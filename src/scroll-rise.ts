@@ -1,6 +1,6 @@
 import { SMCanvas } from './canvas';
 
-export class ScrollMotion {
+export class ScrollRise {
 
   private lastKnownScrollPosition = 0;
   private ticking = false;

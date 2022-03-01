@@ -1,8 +1,13 @@
 {
-  "name": "scroll-motion",
+  "name": "scroll-rise",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": false,
+  "description": "The typescript library for scroll animation",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build" : "tsc"
@@ -12,8 +17,8 @@
     "url": "git+https://github.com/drKaramazin/scroll-motion.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "unknown",
+  "author": "Nikolay Grishkin",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/drKaramazin/scroll-motion/issues"
   },

@@ -1,4 +1,4 @@
-export class ScrollMotionSpeed {
+export class ScrollRiseSpeed {
 
   private mouseupListener: (() => void) | undefined;
   private mousedownListener: (() => void) | undefined;
