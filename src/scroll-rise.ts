@@ -1,4 +1,4 @@
-import { SMCanvas } from './canvas';
+import { SRCanvas } from './canvas';
 
 export class ScrollRise {
 
@@ -8,7 +8,7 @@ export class ScrollRise {
   private resizeListener: (() => void) | undefined;
 
   constructor(
-    public canvas: SMCanvas,
+    public canvas: SRCanvas,
   ) {
     this.init();
     this.tick();

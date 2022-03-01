@@ -1,7 +1,7 @@
 import { Widget } from './models/widgets/widget.model';
 import { Util } from './util';
 
-export class SMCanvas {
+export class SRCanvas {
 
   private _list: Widget[] = [];
 

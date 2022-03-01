@@ -1,2 +1,9 @@
 export { ScrollRise } from './scroll-rise';
 export { ScrollRiseSpeed } from './scroll-rise-speed';
+export { SRCanvas } from './canvas';
+export { StaticWidget } from './models/widgets/static-widget';
+export { RefWidget } from './models/widgets/ref-widget';
+export { MoveMotion } from './models/motions/move-motion.model';
+export { SizeMotion } from './models/motions/size-motion.model';
+export { OpacityMotion } from './models/motions/opacity-motion.model';
+export { Frame } from './models/frame.model';
