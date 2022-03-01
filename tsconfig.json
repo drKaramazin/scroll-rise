@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es2015",
+    "target": "es5",
+    "lib": ["es6", "dom", "es2017"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "allowJs": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
