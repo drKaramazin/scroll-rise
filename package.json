@@ -20,9 +20,9 @@
   "author": "Nikolay Grishkin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/drKaramazin/scroll-motion/issues"
+    "url": "https://github.com/drKaramazin/scroll-rise/issues"
   },
-  "homepage": "https://github.com/drKaramazin/scroll-motion#readme",
+  "homepage": "https://github.com/drKaramazin/scroll-rise#readme",
   "devDependencies": {
     "typescript": "^4.6.2"
   }
