@@ -12,6 +12,8 @@ export interface ISizeMotion {
 
 export class SizeMotion extends Motion {
 
+  override name = 'SizeMotion';
+
   startWidth: Value;
   endWidth: Value;
   startHeight: Value;

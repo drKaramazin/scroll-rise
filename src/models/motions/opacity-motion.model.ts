@@ -10,6 +10,8 @@ export interface IOpacityMotion {
 
 export class OpacityMotion extends Motion {
 
+  override name = 'OpacityMotion';
+
   start: Value;
   end: Value;
 

@@ -12,6 +12,8 @@ export interface IMoveMotion {
 
 export class MoveMotion extends Motion {
 
+  override name = 'MoveMotion';
+
   startX: Value;
   endX: Value;
   startY: Value;

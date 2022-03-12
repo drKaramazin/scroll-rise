@@ -2,7 +2,6 @@ import { SRCanvas } from './canvas';
 
 export class ScrollRise {
 
-  private lastKnownScrollPosition = 0;
   private ticking = false;
   private scrollListener: (() => void) | undefined;
   private resizeListener: (() => void) | undefined;
@@ -15,7 +14,6 @@ export class ScrollRise {
   }
 
   tick() {
-    this.lastKnownScrollPosition = window?.scrollY;
     if (!this.ticking) {
       window?.requestAnimationFrame(() => {
         this.render(this.canvas.elementY());

@@ -8,6 +8,8 @@ export interface IPositionMotion {
 
 export class PositionMotion extends Motion {
 
+  override name = 'PositionMotion';
+
   from: 'relative' | 'fixed';
   to: 'relative' | 'fixed';
 

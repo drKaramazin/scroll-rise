@@ -30,16 +30,20 @@ export abstract class Widget {
     this.startY = coord.Y;
   }
 
-  render(scrollPos: number) {
-    const frames: { [key: string]: Frame[] } = this.frames.reduce(
+  private groupFramesByMotion(frames: Frame[]): { [key: string]: Frame[] } {
+    return frames.reduce(
       (acc: any, frame) => {
-        const motionName = frame.motion.constructor.name;
+        const motionName = frame.motion.name;
         acc[motionName] = acc[motionName] ? [...acc[motionName], frame] : [frame];
 
         return acc;
       },
       {}
     );
+  }
+
+  render(scrollPos: number) {
+    const frames = this.groupFramesByMotion(this.frames);
 
     for (const key of Object.keys(frames)) {
       if (frames[key].length > 1) {
