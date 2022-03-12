@@ -19,6 +19,7 @@ module.exports = {
             name: 'scroll-rise',
             type: "umd",
         },
+        globalObject: "this",
     },
     watchOptions: {
         ignored: /node_modules/,
