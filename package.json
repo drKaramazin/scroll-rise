@@ -1,6 +1,6 @@
 {
   "name": "scroll-rise",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": false,
   "description": "The typescript library for scroll animation",
   "main": "lib/index.js",
