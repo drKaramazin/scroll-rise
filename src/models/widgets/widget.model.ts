@@ -42,7 +42,7 @@ export abstract class Widget {
     );
   }
 
-  render(scrollPos: number) {
+  render(scrollPos: number, canvas: HTMLElement, displayWidth: number, displayHeight: number) {
     const frames = this.groupFramesByMotion(this.frames);
 
     for (const key of Object.keys(frames)) {

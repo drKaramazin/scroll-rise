@@ -7,3 +7,6 @@ export { MoveMotion } from './models/motions/move-motion.model';
 export { SizeMotion } from './models/motions/size-motion.model';
 export { OpacityMotion } from './models/motions/opacity-motion.model';
 export { Frame } from './models/frame.model';
+export { Widget } from './models/widgets/widget.model';
+export { Coord } from './models/coord.model';
+export { Motion } from './models/motions/motion.model';

@@ -1,4 +1,5 @@
 import { SRCanvas } from './canvas';
+import { Util } from './util';
 
 export class ScrollRise {
 
@@ -51,7 +52,7 @@ export class ScrollRise {
 
   render(scrollPos: number) {
     for (const widget of this.canvas.list) {
-      widget.render(scrollPos);
+      widget.render(scrollPos, this.canvas.el, Util.displayWidth(), Util.displayHeight());
     }
   }
 

@@ -6,14 +6,18 @@ export class SRCanvas {
   private _list: Widget[] = [];
 
   constructor(
-    protected el: HTMLElement,
+    public el: HTMLElement,
+    protected width: (deviceWidth: number, deviceHeight: number) => number,
     protected height: (deviceWidth: number, deviceHeight: number) => number,
   ) {
+    console.log('Constructor');
     this.init();
   }
 
   init() {
-    this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
+    console.log('Here man');
+    this.el.setAttribute('width', `${this.width(Util.displayWidth(), Util.displayHeight())}px`);
+    this.el.setAttribute('height', `${this.height(Util.displayWidth(), Util.displayHeight())}px`);
   }
 
   elementY(): number {
