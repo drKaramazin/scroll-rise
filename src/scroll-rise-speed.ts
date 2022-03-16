@@ -37,6 +37,8 @@ export class ScrollRiseSpeed {
         if (scrollY > limitY) {
           scrollY = limitY;
         }
+      } else {
+        scrollY = 0;
       }
       window?.scrollTo(0, scrollY);
     }
@@ -51,6 +53,12 @@ export class ScrollRiseSpeed {
     this.container.addEventListener('mousewheel', this.mousewheelListener, {
       passive: false,
     });
+    this.container.addEventListener('DOMMouseScroll', this.mousewheelListener, {
+      passive: false,
+    });
+    this.container.addEventListener('wheel', this.mousewheelListener, {
+      passive: false,
+    });
   }
 
   stop() {
@@ -62,6 +70,8 @@ export class ScrollRiseSpeed {
     }
     if (this.mousewheelListener) {
       this.container.removeEventListener('mousewheel', this.mousewheelListener);
+      this.container.removeEventListener('DOMMouseScroll', this.mousewheelListener);
+      this.container.removeEventListener('wheel', this.mousewheelListener);
     }
   }
 
