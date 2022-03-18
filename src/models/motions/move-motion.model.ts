@@ -30,18 +30,18 @@ export class MoveMotion extends Motion {
 
   renderX(scrollPos: number, frame: Frame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
+      if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
+      if (scrollPos > frame.getEndPos()) {
         element.style.left = `${this.endX(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
 
       const motionL = this.endX(Util.displayWidth(), Util.displayHeight()) - this.startX(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = this.startX(Util.displayWidth(), Util.displayHeight()) + d * ((-scrollPos) - frame.getStartPos());
+      const y = this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.left = `${y}px`;
     }
@@ -49,18 +49,18 @@ export class MoveMotion extends Motion {
 
   renderY(scrollPos: number, frame: Frame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
-        element.style.top = `${scrollPos + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
+      if (scrollPos < frame.getStartPos()) {
+        element.style.top = `${-scrollPos + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
-        element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight()) - (-scrollPos - frame.getEndPos())}px`;
+      if (scrollPos > frame.getEndPos()) {
+        element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight()) - (scrollPos - frame.getEndPos())}px`;
         return;
       }
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() - scrollPos));
+      const y = Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
 
       element.style.top = `${y}px`;
     }

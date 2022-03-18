@@ -24,18 +24,18 @@ export class OpacityMotion extends Motion {
 
   renderOpacity(scrollPos: number, frame: Frame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
+      if (scrollPos < frame.getStartPos()) {
         element.style.opacity = this.start(Util.displayWidth(), Util.displayHeight()).toString();
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
+      if (scrollPos > frame.getEndPos()) {
         element.style.opacity = this.end(Util.displayWidth(), Util.displayHeight()).toString();
         return;
       }
 
       const motionL = this.end(Util.displayWidth(), Util.displayHeight()) - this.start(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const opacity = this.start(Util.displayWidth(), Util.displayHeight()) + d * ((-scrollPos) - frame.getStartPos());
+      const opacity = this.start(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.opacity = opacity.toString();
     }

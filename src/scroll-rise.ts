@@ -50,8 +50,12 @@ export class ScrollRise {
   }
 
   render(scrollPos: number) {
-    for (const widget of this.canvas.list) {
-      widget.render(scrollPos);
+    const pos = this.canvas.offset() ? scrollPos + this.canvas.offset() : scrollPos;
+    console.log(pos);
+    if (pos < 0) {
+      for (const widget of this.canvas.list) {
+        widget.render(-pos);
+      }
     }
   }
 

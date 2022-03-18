@@ -30,18 +30,18 @@ export class SizeMotion extends Motion {
 
   renderWidth(scrollPos: number, frame: Frame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
+      if (scrollPos < frame.getStartPos()) {
         element.style.width = `${this.startWidth(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
+      if (scrollPos > frame.getEndPos()) {
         element.style.width = `${this.endWidth(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
 
       const motionL = this.endWidth(Util.displayWidth(), Util.displayHeight()) - this.startWidth(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const width = this.startWidth(Util.displayWidth(), Util.displayHeight()) + d * ((-scrollPos) - frame.getStartPos());
+      const width = this.startWidth(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.width = `${width}px`;
     }
@@ -49,18 +49,18 @@ export class SizeMotion extends Motion {
 
   renderHeight(scrollPos: number, frame: Frame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
+      if (scrollPos < frame.getStartPos()) {
         element.style.height = `${this.startHeight(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
+      if (scrollPos > frame.getEndPos()) {
         element.style.height = `${this.endHeight(Util.displayWidth(), Util.displayHeight())}px`;
         return;
       }
 
       const motionL = this.endHeight(Util.displayWidth(), Util.displayHeight()) - this.startHeight(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const height = this.startHeight(Util.displayWidth(), Util.displayHeight()) + d * ((-scrollPos) - frame.getStartPos());
+      const height = this.startHeight(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.height = `${height}px`;
     }

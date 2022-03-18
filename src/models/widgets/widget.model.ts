@@ -5,30 +5,17 @@ import { Util } from '../../util';
 
 export abstract class Widget {
 
-  constructor(
-    public startStyle?: string,
-  ) {}
+  constructor() {}
 
   protected element: HTMLElement | undefined;
   abstract bindElement(): HTMLElement | undefined;
 
   protected frames: Frame[] = [];
 
-  startX: Value | undefined;
-  startY: Value | undefined;
-
-  startWidth: Value | undefined;
-  startHeight: Value | undefined;
-
   abstract calcStartPosition(): Coord;
 
   initStartPosition() {}
   afterBindElement() {}
-
-  setStartCoord(coord: Coord) {
-    this.startX = coord.X;
-    this.startY = coord.Y;
-  }
 
   private groupFramesByMotion(frames: Frame[]): { [key: string]: Frame[] } {
     return frames.reduce(
@@ -49,16 +36,16 @@ export abstract class Widget {
       if (frames[key].length > 1) {
         const visible = frames[key].filter(
           frame =>
-            -scrollPos < frame.getStartPos() && -scrollPos + Util.displayHeight() >= frame.getStartPos() ||
-            -scrollPos >= frame.getStartPos() && -scrollPos + Util.displayHeight() <= frame.getEndPos() ||
-            -scrollPos >= frame.getStartPos() && -scrollPos <= frame.getEndPos()
+            scrollPos < frame.getStartPos() && scrollPos + Util.displayHeight() >= frame.getStartPos() ||
+            scrollPos >= frame.getStartPos() && scrollPos + Util.displayHeight() <= frame.getEndPos() ||
+            scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()
         );
 
         if (visible.length === 1) {
           frames[key] = visible;
         } else if (visible.length === 0 && frames[key].length) {
           frames[key].sort((a, b) => a.getStartPos() - b.getStartPos())
-          if (-scrollPos + Util.displayHeight() < frames[key][0].getStartPos()) {
+          if (scrollPos + Util.displayHeight() < frames[key][0].getStartPos()) {
             frames[key] = [frames[key][0]];
           } else {
             frames[key].sort((a, b) => {
@@ -69,7 +56,7 @@ export abstract class Widget {
               }
               return 1;
             });
-            if (-scrollPos > frames[key][0].getEndPos()) {
+            if (scrollPos > frames[key][0].getEndPos()) {
               frames[key] = [frames[key][0]];
             }
           }

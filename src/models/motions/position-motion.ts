@@ -6,7 +6,7 @@ export interface IPositionMotion {
   to: 'relative' | 'fixed';
 }
 
-export class PositionMotion extends Motion {
+class PositionMotion extends Motion {
 
   override name = 'PositionMotion';
 
@@ -21,10 +21,10 @@ export class PositionMotion extends Motion {
   }
 
   override make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
-    if (-scrollPosForFrame >= frame.getStartPos() && element.style.position !== this.to) {
+    if (scrollPosForFrame >= frame.getStartPos() && element.style.position !== this.to) {
       element.style.position = this.to;
     }
-    if (-scrollPosForFrame < frame.getStartPos() && element.style.position !== this.from) {
+    if (scrollPosForFrame < frame.getStartPos() && element.style.position !== this.from) {
       element.style.position = this.from;
     }
   }

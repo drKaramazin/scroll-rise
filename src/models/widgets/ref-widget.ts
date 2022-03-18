@@ -4,9 +4,8 @@ export class RefWidget extends InitiableWidget {
 
   constructor(
     protected override element: HTMLElement | undefined,
-    public override startStyle?: string,
   ) {
-    super(startStyle);
+    super();
   }
 
   override bindElement(): HTMLElement | undefined {
