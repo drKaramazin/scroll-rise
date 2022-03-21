@@ -11,7 +11,7 @@ export interface StaticWidgetOptions {
 export class StaticWidget extends InitiableWidget {
 
   constructor(
-    protected override element: HTMLElement | undefined,
+    public override element: HTMLElement | undefined,
     public options?: StaticWidgetOptions,
   ) {
     super();

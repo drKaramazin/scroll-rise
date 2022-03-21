@@ -1,5 +1,4 @@
 import { Frame } from '../frame.model';
-import { Value } from '../value.model';
 import { Coord } from '../coord.model';
 import { Util } from '../../util';
 
@@ -7,7 +6,7 @@ export abstract class Widget {
 
   constructor() {}
 
-  protected element: HTMLElement | undefined;
+  public element: HTMLElement | undefined;
   abstract bindElement(): HTMLElement | undefined;
 
   protected frames: Frame[] = [];

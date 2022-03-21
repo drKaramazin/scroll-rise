@@ -1,4 +1,5 @@
 import { SRCanvas } from './canvas';
+import { Util } from './util';
 
 export class ScrollRise {
 
@@ -6,11 +7,25 @@ export class ScrollRise {
   private scrollListener: (() => void) | undefined;
   private resizeListener: (() => void) | undefined;
 
+  private displayWidth: number;
+  private displayHeight: number;
+
   constructor(
     public canvas: SRCanvas,
   ) {
+    this.saveDisplaySize();
     this.init();
     this.tick();
+  }
+
+  saveDisplaySize() {
+    this.displayWidth = Util.displayWidth();
+    this.displayHeight = Util.displayHeight();
+  }
+
+  isNeedResize(): boolean {
+    // console.log(this.displayWidth, Util.displayWidth(), this.displayHeight, Util.displayHeight());
+    return this.displayWidth !== Util.displayWidth();
   }
 
   tick() {
@@ -24,13 +39,21 @@ export class ScrollRise {
     }
   }
 
+  pos(scrollPos: number): number {
+    return scrollPos + this.canvas.offset();
+  }
+
   scroll() {
     this.tick();
+    this.canvas.scroll(this.canvas.elementY());
   }
 
   resize() {
-    this.canvas.init();
-    this.tick();
+    console.log('Resize');
+    if (this.isNeedResize()) {
+      this.canvas.resizeHeight();
+      this.tick();
+    }
   }
 
   private init() {
@@ -50,8 +73,7 @@ export class ScrollRise {
   }
 
   render(scrollPos: number) {
-    const pos = this.canvas.offset() ? scrollPos + this.canvas.offset() : scrollPos;
-    console.log(pos);
+    const pos = this.pos(scrollPos);
     if (pos < 0) {
       for (const widget of this.canvas.list) {
         widget.render(-pos);

@@ -3,7 +3,7 @@ import { InitiableWidget } from './initiable-widget';
 export class RefWidget extends InitiableWidget {
 
   constructor(
-    protected override element: HTMLElement | undefined,
+    public override element: HTMLElement | undefined,
   ) {
     super();
   }

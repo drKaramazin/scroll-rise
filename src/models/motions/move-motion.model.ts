@@ -28,7 +28,7 @@ export class MoveMotion extends Motion {
     this.endY = data.endY;
   }
 
-  renderX(scrollPos: number, frame: Frame, element: HTMLElement) {
+  renderX(scrollPos: number, frame: Frame, element: HTMLElement): number {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.displayWidth(), Util.displayHeight())}px`;
@@ -41,32 +41,34 @@ export class MoveMotion extends Motion {
 
       const motionL = this.endX(Util.displayWidth(), Util.displayHeight()) - this.startX(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
+      const x = this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
-      element.style.left = `${y}px`;
+      // return x;
+      element.style.left = `${x}px`;
     }
   }
 
-  renderY(scrollPos: number, frame: Frame, element: HTMLElement) {
+  renderY(scrollPos: number, frame: Frame, element: HTMLElement): number {
     if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.top = `${-scrollPos + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
-        return;
-      }
       if (scrollPos > frame.getEndPos()) {
-        element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight()) - (scrollPos - frame.getEndPos())}px`;
         return;
       }
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
+      const y = scrollPos + Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
 
+      // return y;
       element.style.top = `${y}px`;
+
+      // console.log('Here');
+      // element.style.transform = `translateY(${y}px)`;
     }
   }
 
   make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
+    // element.style.transform =
+    //     `translate(${this.renderX(scrollPosForFrame, frame, element)}px, ${this.renderY(scrollPosForFrame, frame, element)}px)`;
     this.renderX(scrollPosForFrame, frame, element);
     this.renderY(scrollPosForFrame, frame, element);
   }
