@@ -24,7 +24,6 @@ export class ScrollRise {
   }
 
   isNeedResize(): boolean {
-    // console.log(this.displayWidth, Util.displayWidth(), this.displayHeight, Util.displayHeight());
     return this.displayWidth !== Util.displayWidth();
   }
 
@@ -49,9 +48,9 @@ export class ScrollRise {
   }
 
   resize() {
-    console.log('Resize');
     if (this.isNeedResize()) {
       this.canvas.resizeHeight();
+      this.canvas.resizePlatform();
       this.tick();
     }
   }
@@ -73,11 +72,8 @@ export class ScrollRise {
   }
 
   render(scrollPos: number) {
-    const pos = this.pos(scrollPos);
-    if (pos < 0) {
-      for (const widget of this.canvas.list) {
-        widget.render(-pos);
-      }
+    for (const widget of this.canvas.list) {
+      widget.render(-this.pos(scrollPos));
     }
   }
 

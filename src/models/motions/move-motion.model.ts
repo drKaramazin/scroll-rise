@@ -43,7 +43,6 @@ export class MoveMotion extends Motion {
       const d = motionL/frame.length();
       const x = this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
-      // return x;
       element.style.left = `${x}px`;
     }
   }
@@ -56,19 +55,13 @@ export class MoveMotion extends Motion {
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = scrollPos + Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
+      const y = Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
 
-      // return y;
       element.style.top = `${y}px`;
-
-      // console.log('Here');
-      // element.style.transform = `translateY(${y}px)`;
     }
   }
 
   make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
-    // element.style.transform =
-    //     `translate(${this.renderX(scrollPosForFrame, frame, element)}px, ${this.renderY(scrollPosForFrame, frame, element)}px)`;
     this.renderX(scrollPosForFrame, frame, element);
     this.renderY(scrollPosForFrame, frame, element);
   }

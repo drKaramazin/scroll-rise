@@ -3,7 +3,9 @@ import { Util } from './util';
 import defaults from 'defaults';
 
 export interface CanvasOptions {
-  offset?: (deviceWidth: number, deviceHeight: number, canvasHeight: number) => number,
+  offset?: (deviceWidth: number, deviceHeight: number, canvasHeight: number) => number;
+  method?: 'fixed-actors' | 'sticky-platform';
+  stickyPlatformHeight?: (deviceWidth: number, deviceHeight: number) => number;
 }
 
 export class SRCanvas {
@@ -19,9 +21,10 @@ export class SRCanvas {
   ) {
     this.options = defaults(this.options, {
       offset: () => 0,
+      method: 'sticky-platform',
+      stickyPlatformHeight: (deviceWidth: number, deviceHeight: number) => deviceHeight,
     });
 
-    console.log('Constructor');
     this.init();
   }
 
@@ -29,31 +32,35 @@ export class SRCanvas {
     this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
   }
 
+  resizePlatform() {
+    if (this.options.method === 'sticky-platform') {
+      this.platform.style.height = `${this.options.stickyPlatformHeight(Util.displayWidth(), Util.displayHeight())}px`;
+    }
+  }
+
   init() {
-    console.log('Init');
     this.resizeHeight();
     this.el.style.position = 'relative';
     this.el.style.overflow = 'visible';
 
     this.platform = document.createElement('div');
     this.platform.style.position = 'sticky';
-    this.platform.style.background = '#f00';
+    this.platform.style.background = '#fff';
     this.platform.style.top = `0`;
     this.platform.style.left = '0';
     this.platform.style.width = `${Util.displayWidth()}px`;
-    this.platform.style.height = `${Util.displayHeight()}px`;
+    this.resizePlatform();
     this.scroll(this.elementY());
 
     this.el.appendChild(this.platform);
   }
 
   scroll(pos: number) {
-    // console.log(this.elementY(), pos);
-    // if (this.elementY() > 0) {
-    //   this.platform.style.top = `${pos}px`;
-    // } else {
-    //   this.platform.style.top = `0px`;
-    // }
+    if (this.elementY() > 0) {
+      this.platform.style.top = `${pos}px`;
+    } else {
+      this.platform.style.top = `0px`;
+    }
   }
 
   elementY(): number {
@@ -70,7 +77,9 @@ export class SRCanvas {
 
   add(widget: Widget) {
     this._list.push(widget);
-    this.platform.appendChild(widget.element);
+    if (this.el === widget.element.parentElement) {
+      this.platform.appendChild(widget.element);
+    }
     widget.initElement();
   }
 
