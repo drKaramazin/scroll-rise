@@ -1,0 +1,16 @@
+body {
+    font-family: 'IngoStem', Arial, Verdana, Courier, serif;
+    font-style: normal;
+    background: #243138;
+    color: #fff;
+}
+
+h1 {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+a {
+    color: #fff;
+}

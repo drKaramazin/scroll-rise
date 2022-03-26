@@ -15,7 +15,7 @@ export class StaticWidget extends InitiableWidget {
 
   override bindElement(): HTMLElement | undefined {
     if (this.element) {
-      this.element.style.display = 'fixed';
+      this.element.style.position = 'fixed';
     }
     return this.element;
   }
