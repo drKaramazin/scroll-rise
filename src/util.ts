@@ -1,11 +1,11 @@
 export class Util {
 
   static displayWidth(): number {
-    return Math.max(window.innerWidth, document.body.clientWidth);
+    return document.documentElement.clientWidth;
   }
 
   static displayHeight(): number {
-    return Math.max(window.innerHeight, document.body.clientHeight);
+    return document.documentElement.clientHeight;
   }
 
 }
