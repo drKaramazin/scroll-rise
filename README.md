@@ -1,7 +1,7 @@
 # Scroll Rise
 The typescript library for scroll animation.
 
-##Demo
+## Demo
 
 [https://drkaramazin.github.io/scroll-rise/](https://drkaramazin.github.io/scroll-rise/)
 
