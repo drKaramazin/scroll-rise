@@ -45,7 +45,6 @@ export class SRCanvas {
 
     this.platform = document.createElement('div');
     this.platform.style.position = 'sticky';
-    this.platform.style.background = '#fff';
     this.platform.style.top = `0`;
     this.platform.style.left = '0';
     this.platform.style.width = `${Util.displayWidth()}px`;
