@@ -1,7 +1,7 @@
 import { Motion } from './motions/motion.model';
 import { Util } from '../util';
 
-export class Frame {
+export class TimeFrame {
 
   constructor(
     public motion: Motion,

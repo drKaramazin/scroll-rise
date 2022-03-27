@@ -1,6 +1,6 @@
 import { Value } from '../value.model';
 import { Motion } from './motion.model';
-import { Frame } from '../frame.model';
+import { TimeFrame } from '../time-frame.model';
 import { Util } from '../../util';
 
 export interface IOpacityMotion {
@@ -22,26 +22,26 @@ export class OpacityMotion extends Motion {
     this.end = data.end;
   }
 
-  renderOpacity(scrollPos: number, frame: Frame, element: HTMLElement) {
+  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement) {
     if (element) {
-      if (-scrollPos < frame.getStartPos()) {
+      if (scrollPos < frame.getStartPos()) {
         element.style.opacity = this.start(Util.displayWidth(), Util.displayHeight()).toString();
         return;
       }
-      if (-scrollPos > frame.getEndPos()) {
+      if (scrollPos > frame.getEndPos()) {
         element.style.opacity = this.end(Util.displayWidth(), Util.displayHeight()).toString();
         return;
       }
 
       const motionL = this.end(Util.displayWidth(), Util.displayHeight()) - this.start(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const opacity = this.start(Util.displayWidth(), Util.displayHeight()) + d * ((-scrollPos) - frame.getStartPos());
+      const opacity = this.start(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.opacity = opacity.toString();
     }
   }
 
-  override make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
+  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement) {
     this.renderOpacity(scrollPosForFrame, frame, element);
   }
 

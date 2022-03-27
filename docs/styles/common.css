@@ -14,3 +14,10 @@ h1 {
 a {
     color: #fff;
 }
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}

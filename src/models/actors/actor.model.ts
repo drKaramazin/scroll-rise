@@ -1,36 +1,21 @@
-import { Frame } from '../frame.model';
-import { Value } from '../value.model';
+import { TimeFrame } from '../time-frame.model';
 import { Coord } from '../coord.model';
 import { Util } from '../../util';
+import { SceneModel } from '../scenes/scene.model';
 
-export abstract class Widget {
+export abstract class Actor {
 
-  constructor(
-    public startStyle?: string,
-  ) {}
-
-  protected element: HTMLElement | undefined;
+  public element: HTMLElement | undefined;
   abstract bindElement(): HTMLElement | undefined;
 
-  protected frames: Frame[] = [];
-
-  startX: Value | undefined;
-  startY: Value | undefined;
-
-  startWidth: Value | undefined;
-  startHeight: Value | undefined;
+  protected frames: TimeFrame[] = [];
 
   abstract calcStartPosition(): Coord;
 
   initStartPosition() {}
   afterBindElement() {}
 
-  setStartCoord(coord: Coord) {
-    this.startX = coord.X;
-    this.startY = coord.Y;
-  }
-
-  private groupFramesByMotion(frames: Frame[]): { [key: string]: Frame[] } {
+  private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
     return frames.reduce(
       (acc: any, frame) => {
         const motionName = frame.motion.name;
@@ -42,23 +27,23 @@ export abstract class Widget {
     );
   }
 
-  render(scrollPos: number) {
+  render(scrollPos: number, scene: SceneModel<any>) {
     const frames = this.groupFramesByMotion(this.frames);
 
     for (const key of Object.keys(frames)) {
       if (frames[key].length > 1) {
         const visible = frames[key].filter(
           frame =>
-            -scrollPos < frame.getStartPos() && -scrollPos + Util.displayHeight() >= frame.getStartPos() ||
-            -scrollPos >= frame.getStartPos() && -scrollPos + Util.displayHeight() <= frame.getEndPos() ||
-            -scrollPos >= frame.getStartPos() && -scrollPos <= frame.getEndPos()
+            scrollPos < frame.getStartPos() && scrollPos + Util.displayHeight() >= frame.getStartPos() ||
+            scrollPos >= frame.getStartPos() && scrollPos + Util.displayHeight() <= frame.getEndPos() ||
+            scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()
         );
 
         if (visible.length === 1) {
           frames[key] = visible;
         } else if (visible.length === 0 && frames[key].length) {
           frames[key].sort((a, b) => a.getStartPos() - b.getStartPos())
-          if (-scrollPos + Util.displayHeight() < frames[key][0].getStartPos()) {
+          if (scrollPos + Util.displayHeight() < frames[key][0].getStartPos()) {
             frames[key] = [frames[key][0]];
           } else {
             frames[key].sort((a, b) => {
@@ -69,7 +54,7 @@ export abstract class Widget {
               }
               return 1;
             });
-            if (-scrollPos > frames[key][0].getEndPos()) {
+            if (scrollPos > frames[key][0].getEndPos()) {
               frames[key] = [frames[key][0]];
             }
           }
@@ -83,17 +68,17 @@ export abstract class Widget {
     if (this.element) {
       for (const key of Object.keys(frames)) {
         if (frames[key]?.length) {
-          frames[key][0].motion.make(scrollPos, frames[key][0], this.element);
+          frames[key][0].motion.make(scrollPos, frames[key][0], this.element, scene);
         }
       }
     }
   }
 
-  addFrame(frame: Frame) {
+  addFrame(frame: TimeFrame) {
     this.frames.push(frame);
   }
 
-  addFrames(frames: Frame[]) {
+  addFrames(frames: TimeFrame[]) {
     this.frames = this.frames.concat(frames);
   }
 

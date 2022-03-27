@@ -1,4 +1,5 @@
-import { SRCanvas } from './canvas';
+import { StickyPlatformScene } from './models/scenes/sticky-platform.scene';
+import { Util } from './util';
 
 export class ScrollRise {
 
@@ -6,17 +7,30 @@ export class ScrollRise {
   private scrollListener: (() => void) | undefined;
   private resizeListener: (() => void) | undefined;
 
+  private displayWidth: number;
+  private displayHeight: number;
+
   constructor(
-    public canvas: SRCanvas,
+    public scene: StickyPlatformScene,
   ) {
+    this.saveDisplaySize();
     this.init();
     this.tick();
+  }
+
+  saveDisplaySize() {
+    this.displayWidth = Util.displayWidth();
+    this.displayHeight = Util.displayHeight();
+  }
+
+  isNeedResize(): boolean {
+    return true;
   }
 
   tick() {
     if (!this.ticking) {
       window?.requestAnimationFrame(() => {
-        this.render(this.canvas.elementY());
+        this.render(this.scene.elementY());
         this.ticking = false;
       });
 
@@ -24,13 +38,19 @@ export class ScrollRise {
     }
   }
 
+  pos(scrollPos: number): number {
+    return scrollPos + this.scene.offset();
+  }
+
   scroll() {
     this.tick();
   }
 
   resize() {
-    this.canvas.init();
-    this.tick();
+    if (this.isNeedResize()) {
+      this.scene.resizeHeight();
+      this.tick();
+    }
   }
 
   private init() {
@@ -50,8 +70,8 @@ export class ScrollRise {
   }
 
   render(scrollPos: number) {
-    for (const widget of this.canvas.list) {
-      widget.render(scrollPos);
+    for (const actor of this.scene.list) {
+      actor.render(-this.pos(scrollPos), this.scene);
     }
   }
 

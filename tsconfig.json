@@ -10,7 +10,8 @@
       "node_modules/@types"
     ],
     "allowJs": true,
-    "declaration": true
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"

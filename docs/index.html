@@ -1,176 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>First demo</title>
+    <title>Demos</title>
 
     <link href="styles/reset.css" rel="stylesheet">
     <link href="styles/common.css" rel="stylesheet">
-    <link href="styles/first-demo.css" rel="stylesheet">
-
+    <link href="styles/index.css" rel="stylesheet">
 </head>
 <body>
-
-    <div class="empty-block">
-        Scroll down<br>
-        v
+    <div class="contents">
+        <h1>Demo</h1>
+        <div class="agenda">
+            Choose the demo<br>
+            v
+        </div>
+        <a href="fixed-actors-scene-demo.html" class="demo fixed-actors-scene">
+            Fixed Actors Scene Demo
+        </a>
+        <a href="sticky-platform-scene-demo.html" class="demo sticky-platform-scene">
+            Sticky Platform Scene Demo
+        </a>
     </div>
-
-    <div id="canvas" style="position: relative;">
-
-        <div style="width: 50%; height: 100%; background: #85643A; position: absolute; left: 0;"></div>
-        <div style="width: 25%; height: 100%; background: #857748; position: absolute; left: 0;"></div>
-
-        <div class="block" id="first-block"><span>Label 1</span></div>
-        <div class="block" id="second-block"><span>Label 2</span></div>
-        <div class="block" id="third-block"><span>Label 3</span></div>
-        <div class="block" id="fourth-block"><span>Label 4</span></div>
-
-        <div class="agenda" id="agenda"><span>WOW!</span></div>
-    </div>
-
-    <div class="empty-block">Be happy!</div>
-
-    <script type="module">
-
-        import {
-            ScrollRise,
-            SRCanvas,
-            StaticWidget,
-            Frame,
-            MoveMotion,
-            SizeMotion,
-            OpacityMotion,
-        } from "./scroll-rise/index.es.js";
-
-        const firstBlock = new StaticWidget(document.getElementById('first-block'));
-        const secondBlock = new StaticWidget(document.getElementById('second-block'));
-        const thirdBlock = new StaticWidget(document.getElementById('third-block'));
-        const fourthBlock = new StaticWidget(document.getElementById('fourth-block'));
-        const agenda = new StaticWidget(document.getElementById('agenda'));
-
-        const canvasHeight = (w, h) => h * 2;
-
-        const blockWidth = (w, h) => w/4;
-        const blockHeight = (w, h) => h/8;
-
-        const firstHalfBlockX = (w, h) => w/4 - blockWidth(w, h)/2;
-        const secondHalfStartBlockX = (w, h) => w/4 * 3 - blockWidth(w, h)/2;
-        const secondHalfEndBlockX = (w, h) => w/2;
-        const firstHalfBlockY = (w, h) => h/4 - blockHeight(w, h)/2;
-        const secondHalfBlockY = (w, h) => h/4 * 3 - blockHeight(w, h)/2;
-
-        const endBlockWidth = (w, h) => w/2 - firstHalfBlockX(w, h);
-
-        const hideBlockFrame = new Frame(new OpacityMotion({
-            start: () => 1,
-            end: () => 0,
-        }), (w, h) => 0, (w, h) => h);
-
-        firstBlock.addFrames([
-            new Frame(new MoveMotion({
-                startX: firstHalfBlockX,
-                endX: firstHalfBlockX,
-                startY: firstHalfBlockY,
-                endY: firstHalfBlockY,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new SizeMotion({
-                startWidth: blockWidth,
-                startHeight: blockHeight,
-                endWidth: endBlockWidth,
-                endHeight: blockHeight,
-            }), (w, h) => 0, (w, h) => h),
-            hideBlockFrame,
-        ]);
-
-        secondBlock.addFrames([
-            new Frame(new MoveMotion({
-                startX: secondHalfStartBlockX,
-                endX: secondHalfEndBlockX,
-                startY: firstHalfBlockY,
-                endY: firstHalfBlockY,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new SizeMotion({
-                startWidth: blockWidth,
-                startHeight: blockHeight,
-                endWidth: endBlockWidth,
-                endHeight: blockHeight,
-            }), (w, h) => 0, (w, h) => h),
-            hideBlockFrame,
-        ]);
-
-        thirdBlock.addFrames([
-            new Frame(new MoveMotion({
-                startX: firstHalfBlockX,
-                endX: firstHalfBlockX,
-                startY: secondHalfBlockY,
-                endY: secondHalfBlockY,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new SizeMotion({
-                startWidth: blockWidth,
-                startHeight: blockHeight,
-                endWidth: endBlockWidth,
-                endHeight: blockHeight,
-            }), (w, h) => 0, (w, h) => h),
-            hideBlockFrame,
-        ]);
-
-        fourthBlock.addFrames([
-            new Frame(new MoveMotion({
-                startX: secondHalfStartBlockX,
-                endX: secondHalfEndBlockX,
-                startY: secondHalfBlockY,
-                endY: secondHalfBlockY,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new SizeMotion({
-                startWidth: blockWidth,
-                startHeight: blockHeight,
-                endWidth: endBlockWidth,
-                endHeight: blockHeight,
-            }), (w, h) => 0, (w, h) => h),
-            hideBlockFrame,
-        ]);
-
-        const agendaStartWidth = (w, h) => w/4;
-        const agendaStartHeight = (w, h) => h/4;
-        const agendaEndWidth = (w, h) => w/2;
-        const agendaEndHeight = (w, h) => h/2;
-
-        agenda.addFrames([
-            new Frame(new MoveMotion({
-                startX: (w, h) => w/2 - agendaStartWidth(w, h)/2,
-                endX: (w, h) => w/2 - agendaEndWidth(w, h)/2,
-                startY: (w, h) => h/2 - agendaStartHeight(w, h)/2,
-                endY: (w, h) => h/2 - agendaEndHeight(w, h)/2,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new SizeMotion({
-                startWidth: agendaStartWidth,
-                startHeight: agendaStartHeight,
-                endWidth: agendaEndWidth,
-                endHeight: agendaEndHeight,
-            }), (w, h) => 0, (w, h) => h),
-            new Frame(new OpacityMotion({
-                start: () => 0,
-                end: () => 1,
-            }), (w, h) => 0, (w, h) => h),
-        ]);
-
-        const canvas = new SRCanvas(
-            document.getElementById('canvas'),
-            canvasHeight,
-        );
-
-        canvas.add(firstBlock);
-        canvas.add(secondBlock);
-        canvas.add(thirdBlock);
-        canvas.add(fourthBlock);
-        canvas.add(agenda);
-
-        var sr = new ScrollRise(canvas);
-
-    </script>
-
 </body>
 </html>
