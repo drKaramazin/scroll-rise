@@ -1,6 +1,6 @@
-import { InitiableWidget } from './initiable-widget';
+import { InitiableActor } from './initiable.actor';
 
-export class RefWidget extends InitiableWidget {
+export class RefActor extends InitiableActor {
 
   constructor(
     public override element: HTMLElement | undefined,

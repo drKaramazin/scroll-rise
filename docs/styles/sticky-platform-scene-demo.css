@@ -9,8 +9,9 @@
     font-size: 1.2em;
 }
 
-#canvas {
+#scene {
     background: #2F3B4F;
+    position: relative;
 }
 
 #first-block {
@@ -30,8 +31,24 @@
     background: #555E9E;
 }
 
+.first-lay {
+    width: 50%;
+    height: 100%;
+    background: #85643A;
+    position: absolute;
+    left: 0;
+}
+
+.second-lay {
+    width: 25%;
+    height: 100%;
+    background: #857748;
+    position: absolute;
+    left: 0;
+}
+
 .empty-block {
-    height: 50vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;

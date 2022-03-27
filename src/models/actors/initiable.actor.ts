@@ -1,17 +1,17 @@
-import { Widget } from './widget.model';
+import { Actor } from './actor.model';
 import { Coord } from '../coord.model';
-import { Frame } from '../frame.model';
-import { MoveMotion } from '../motions/move-motion.model';
+import { TimeFrame } from '../time-frame.model';
+import { MoveMotion } from '../motions/move.motion';
 import { Dimensions } from '../dimensions';
-import { SizeMotion } from '../motions/size-motion.model';
-import { OpacityMotion } from '../motions/opacity-motion.model';
+import { SizeMotion } from '../motions/size.motion';
+import { OpacityMotion } from '../motions/opacity.motion';
 import { Value } from '../value.model';
 
-export abstract class InitiableWidget extends Widget {
+export abstract class InitiableActor extends Actor {
 
-  findFirstFrame(motionName: string): Frame | undefined {
+  findFirstFrame(motionName: string): TimeFrame | undefined {
     return  this.frames.reduce(
-      (acc: Frame | undefined, frame: Frame) => {
+      (acc: TimeFrame | undefined, frame: TimeFrame) => {
         if (frame.motion.name === motionName) {
           if (acc) {
             if (frame.getStartPos() < acc?.getStartPos()) {

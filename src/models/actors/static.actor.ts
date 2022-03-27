@@ -1,31 +1,30 @@
-import { InitiableWidget } from './initiable-widget';
+import { InitiableActor } from './initiable.actor';
 import { Util } from '../../util';
-import defaults from 'defaults';
 
-export interface StaticWidgetOptions {
+export interface StaticActorOptions {
   initPosition?: boolean;
   initSize?: boolean;
   initOpacity?: boolean;
 }
 
-export class StaticWidget extends InitiableWidget {
+export class StaticActor extends InitiableActor {
 
   constructor(
     public override element: HTMLElement | undefined,
-    public options?: StaticWidgetOptions,
+    public options?: StaticActorOptions,
   ) {
     super();
-    this.options = defaults(this.options, {
+    this.options = {
       initPosition: true,
       initSize: true,
       initOpacity: true,
-    });
+      ...this.options,
+    };
   }
 
   override bindElement(): HTMLElement | undefined {
     if (this.element) {
       if (this.options.initPosition) {
-        this.element.style.position = 'absolute';
         const startCoord = this.calcStartPosition();
         this.element.style.left = `${startCoord.X(Util.displayWidth(), Util.displayHeight())}px`;
         this.element.style.top = `${startCoord.Y(Util.displayWidth(), Util.displayHeight())}px`;

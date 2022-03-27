@@ -1,6 +1,6 @@
 import { Value } from '../value.model';
 import { Motion } from './motion.model';
-import { Frame } from '../frame.model';
+import { TimeFrame } from '../time-frame.model';
 import { Util } from '../../util';
 
 export interface IOpacityMotion {
@@ -22,7 +22,7 @@ export class OpacityMotion extends Motion {
     this.end = data.end;
   }
 
-  renderOpacity(scrollPos: number, frame: Frame, element: HTMLElement) {
+  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement) {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.opacity = this.start(Util.displayWidth(), Util.displayHeight()).toString();
@@ -41,7 +41,7 @@ export class OpacityMotion extends Motion {
     }
   }
 
-  override make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
+  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement) {
     this.renderOpacity(scrollPosForFrame, frame, element);
   }
 

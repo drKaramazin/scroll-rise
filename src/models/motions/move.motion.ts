@@ -1,7 +1,8 @@
 import { Value } from '../value.model';
 import { Motion } from './motion.model';
-import { Frame } from '../frame.model';
+import { TimeFrame } from '../time-frame.model';
 import { Util } from '../../util';
+import { SceneModel } from '../scenes/scene.model';
 
 export interface IMoveMotion {
   startX: Value;
@@ -28,7 +29,7 @@ export class MoveMotion extends Motion {
     this.endY = data.endY;
   }
 
-  renderX(scrollPos: number, frame: Frame, element: HTMLElement): number {
+  renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): number {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.displayWidth(), Util.displayHeight())}px`;
@@ -47,10 +48,26 @@ export class MoveMotion extends Motion {
     }
   }
 
-  renderY(scrollPos: number, frame: Frame, element: HTMLElement): number {
+  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): number {
     if (element) {
-      if (scrollPos > frame.getEndPos()) {
-        return;
+      if (scene.name === 'StickyPlatformScene') {
+        if (scrollPos < frame.getStartPos()) {
+          element.style.top = `${this.startY(Util.displayWidth(), Util.displayHeight())}px`;
+          return;
+        }
+        if (scrollPos > frame.getEndPos()) {
+          element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight())}px`;
+          return;
+        }
+      } else if (scene.name === 'FixedActorsScene') {
+        if (scrollPos < frame.getStartPos()) {
+          element.style.top = `${-scrollPos + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
+          return;
+        }
+        if (scrollPos > frame.getEndPos()) {
+          element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight()) - (scrollPos - frame.getEndPos())}px`;
+          return;
+        }
       }
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
@@ -61,9 +78,9 @@ export class MoveMotion extends Motion {
     }
   }
 
-  make(scrollPosForFrame: number, frame: Frame, element: HTMLElement) {
+  make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>) {
     this.renderX(scrollPosForFrame, frame, element);
-    this.renderY(scrollPosForFrame, frame, element);
+    this.renderY(scrollPosForFrame, frame, element, scene);
   }
 
 }

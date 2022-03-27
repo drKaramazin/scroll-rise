@@ -1,22 +1,21 @@
-import { Frame } from '../frame.model';
+import { TimeFrame } from '../time-frame.model';
 import { Coord } from '../coord.model';
 import { Util } from '../../util';
+import { SceneModel } from '../scenes/scene.model';
 
-export abstract class Widget {
-
-  constructor() {}
+export abstract class Actor {
 
   public element: HTMLElement | undefined;
   abstract bindElement(): HTMLElement | undefined;
 
-  protected frames: Frame[] = [];
+  protected frames: TimeFrame[] = [];
 
   abstract calcStartPosition(): Coord;
 
   initStartPosition() {}
   afterBindElement() {}
 
-  private groupFramesByMotion(frames: Frame[]): { [key: string]: Frame[] } {
+  private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
     return frames.reduce(
       (acc: any, frame) => {
         const motionName = frame.motion.name;
@@ -28,7 +27,7 @@ export abstract class Widget {
     );
   }
 
-  render(scrollPos: number) {
+  render(scrollPos: number, scene: SceneModel<any>) {
     const frames = this.groupFramesByMotion(this.frames);
 
     for (const key of Object.keys(frames)) {
@@ -69,17 +68,17 @@ export abstract class Widget {
     if (this.element) {
       for (const key of Object.keys(frames)) {
         if (frames[key]?.length) {
-          frames[key][0].motion.make(scrollPos, frames[key][0], this.element);
+          frames[key][0].motion.make(scrollPos, frames[key][0], this.element, scene);
         }
       }
     }
   }
 
-  addFrame(frame: Frame) {
+  addFrame(frame: TimeFrame) {
     this.frames.push(frame);
   }
 
-  addFrames(frames: Frame[]) {
+  addFrames(frames: TimeFrame[]) {
     this.frames = this.frames.concat(frames);
   }
 
