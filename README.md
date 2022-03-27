@@ -38,7 +38,12 @@ This method also has an _offset_ and _stickyPlatformHeight_ options. To see an e
 - OpacityMotion
 
 ## Actors
-- **StaticActor** should have MoveMotion, SizeMotion and OpacityMotion in its TimeFrame to calc start/end values.
+- **StaticActor** should have MoveMotion, SizeMotion and OpacityMotion in its TimeFrame to calc start/end values. You can also set false into _initPosition_, _initSize_, _initOpacity_ to prevent this behavior:
+```
+const agenda = new StaticActor(document.getElementById('agenda'), {
+    initOpacity: false,
+});
+```
 - **RefActor** doesn't change its coordinates and sizes.
 
 ## Built With
