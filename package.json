@@ -10,7 +10,7 @@
     "/lib"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "watch": "webpack --watch --mode production",
@@ -32,7 +32,13 @@
   },
   "homepage": "https://github.com/drKaramazin/scroll-rise#readme",
   "devDependencies": {
-    "@types/defaults": "^1.0.3",
+    "@types/jasmine": "^4.0.2",
+    "jasmine-core": "^4.0.1",
+    "karma": "^6.3.17",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-jasmine": "^4.0.2",
+    "karma-typescript": "^5.5.3",
+    "karma-typescript-es6-transform": "^5.5.3",
     "ts-loader": "^9.2.7",
     "typescript": "^4.6.2",
     "webpack": "^5.70.0",
