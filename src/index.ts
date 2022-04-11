@@ -17,3 +17,4 @@ export { Motion } from './models/motions/motion.model';
 export { MoveMotion } from './models/motions/move.motion';
 export { SizeMotion } from './models/motions/size.motion';
 export { OpacityMotion } from './models/motions/opacity.motion';
+export { BoundMotion, BoundValue } from './models/motions/bound.motion';
