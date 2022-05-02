@@ -3,14 +3,16 @@
 
 module.exports = function(config) {
   config.set({
-    basePath: '',
+    basePath: 'src',
     frameworks: ['jasmine', "karma-typescript"],
     files: [
-      'src/**/*.spec.ts',
+      '**/*.ts',
+      { pattern: '../docs/styles/reset.css', included:true, watched: false },
+      { pattern: '../styles/test.css', included:true, watched: false },
     ],
     exclude: [],
     preprocessors: {
-      "src/**/*.spec.ts": ['karma-typescript'],
+      '**/*.ts': ['karma-typescript'],
     },
     karmaTypescriptConfig: {
       bundlerOptions: {
@@ -34,6 +36,9 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
+    client: {
+      clearContext: false,
+    },
     concurrency: Infinity
-  })
+  });
 }

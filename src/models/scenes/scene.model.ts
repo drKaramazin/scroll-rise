@@ -7,11 +7,11 @@ export interface SceneOptions {
 
 export abstract class SceneModel<Options extends SceneOptions> {
 
-    protected _list: Actor[] = [];
+    protected _actors: Actor[] = [];
     public abstract name: string;
 
     protected abstract init(): void;
-    protected abstract resizeHeight(): void;
+    public abstract resizeHeight(): void;
 
     constructor(
         protected el: HTMLElement,
@@ -48,11 +48,11 @@ export abstract class SceneModel<Options extends SceneOptions> {
     }
 
     add(actor: Actor) {
-        this._list.push(actor);
+        this._actors.push(actor);
     }
 
-    get list(): Actor[] {
-        return this._list;
+    get actors(): Actor[] {
+        return this._actors;
     }
 
 }

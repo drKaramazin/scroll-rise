@@ -24,6 +24,10 @@ describe("Init test", function() {
         sr = new ScrollRise(scene);
     });
 
+    afterEach(function () {
+        document.body.removeChild(document.getElementById('scene'));
+    });
+
     it("should be inited", function() {
         expect(sceneElement).toBeTruthy();
         expect(scene).toBeTruthy();

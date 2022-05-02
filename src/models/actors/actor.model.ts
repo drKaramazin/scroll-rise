@@ -15,6 +15,9 @@ export abstract class Actor {
   initStartPosition() {}
   afterBindElement() {}
 
+  beforeRender: () => void | undefined;
+  afterRender: () => void | undefined;
+
   private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
     return frames.reduce(
       (acc: any, frame) => {
@@ -28,6 +31,10 @@ export abstract class Actor {
   }
 
   render(scrollPos: number, scene: SceneModel<any>) {
+    if (this.beforeRender) {
+      this.beforeRender();
+    }
+
     const frames = this.groupFramesByMotion(this.frames);
 
     for (const key of Object.keys(frames)) {
@@ -71,6 +78,10 @@ export abstract class Actor {
           frames[key][0].motion.make(scrollPos, frames[key][0], this.element, scene);
         }
       }
+    }
+
+    if (this.afterRender) {
+      this.afterRender();
     }
   }
 

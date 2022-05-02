@@ -1,5 +1,5 @@
-import { StickyPlatformScene } from './models/scenes/sticky-platform.scene';
 import { Util } from './util';
+import { SceneModel, SceneOptions } from './models/scenes/scene.model';
 
 export class ScrollRise {
 
@@ -11,7 +11,7 @@ export class ScrollRise {
   private displayHeight: number;
 
   constructor(
-    public scene: StickyPlatformScene,
+    public scene: SceneModel<SceneOptions>,
   ) {
     this.saveDisplaySize();
     this.init();
@@ -70,7 +70,7 @@ export class ScrollRise {
   }
 
   render(scrollPos: number) {
-    for (const actor of this.scene.list) {
+    for (const actor of this.scene.actors) {
       actor.render(-this.pos(scrollPos), this.scene);
     }
   }
