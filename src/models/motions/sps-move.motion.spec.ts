@@ -5,7 +5,7 @@ import { TimeFrame } from '../time-frame.model';
 import { MoveMotion } from './move.motion';
 import { Util } from '../../util';
 
-describe("Move motion test", function() {
+describe("Sticky Platforms Scene's move motion test", function() {
     let sceneElement: HTMLElement;
     let scene: StickyPlatformScene;
     let blockElement: HTMLElement;
@@ -137,5 +137,5 @@ describe("Move motion test", function() {
             done();
         };
         window.scrollTo(0, Util.displayHeight() * 3);
-    })
+    });
 });
