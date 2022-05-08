@@ -1,0 +1,12 @@
+#scene {
+    background: #00ccff;
+}
+
+#block {
+    background: #f00;
+}
+
+.display {
+    width: 100vw;
+    height: 100vh;
+}
