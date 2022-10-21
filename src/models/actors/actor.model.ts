@@ -1,18 +1,16 @@
 import { TimeFrame } from '../time-frame.model';
-import { Coord } from '../coord.model';
 import { Util } from '../../util';
 import { SceneModel } from '../scenes/scene.model';
 
 export abstract class Actor {
 
   public element: HTMLElement | undefined;
-  abstract bindElement(): HTMLElement | undefined;
+  abstract bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined;
 
   protected frames: TimeFrame[] = [];
 
-  abstract calcStartPosition(): Coord;
+  abstract findFirstMoveMotionFrame(): TimeFrame;
 
-  initStartPosition() {}
   afterBindElement() {}
 
   beforeRender: () => void | undefined;
@@ -93,9 +91,8 @@ export abstract class Actor {
     this.frames = this.frames.concat(frames);
   }
 
-  initElement() {
-    this.initStartPosition();
-    this.element = this.bindElement();
+  initElement(scrollPosOnFrame: number, scene: SceneModel<any>) {
+    this.element = this.bindElement(scrollPosOnFrame, scene);
     this.afterBindElement();
   }
 

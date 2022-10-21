@@ -8,4 +8,8 @@ export class Util {
     return document.documentElement.clientHeight;
   }
 
+  static castToInt(num: number): number {
+    return Math.trunc(num);
+  }
+
 }

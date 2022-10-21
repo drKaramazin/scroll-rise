@@ -42,7 +42,7 @@ export class MoveMotion extends Motion {
 
       const motionL = this.endX(Util.displayWidth(), Util.displayHeight()) - this.startX(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const x = this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
+      const x = Util.castToInt(this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos()));
 
       element.style.left = `${x}px`;
     }
@@ -61,7 +61,7 @@ export class MoveMotion extends Motion {
         }
       } else if (scene.name === 'FixedActorsScene') {
         if (scrollPos < frame.getStartPos()) {
-          element.style.top = `${-scrollPos + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
+          element.style.top = `${scene.elementY() + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
           return;
         }
         if (scrollPos > frame.getEndPos()) {
@@ -72,15 +72,15 @@ export class MoveMotion extends Motion {
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
       const d = motionL/frame.length();
-      const y = Math.round(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
+      const y = Util.castToInt(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
 
       element.style.top = `${y}px`;
     }
   }
 
-  make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>) {
-    this.renderX(scrollPosForFrame, frame, element);
-    this.renderY(scrollPosForFrame, frame, element, scene);
+  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>) {
+    this.renderX(scrollPosOnFrame, frame, element);
+    this.renderY(scrollPosOnFrame, frame, element, scene);
   }
 
 }

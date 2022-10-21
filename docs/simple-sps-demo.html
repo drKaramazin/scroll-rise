@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple SPS demo</title>
+    <link href="styles/reset.css" rel="stylesheet">
+
+    <style>
+        #scene {
+            background: #00ccff;
+        }
+
+        #block {
+            background: #f00;
+        }
+
+        .display {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+
+</head>
+<body>
+
+<script type="module">
+
+    let blockData = {
+        width: 10,
+        height: 10
+    };
+
+    import {
+        ScrollRise,
+        StaticActor,
+        TimeFrame,
+        MoveMotion,
+        StickyPlatformScene,
+        FixedActorsScene,
+    } from "./scroll-rise/index.es.js";
+
+    const fixture = `
+        <div id="test-body">
+            <div class="display"></div>
+            <div id="scene">
+                <div id="block" style="width: ${blockData.width}px; height: ${blockData.height}px;"></div>
+            </div>
+            <div class="display"></div>
+            <div class="display"></div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('afterbegin', fixture);
+
+    let sceneElement = document.getElementById('scene');
+
+    let scene = new FixedActorsScene(
+        sceneElement,
+        (w, h) => h,
+    );
+
+    let sr = new ScrollRise(scene);
+
+    let blockElement = document.getElementById('block');
+
+    let block = new StaticActor(blockElement);
+
+    block.addFrames([
+        new TimeFrame(new MoveMotion({
+            startX: () => 0,
+            endX: (w) =>  w - blockData.width,
+            startY: () => 0,
+            endY: (w, h) => h - blockData.height,
+        }), (w, h) => 0, (w, h) => h)
+    ]);
+
+    scene.add(block);
+</script>
+
+</body>
+</html>

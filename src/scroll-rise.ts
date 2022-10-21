@@ -3,6 +3,7 @@ import { SceneModel, SceneOptions } from './models/scenes/scene.model';
 
 export class ScrollRise {
 
+  private initialized = false;
   private ticking = false;
   private scrollListener: (() => void) | undefined;
   private resizeListener: (() => void) | undefined;
@@ -39,7 +40,7 @@ export class ScrollRise {
   }
 
   pos(scrollPos: number): number {
-    return scrollPos + this.scene.offset();
+    return -(scrollPos + this.scene.offset());
   }
 
   scroll() {
@@ -54,24 +55,35 @@ export class ScrollRise {
   }
 
   private init() {
-    this.scrollListener = this.scroll.bind(this);
-    window?.addEventListener('scroll', this.scrollListener);
-    this.resizeListener = this.resize.bind(this);
-    window?.addEventListener('resize', this.resizeListener);
+    if (!this.initialized) {
+      this.initialized = true;
+      this.scrollListener = this.scroll.bind(this);
+      window?.addEventListener('scroll', this.scrollListener);
+      this.resizeListener = this.resize.bind(this);
+      window?.addEventListener('resize', this.resizeListener);
+      this.tick();
+    } else {
+      throw new Error('Scroll-Rise has already been initialized');
+    }
   }
 
   stop() {
-    if (this.scrollListener) {
-      window?.removeEventListener('scroll', this.scrollListener);
-    }
-    if (this.resizeListener) {
-      window?.removeEventListener('resize', this.resizeListener);
+    if (this.initialized) {
+      this.initialized = false;
+      if (this.scrollListener) {
+        window?.removeEventListener('scroll', this.scrollListener);
+      }
+      if (this.resizeListener) {
+        window?.removeEventListener('resize', this.resizeListener);
+      }
+    } else {
+      throw new Error('Scroll-Rise hasn\'t yet been initialized');
     }
   }
 
   render(scrollPos: number) {
     for (const actor of this.scene.actors) {
-      actor.render(-this.pos(scrollPos), this.scene);
+      actor.render(this.pos(scrollPos), this.scene);
     }
   }
 

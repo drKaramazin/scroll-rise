@@ -1,5 +1,7 @@
 import { InitiableActor } from './initiable.actor';
 import { Util } from '../../util';
+import { MoveMotion } from '../motions/move.motion';
+import { SceneModel } from "../scenes/scene.model";
 
 export interface StaticActorOptions {
   initPosition?: boolean;
@@ -22,12 +24,11 @@ export class StaticActor extends InitiableActor {
     };
   }
 
-  override bindElement(): HTMLElement | undefined {
+  override bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined {
     if (this.element) {
       if (this.options.initPosition) {
-        const startCoord = this.calcStartPosition();
-        this.element.style.left = `${startCoord.X(Util.displayWidth(), Util.displayHeight())}px`;
-        this.element.style.top = `${startCoord.Y(Util.displayWidth(), Util.displayHeight())}px`;
+        const timeFrame = this.findFirstMoveMotionFrame();
+        (timeFrame.motion as MoveMotion).make(scrollPosOnFrame, timeFrame, this.element, scene);
       }
       if (this.options.initSize) {
         const startDimensions = this.calcStartSize();

@@ -1,11 +1,11 @@
 import { Actor } from './actor.model';
-import { Coord } from '../coord.model';
 import { TimeFrame } from '../time-frame.model';
 import { MoveMotion } from '../motions/move.motion';
 import { Dimensions } from '../dimensions';
 import { SizeMotion } from '../motions/size.motion';
 import { OpacityMotion } from '../motions/opacity.motion';
 import { Value } from '../value.model';
+import { SceneModel } from "../scenes/scene.model";
 
 export abstract class InitiableActor extends Actor {
 
@@ -33,14 +33,13 @@ export abstract class InitiableActor extends Actor {
     );
   }
 
-  calcStartPosition(): Coord {
+  findFirstMoveMotionFrame(): TimeFrame {
     const firstFrame = this.findFirstFrame('MoveMotion');
 
     if (firstFrame) {
-      const motion = firstFrame.motion as MoveMotion;
-      return { X: motion.startX, Y: motion.startY };
+      return firstFrame;
     } else {
-      throw new SyntaxError('First "MoveMotion" frame wasn\'t found');
+      throw new Error('First "MoveMotion" frame wasn\'t found');
     }
   }
 
@@ -51,7 +50,7 @@ export abstract class InitiableActor extends Actor {
       const motion = firstFrame.motion as SizeMotion;
       return { width: motion.startWidth, height: motion.startHeight };
     } else {
-      throw new SyntaxError('First "SizeMotion" frame wasn\'t found');
+      throw new Error('First "SizeMotion" frame wasn\'t found');
     }
   }
 
@@ -62,11 +61,11 @@ export abstract class InitiableActor extends Actor {
       const motion = firstFrame.motion as OpacityMotion;
       return motion.start;
     } else {
-      throw new SyntaxError('First "OpacityMotion" frame wasn\'t found');
+      throw new Error('First "OpacityMotion" frame wasn\'t found');
     }
   }
 
-  override bindElement(): HTMLElement | undefined {
+  override bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined {
     return this.element;
   }
 
