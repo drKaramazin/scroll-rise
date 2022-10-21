@@ -48,7 +48,8 @@
 }
 
 .empty-block {
-    height: 50vh;
+    padding: 10px;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
