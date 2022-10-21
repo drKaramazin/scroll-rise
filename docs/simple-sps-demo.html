@@ -64,7 +64,10 @@
 
     let blockElement = document.getElementById('block');
 
-    let block = new StaticActor(blockElement);
+    let block = new StaticActor(blockElement, {
+        initSize: false,
+        initOpacity: false,
+    });
 
     block.addFrames([
         new TimeFrame(new MoveMotion({

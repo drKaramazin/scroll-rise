@@ -48,7 +48,7 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
       this.platform.appendChild(actor.element);
       actor.element.style.position = 'absolute';
     }
-    actor.initElement();
+    actor.initElement(this.elementY(), this);
   }
 
 }
