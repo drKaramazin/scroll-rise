@@ -29,7 +29,7 @@ export class MoveMotion extends Motion {
     this.endY = data.endY;
   }
 
-  renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): number {
+  renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.displayWidth(), Util.displayHeight())}px`;
@@ -41,14 +41,14 @@ export class MoveMotion extends Motion {
       }
 
       const motionL = this.endX(Util.displayWidth(), Util.displayHeight()) - this.startX(Util.displayWidth(), Util.displayHeight());
-      const d = motionL/frame.length();
+      const d = motionL / frame.length();
       const x = Util.castToInt(this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos()));
 
       element.style.left = `${x}px`;
     }
   }
 
-  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): number {
+  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
     if (element) {
       if (scene.name === 'StickyPlatformScene') {
         if (scrollPos < frame.getStartPos()) {
@@ -71,14 +71,14 @@ export class MoveMotion extends Motion {
       }
 
       const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
-      const d = motionL/frame.length();
+      const d = motionL / frame.length();
       const y = Util.castToInt(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
 
       element.style.top = `${y}px`;
     }
   }
 
-  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>) {
+  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
     this.renderX(scrollPosOnFrame, frame, element);
     this.renderY(scrollPosOnFrame, frame, element, scene);
   }

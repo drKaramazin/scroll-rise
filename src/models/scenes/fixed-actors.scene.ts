@@ -4,20 +4,20 @@ import { SceneModel, SceneOptions } from './scene.model';
 
 export class FixedActorsScene extends SceneModel<SceneOptions> {
 
-    public override name = 'FixedActorsScene';
+  public override name = 'FixedActorsScene';
 
-    override resizeHeight() {
-        this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
-    }
+  override resizeHeight(): void {
+    this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
+  }
 
-    protected override init() {
-        this.resizeHeight();
-    }
+  protected override init(): void {
+    this.resizeHeight();
+  }
 
-    override add(actor: Actor) {
-        super.add(actor);
-        actor.element.style.position = 'fixed';
-        actor.initElement(this.elementY(), this);
-    }
+  override add(actor: Actor): void {
+    super.add(actor);
+    actor.element.style.position = 'fixed';
+    actor.initElement(this.elementY(), this);
+  }
 
 }

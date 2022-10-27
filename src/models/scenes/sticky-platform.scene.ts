@@ -19,16 +19,16 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
     };
   }
 
-  override resizeHeight() {
+  override resizeHeight(): void {
     this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
     this.resizePlatform();
   }
 
-  resizePlatform() {
+  resizePlatform(): void {
     this.platform.style.height = `${this.options.stickyPlatformHeight(Util.displayWidth(), Util.displayHeight())}px`;
   }
 
-  protected override init() {
+  protected override init(): void {
     this.el.style.position = 'relative';
     this.el.style.overflow = 'visible';
 
@@ -42,9 +42,9 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
     this.el.appendChild(this.platform);
   }
 
-  override add(actor: Actor) {
+  override add(actor: Actor): void {
     super.add(actor);
-    if (this.el === actor.element.parentElement) {
+    if (this.el === actor.element?.parentElement) {
       this.platform.appendChild(actor.element);
       actor.element.style.position = 'absolute';
     }

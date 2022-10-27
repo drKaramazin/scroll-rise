@@ -10,7 +10,7 @@ export class TimeFrame {
   ) {
     if (end === undefined) {
       this.end = start;
-    } else  {
+    } else {
       if (this.getStartPos() > this.getEndPos()) {
         throw new SyntaxError('"Start" later than "End" in the frame');
       }

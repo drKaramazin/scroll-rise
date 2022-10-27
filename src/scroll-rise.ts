@@ -19,7 +19,7 @@ export class ScrollRise {
     this.tick();
   }
 
-  saveDisplaySize() {
+  saveDisplaySize(): void {
     this.displayWidth = Util.displayWidth();
     this.displayHeight = Util.displayHeight();
   }
@@ -28,7 +28,7 @@ export class ScrollRise {
     return true;
   }
 
-  tick() {
+  tick(): void {
     if (!this.ticking) {
       window?.requestAnimationFrame(() => {
         this.render(this.scene.elementY());
@@ -43,31 +43,31 @@ export class ScrollRise {
     return -(scrollPos + this.scene.offset());
   }
 
-  scroll() {
+  scroll(): void {
     this.tick();
   }
 
-  resize() {
+  resize(): void {
     if (this.isNeedResize()) {
       this.scene.resizeHeight();
       this.tick();
     }
   }
 
-  private init() {
+  private init(): void {
     if (!this.initialized) {
       this.initialized = true;
       this.scrollListener = this.scroll.bind(this);
-      window?.addEventListener('scroll', this.scrollListener);
+      window?.addEventListener('scroll', this.scrollListener!);
       this.resizeListener = this.resize.bind(this);
-      window?.addEventListener('resize', this.resizeListener);
+      window?.addEventListener('resize', this.resizeListener!);
       this.tick();
     } else {
       throw new Error('Scroll-Rise has already been initialized');
     }
   }
 
-  stop() {
+  stop(): void {
     if (this.initialized) {
       this.initialized = false;
       if (this.scrollListener) {
@@ -81,7 +81,7 @@ export class ScrollRise {
     }
   }
 
-  render(scrollPos: number) {
+  render(scrollPos: number): void {
     for (const actor of this.scene.actors) {
       actor.render(this.pos(scrollPos), this.scene);
     }

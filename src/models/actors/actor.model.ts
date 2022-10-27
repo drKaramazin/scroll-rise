@@ -11,10 +11,10 @@ export abstract class Actor {
 
   abstract findFirstMoveMotionFrame(): TimeFrame;
 
-  afterBindElement() {}
+  afterBindElement(): void {}
 
-  beforeRender: () => void | undefined;
-  afterRender: () => void | undefined;
+  beforeRender?: () => void;
+  afterRender?: () => void;
 
   private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
     return frames.reduce(
@@ -24,11 +24,11 @@ export abstract class Actor {
 
         return acc;
       },
-      {}
+      {},
     );
   }
 
-  render(scrollPos: number, scene: SceneModel<any>) {
+  render(scrollPos: number, scene: SceneModel<any>): void {
     if (this.beforeRender) {
       this.beforeRender();
     }
@@ -55,7 +55,7 @@ export abstract class Actor {
               if (a.getEndPos() > b.getEndPos()) {
                 return -1;
               } else if (a.getEndPos() > b.getEndPos()) {
-                return 0
+                return 0;
               }
               return 1;
             });
@@ -83,15 +83,15 @@ export abstract class Actor {
     }
   }
 
-  addFrame(frame: TimeFrame) {
+  addFrame(frame: TimeFrame): void {
     this.frames.push(frame);
   }
 
-  addFrames(frames: TimeFrame[]) {
+  addFrames(frames: TimeFrame[]): void {
     this.frames = this.frames.concat(frames);
   }
 
-  initElement(scrollPosOnFrame: number, scene: SceneModel<any>) {
+  initElement(scrollPosOnFrame: number, scene: SceneModel<any>): void {
     this.element = this.bindElement(scrollPosOnFrame, scene);
     this.afterBindElement();
   }

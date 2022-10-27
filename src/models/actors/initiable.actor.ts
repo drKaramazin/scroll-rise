@@ -1,22 +1,21 @@
 import { Actor } from './actor.model';
 import { TimeFrame } from '../time-frame.model';
-import { MoveMotion } from '../motions/move.motion';
 import { Dimensions } from '../dimensions';
 import { SizeMotion } from '../motions/size.motion';
 import { OpacityMotion } from '../motions/opacity.motion';
 import { Value } from '../value.model';
-import { SceneModel } from "../scenes/scene.model";
+import { SceneModel } from '../scenes/scene.model';
 
 export abstract class InitiableActor extends Actor {
 
   findFirstFrame(motionName: string): TimeFrame | undefined {
-    return  this.frames.reduce(
+    return this.frames.reduce(
       (acc: TimeFrame | undefined, frame: TimeFrame) => {
         if (frame.motion.name === motionName) {
           if (acc) {
             if (frame.getStartPos() < acc?.getStartPos()) {
               return frame;
-            } else  {
+            } else {
               return acc;
             }
           } else {

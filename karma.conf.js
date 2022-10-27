@@ -4,11 +4,11 @@
 module.exports = function(config) {
   config.set({
     basePath: 'src',
-    frameworks: ['jasmine', "karma-typescript"],
+    frameworks: ['jasmine', 'karma-typescript'],
     files: [
       '**/*.ts',
-      { pattern: '../docs/styles/reset.css', included:true, watched: false },
-      { pattern: '../styles/test.css', included:true, watched: false },
+      { pattern: '../docs/styles/reset.css', included: true, watched: false },
+      { pattern: '../styles/test.css', included: true, watched: false },
     ],
     exclude: [],
     preprocessors: {
@@ -17,17 +17,17 @@ module.exports = function(config) {
     karmaTypescriptConfig: {
       bundlerOptions: {
         transforms: [
-          require("karma-typescript-es6-transform")({
+          require('karma-typescript-es6-transform')({
             presets: [
-              ["@babel/preset-env", {
+              ['@babel/preset-env', {
                 targets: {
-                  chrome: "60"
-                }
-              }]
-            ]
-          })
-        ]
-      }
+                  chrome: '60',
+                },
+              }],
+            ],
+          }),
+        ],
+      },
     },
     reporters: ['progress', 'karma-typescript'],
     port: 9876,
@@ -39,6 +39,6 @@ module.exports = function(config) {
     client: {
       clearContext: false,
     },
-    concurrency: Infinity
+    concurrency: Infinity,
   });
-}
+};

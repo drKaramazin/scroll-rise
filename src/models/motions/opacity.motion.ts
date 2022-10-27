@@ -22,7 +22,7 @@ export class OpacityMotion extends Motion {
     this.end = data.end;
   }
 
-  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement) {
+  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.opacity = this.start(Util.displayWidth(), Util.displayHeight()).toString();
@@ -34,14 +34,14 @@ export class OpacityMotion extends Motion {
       }
 
       const motionL = this.end(Util.displayWidth(), Util.displayHeight()) - this.start(Util.displayWidth(), Util.displayHeight());
-      const d = motionL/frame.length();
+      const d = motionL / frame.length();
       const opacity = this.start(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.opacity = opacity.toString();
     }
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement) {
+  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
     this.renderOpacity(scrollPosForFrame, frame, element);
   }
 

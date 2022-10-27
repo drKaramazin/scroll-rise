@@ -28,7 +28,7 @@ export class SizeMotion extends Motion {
     this.endHeight = data.endHeight;
   }
 
-  renderWidth(scrollPos: number, frame: TimeFrame, element: HTMLElement) {
+  renderWidth(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.width = `${this.startWidth(Util.displayWidth(), Util.displayHeight())}px`;
@@ -40,14 +40,14 @@ export class SizeMotion extends Motion {
       }
 
       const motionL = this.endWidth(Util.displayWidth(), Util.displayHeight()) - this.startWidth(Util.displayWidth(), Util.displayHeight());
-      const d = motionL/frame.length();
+      const d = motionL / frame.length();
       const width = this.startWidth(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.width = `${width}px`;
     }
   }
 
-  renderHeight(scrollPos: number, frame: TimeFrame, element: HTMLElement) {
+  renderHeight(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.height = `${this.startHeight(Util.displayWidth(), Util.displayHeight())}px`;
@@ -59,14 +59,14 @@ export class SizeMotion extends Motion {
       }
 
       const motionL = this.endHeight(Util.displayWidth(), Util.displayHeight()) - this.startHeight(Util.displayWidth(), Util.displayHeight());
-      const d = motionL/frame.length();
+      const d = motionL / frame.length();
       const height = this.startHeight(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.height = `${height}px`;
     }
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement) {
+  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
     this.renderWidth(scrollPosForFrame, frame, element);
     this.renderHeight(scrollPosForFrame, frame, element);
   }

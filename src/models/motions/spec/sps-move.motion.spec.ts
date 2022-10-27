@@ -14,7 +14,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
     beforeEach(function () {
         document.body.insertAdjacentHTML('afterbegin', SpsMotionFixture.htmlTemplate());
 
-        sceneElement = document.getElementById('scene');
+        sceneElement = document.getElementById('scene')!;
 
         scene = new StickyPlatformScene(
             sceneElement,
@@ -23,7 +23,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
         sr = new ScrollRise(scene);
 
-        blockElement = document.getElementById('block');
+        blockElement = document.getElementById('block')!;
 
         block = new StaticActor(blockElement, {
             initSize: false,
@@ -33,7 +33,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
     afterEach(function () {
         sr.stop();
-        document.body.removeChild(document.getElementById('test-body'));
+        document.body.removeChild(document.getElementById('test-body')!);
     });
 
     it("should be inited", function() {

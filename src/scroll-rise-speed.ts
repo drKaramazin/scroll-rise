@@ -10,10 +10,10 @@ export class ScrollRiseSpeed {
       deltaY?: number,
       limitY?: number,
       excludeIds?: string[],
-    }
+    },
   ) {}
 
-  handleScrollReset() {
+  handleScrollReset(): void {
     scrollY = this.container.scrollTop;
   }
 
@@ -23,7 +23,7 @@ export class ScrollRiseSpeed {
     }
   }
 
-  handleMouseWheel(e: any) {
+  handleMouseWheel(e: any): void {
     if (!this.exclude(e)) {
       e.preventDefault();
       let delta = e.deltaY;
@@ -44,7 +44,7 @@ export class ScrollRiseSpeed {
     }
   }
 
-  init() {
+  init(): void {
     this.mouseupListener = this.handleScrollReset.bind(this);
     this.mousedownListener = this.handleScrollReset.bind(this);
     this.mousewheelListener = this.handleMouseWheel.bind(this);
@@ -61,7 +61,7 @@ export class ScrollRiseSpeed {
     });
   }
 
-  stop() {
+  stop(): void {
     if (this.mouseupListener) {
       this.container.removeEventListener('mouseup', this.mouseupListener);
     }

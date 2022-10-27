@@ -1,7 +1,7 @@
 import { InitiableActor } from './initiable.actor';
 import { Util } from '../../util';
 import { MoveMotion } from '../motions/move.motion';
-import { SceneModel } from "../scenes/scene.model";
+import { SceneModel } from '../scenes/scene.model';
 
 export interface StaticActorOptions {
   initPosition?: boolean;
