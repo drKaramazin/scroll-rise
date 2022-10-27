@@ -16,7 +16,7 @@ export class FixedActorsScene extends SceneModel<SceneOptions> {
 
   override add(actor: Actor): void {
     super.add(actor);
-    actor.element.style.position = 'fixed';
+    actor.element!.style.position = 'fixed';
     actor.initElement(this.elementY(), this);
   }
 

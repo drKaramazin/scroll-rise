@@ -4,7 +4,7 @@ import { SceneModel } from '../scenes/scene.model';
 
 export abstract class Actor {
 
-  public element: HTMLElement | undefined;
+  public element?: HTMLElement;
   abstract bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined;
 
   protected frames: TimeFrame[] = [];
