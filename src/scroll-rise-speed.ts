@@ -1,19 +1,20 @@
 export class ScrollRiseSpeed {
 
-  private mouseupListener: (() => void) | undefined;
-  private mousedownListener: (() => void) | undefined;
-  private mousewheelListener: ((e: any) => void) | undefined;
+  private mouseupListener?: () => void;
+  private mousedownListener?: () => void;
+  private mousewheelListener?: (e: any) => void;
 
   constructor(
     public container: HTMLElement,
     protected options?: {
-      deltaY?: number,
-      limitY?: number,
-      excludeIds?: string[],
+      deltaY?: number;
+      limitY?: number;
+      excludeIds?: string[];
     },
   ) {}
 
   handleScrollReset(): void {
+    // eslint-disable-next-line no-global-assign
     scrollY = this.container.scrollTop;
   }
 
@@ -26,18 +27,21 @@ export class ScrollRiseSpeed {
   handleMouseWheel(e: any): void {
     if (!this.exclude(e)) {
       e.preventDefault();
-      let delta = e.deltaY;
+      let delta: number = e.deltaY;
       delta = this.options?.deltaY ? delta * this.options.deltaY : delta;
       if (this.options?.limitY && Math.abs(delta) > this.options.limitY) {
         delta = delta > 0 ? this.options.limitY : -this.options.limitY;
       }
+      // eslint-disable-next-line no-global-assign
       scrollY += delta;
       if (scrollY > 0) {
-        var limitY = this.container.scrollHeight - this.container.clientHeight;
+        const limitY = this.container.scrollHeight - this.container.clientHeight;
         if (scrollY > limitY) {
+          // eslint-disable-next-line no-global-assign
           scrollY = limitY;
         }
       } else {
+        // eslint-disable-next-line no-global-assign
         scrollY = 0;
       }
       window?.scrollTo(0, scrollY);
@@ -48,15 +52,15 @@ export class ScrollRiseSpeed {
     this.mouseupListener = this.handleScrollReset.bind(this);
     this.mousedownListener = this.handleScrollReset.bind(this);
     this.mousewheelListener = this.handleMouseWheel.bind(this);
-    this.container.addEventListener('mouseup', this.mouseupListener, false);
-    this.container.addEventListener('mousedown', this.mousedownListener, false);
-    this.container.addEventListener('mousewheel', this.mousewheelListener, {
+    this.container.addEventListener('mouseup', this.mouseupListener!, false);
+    this.container.addEventListener('mousedown', this.mousedownListener!, false);
+    this.container.addEventListener('mousewheel', this.mousewheelListener!, {
       passive: false,
     });
-    this.container.addEventListener('DOMMouseScroll', this.mousewheelListener, {
+    this.container.addEventListener('DOMMouseScroll', this.mousewheelListener!, {
       passive: false,
     });
-    this.container.addEventListener('wheel', this.mousewheelListener, {
+    this.container.addEventListener('wheel', this.mousewheelListener!, {
       passive: false,
     });
   }

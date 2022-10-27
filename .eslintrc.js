@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
   },
   extends: 'standard-with-typescript',
   overrides: [
@@ -35,5 +35,9 @@ module.exports = {
       },
       multilineDetection: 'brackets',
     }],
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    'no-var': 'error',
+    '@typescript-eslint/promise-function-async': 'off',
+    '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'as', objectLiteralTypeAssertions: 'allow' }],
   },
 };

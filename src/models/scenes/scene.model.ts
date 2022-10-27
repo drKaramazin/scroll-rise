@@ -2,7 +2,7 @@ import { Actor } from '../actors/actor.model';
 import { Util } from '../../util';
 
 export interface SceneOptions {
-  offset?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
+  offset: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
 }
 
 export abstract class SceneModel<Options extends SceneOptions> {
@@ -26,7 +26,7 @@ export abstract class SceneModel<Options extends SceneOptions> {
     this.options = {
       ...this.defaults(),
       ...this.options,
-    };
+    } as Options;
   }
 
   defaults(): SceneOptions {
@@ -36,7 +36,7 @@ export abstract class SceneModel<Options extends SceneOptions> {
   }
 
   offset(): number {
-    return this.options.offset(
+    return this.options!.offset(
       Util.displayWidth(),
       Util.displayHeight(),
       this.height(Util.displayWidth(), Util.displayHeight()),

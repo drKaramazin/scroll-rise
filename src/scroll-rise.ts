@@ -5,8 +5,8 @@ export class ScrollRise {
 
   private initialized = false;
   private ticking = false;
-  private scrollListener: (() => void) | undefined;
-  private resizeListener: (() => void) | undefined;
+  private scrollListener?: (() => void);
+  private resizeListener?: (() => void);
 
   private displayWidth: number;
   private displayHeight: number;
@@ -70,10 +70,10 @@ export class ScrollRise {
   stop(): void {
     if (this.initialized) {
       this.initialized = false;
-      if (this.scrollListener) {
+      if (this.scrollListener !== undefined) {
         window?.removeEventListener('scroll', this.scrollListener);
       }
-      if (this.resizeListener) {
+      if (this.resizeListener !== undefined) {
         window?.removeEventListener('resize', this.resizeListener);
       }
     } else {

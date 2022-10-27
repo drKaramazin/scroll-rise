@@ -28,7 +28,7 @@ export abstract class InitiableActor extends Actor {
           return undefined;
         }
       },
-      undefined
+      undefined,
     );
   }
 

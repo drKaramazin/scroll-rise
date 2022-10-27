@@ -39,15 +39,15 @@ export abstract class Actor {
       if (frames[key].length > 1) {
         const visible = frames[key].filter(
           frame =>
-            scrollPos < frame.getStartPos() && scrollPos + Util.displayHeight() >= frame.getStartPos() ||
-            scrollPos >= frame.getStartPos() && scrollPos + Util.displayHeight() <= frame.getEndPos() ||
-            scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()
+            (scrollPos < frame.getStartPos() && scrollPos + Util.displayHeight() >= frame.getStartPos()) ||
+            (scrollPos >= frame.getStartPos() && scrollPos + Util.displayHeight() <= frame.getEndPos()) ||
+            (scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()),
         );
 
         if (visible.length === 1) {
           frames[key] = visible;
         } else if (visible.length === 0 && frames[key].length) {
-          frames[key].sort((a, b) => a.getStartPos() - b.getStartPos())
+          frames[key].sort((a, b) => a.getStartPos() - b.getStartPos());
           if (scrollPos + Util.displayHeight() < frames[key][0].getStartPos()) {
             frames[key] = [frames[key][0]];
           } else {

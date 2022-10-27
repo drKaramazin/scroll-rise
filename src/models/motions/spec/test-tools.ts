@@ -4,7 +4,7 @@ export interface ChangeStage {
   scrollTo?: {
     x: number;
     y: number;
-  },
+  };
   x: number;
   y: number;
 }
