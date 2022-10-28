@@ -7,7 +7,7 @@ module.exports = {
   overrides: [
   ],
   parserOptions: {
-    project: './tsconfig.json',
+    project: './tsconfig.linter.json',
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
