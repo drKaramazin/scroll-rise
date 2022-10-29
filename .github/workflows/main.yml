@@ -1,14 +1,16 @@
 name: main-github-workflow
 on: [push]
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: |
-          npm ci
-          npm run lint
-          npm run test
+      - name: Install node dependencies
+        run: npm ci
+      - name: Linter
+        run: npm run lint
+      - name: Tests
+        run: npm run test:no-browser
