@@ -1,11 +1,11 @@
-import { MotionFixture } from './motion.fixture';
 import { ChangeStage } from './test-tools';
 import { Util } from '../../../util';
+import { MoveFixture } from './move.fixture';
 
-export class FasMoveFixture extends MotionFixture {
+export class FasMoveFixture extends MoveFixture {
 
   static changeX = {
-    timeFrame: MotionFixture.changeXTimeFrame,
+    timeFrame: MoveFixture.changeXTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -31,7 +31,7 @@ export class FasMoveFixture extends MotionFixture {
           y: Util.displayHeight() * 2,
         },
         coords: {
-          x: { value: Util.displayWidth() - MotionFixture.block.width },
+          x: { value: Util.displayWidth() - MoveFixture.block.width },
           y: { value: 0 },
         },
       }, {
@@ -40,7 +40,7 @@ export class FasMoveFixture extends MotionFixture {
           y: Util.displayHeight() * 3,
         },
         coords: {
-          x: { value: Util.displayWidth() - MotionFixture.block.width },
+          x: { value: Util.displayWidth() - MoveFixture.block.width },
           y: { value: -Util.displayHeight() },
         },
       }];
@@ -48,7 +48,7 @@ export class FasMoveFixture extends MotionFixture {
   };
 
   static changeY = {
-    timeFrame: MotionFixture.changeYTimeFrame,
+    timeFrame: MoveFixture.changeYTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -75,7 +75,7 @@ export class FasMoveFixture extends MotionFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.displayHeight() - MotionFixture.block.height },
+          y: { value: Util.displayHeight() - MoveFixture.block.height },
         },
       }, {
         scrollTo: {
@@ -84,14 +84,14 @@ export class FasMoveFixture extends MotionFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: -MotionFixture.block.height },
+          y: { value: -MoveFixture.block.height },
         },
       }];
     },
   };
 
   static changeXY = {
-    timeFrame: MotionFixture.changeXYTimeFrame,
+    timeFrame: MoveFixture.changeXYTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -117,8 +117,8 @@ export class FasMoveFixture extends MotionFixture {
           y: Util.displayHeight() * 2,
         },
         coords: {
-          x: { value: Util.displayWidth() - MotionFixture.block.width },
-          y: { value: Util.displayHeight() - MotionFixture.block.height },
+          x: { value: Util.displayWidth() - MoveFixture.block.width },
+          y: { value: Util.displayHeight() - MoveFixture.block.height },
         },
       }, {
         scrollTo: {
@@ -126,8 +126,8 @@ export class FasMoveFixture extends MotionFixture {
           y: Util.displayHeight() * 3,
         },
         coords: {
-          x: { value: Util.displayWidth() - MotionFixture.block.width },
-          y: { value: -MotionFixture.block.height },
+          x: { value: Util.displayWidth() - MoveFixture.block.width },
+          y: { value: -MoveFixture.block.height },
         },
       }];
     },
