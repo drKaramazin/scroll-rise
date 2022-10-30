@@ -7,6 +7,7 @@ export interface ChangeStage {
   };
   x: number;
   y: number;
+  withContext: string;
 }
 
 export class TestTools {
@@ -19,8 +20,8 @@ export class TestTools {
         return new Promise(resolve => {
           block.afterRender = () => {
             // console.log('expect', blockElement.getBoundingClientRect().x, blockElement.getBoundingClientRect().y);
-            expect(blockElement.getBoundingClientRect().x).toEqual(stage.x);
-            expect(blockElement.getBoundingClientRect().y).toEqual(stage.y);
+            expect(blockElement.getBoundingClientRect().x).withContext(stage.withContext).toEqual(stage.x);
+            expect(blockElement.getBoundingClientRect().y).withContext(stage.withContext).toEqual(stage.y);
             resolve();
           };
           if (stage.scrollTo) {

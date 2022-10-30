@@ -10,6 +10,7 @@ export class SpsMotionFixture extends MotionFixture {
       return [{
         x: 0,
         y: Util.displayHeight(),
+        withContext: 'stage 1',
       }, {
         scrollTo: {
           x: 0,
@@ -17,6 +18,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: 0,
         y: 0,
+        withContext: 'stage 2',
       }, {
         scrollTo: {
           x: 0,
@@ -24,6 +26,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: Util.displayWidth() - MotionFixture.block.width,
         y: -Util.displayHeight(),
+        withContext: 'stage 3',
       }, {
         scrollTo: {
           x: 0,
@@ -31,6 +34,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: Util.displayWidth() - MotionFixture.block.width,
         y: -Util.displayHeight() * 2,
+        withContext: 'stage 4',
       }];
     },
   };
@@ -41,6 +45,7 @@ export class SpsMotionFixture extends MotionFixture {
       return [{
         x: 0,
         y: Util.displayHeight(),
+        withContext: 'stage 1',
       }, {
         scrollTo: {
           x: 0,
@@ -48,6 +53,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: 0,
         y: 0,
+        withContext: 'stage 2',
       }, {
         scrollTo: {
           x: 0,
@@ -55,6 +61,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: 0,
         y: -MotionFixture.block.height,
+        withContext: 'stage 3',
       }, {
         scrollTo: {
           x: 0,
@@ -62,6 +69,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: 0,
         y: -Util.displayHeight() - MotionFixture.block.height,
+        withContext: 'stage 4',
       }];
     },
   };
@@ -72,6 +80,7 @@ export class SpsMotionFixture extends MotionFixture {
       return [{
         x: 0,
         y: Util.displayHeight(),
+        withContext: 'stage 1',
       }, {
         scrollTo: {
           x: 0,
@@ -79,6 +88,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: 0,
         y: 0,
+        withContext: 'stage 2',
       }, {
         scrollTo: {
           x: 0,
@@ -86,6 +96,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: Util.displayWidth() - MotionFixture.block.width,
         y: -MotionFixture.block.height,
+        withContext: 'stage 3',
       }, {
         scrollTo: {
           x: 0,
@@ -93,6 +104,7 @@ export class SpsMotionFixture extends MotionFixture {
         },
         x: Util.displayWidth() - MotionFixture.block.width,
         y: -Util.displayHeight() - MotionFixture.block.height,
+        withContext: 'stage 4',
       }];
     },
   };
