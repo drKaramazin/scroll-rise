@@ -8,6 +8,10 @@ export class FasMoveFixture extends MotionFixture {
     timeFrame: MotionFixture.changeXTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
+        scrollTo: {
+          x: 0,
+          y: 0,
+        },
         coords: {
           x: { value: 0 },
           y: { value: Util.displayHeight() },
@@ -47,6 +51,10 @@ export class FasMoveFixture extends MotionFixture {
     timeFrame: MotionFixture.changeYTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
+        scrollTo: {
+          x: 0,
+          y: 0,
+        },
         coords: {
           x: { value: 0 },
           y: { value: Util.displayHeight() },
@@ -86,6 +94,10 @@ export class FasMoveFixture extends MotionFixture {
     timeFrame: MotionFixture.changeXYTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
+        scrollTo: {
+          x: 0,
+          y: 0,
+        },
         coords: {
           x: { value: 0 },
           y: { value: Util.displayHeight() },
