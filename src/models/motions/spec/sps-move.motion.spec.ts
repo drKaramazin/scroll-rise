@@ -37,6 +37,14 @@ describe("Sticky Platforms Scene's move motion test", function() {
   });
 
   it('should be inited', function() {
+    console.log('Dcumens\'s size:');
+    console.log('document.documentElement.clientWidth, clientHeight', document.documentElement.clientWidth, document.documentElement.clientHeight);
+    console.log('document.documentElement.scrollWidth, scrollHeight', document.documentElement.scrollWidth, document.documentElement.scrollHeight);
+    console.log('document.body.scrollWidth, scrollHeight', document.body.scrollWidth, document.body.scrollHeight);
+    console.log('document.body.offsetWidth, offsetHeight', document.body.offsetWidth, document.body.offsetHeight);
+    console.log('document.documentElement.offsetWidth, offsetHeight', document.documentElement.offsetWidth, document.documentElement.offsetHeight);
+    console.log('document.body.clientWidth, clientHeight', document.body.clientWidth, document.body.clientHeight);
+
     expect(blockElement).toBeTruthy();
     expect(block).toBeTruthy();
     expect(sceneElement).toBeTruthy();
