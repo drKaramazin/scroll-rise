@@ -4,7 +4,7 @@ import { TimeFrame } from '../../time-frame.model';
 import { SizeMotion } from '../size.motion';
 import { Util } from '../../../util';
 
-export class SpsSizeFixture extends MotionFixture {
+export class SizeFixture extends MotionFixture {
 
   static changeWidthTimeFrame(): TimeFrame {
     return new TimeFrame(new SizeMotion({
@@ -20,7 +20,7 @@ export class SpsSizeFixture extends MotionFixture {
       startWidth: () => MotionFixture.block.width,
       startHeight: () => MotionFixture.block.height,
       endWidth: () => MotionFixture.block.width,
-      endHeight: () => MotionFixture.block.height * 2,
+      endHeight: () => MotionFixture.block.height * 3,
     }), (w: number, h: number) => 0, (w: number, h: number) => h);
   };
 
@@ -29,12 +29,12 @@ export class SpsSizeFixture extends MotionFixture {
       startWidth: () => MotionFixture.block.width,
       startHeight: () => MotionFixture.block.height,
       endWidth: () => MotionFixture.block.width * 2,
-      endHeight: () => MotionFixture.block.height * 2,
+      endHeight: () => MotionFixture.block.height * 3,
     }), (w: number, h: number) => 0, (w: number, h: number) => h);
   };
 
   static changeWidth = {
-    timeFrame: SpsSizeFixture.changeWidthTimeFrame,
+    timeFrame: SizeFixture.changeWidthTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -77,7 +77,7 @@ export class SpsSizeFixture extends MotionFixture {
   };
 
   static changeHeight = {
-    timeFrame: SpsSizeFixture.changeHeightTimeFrame,
+    timeFrame: SizeFixture.changeHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -104,7 +104,7 @@ export class SpsSizeFixture extends MotionFixture {
         },
         size: {
           width: { value: MotionFixture.block.width },
-          height: { value: MotionFixture.block.height * 2 },
+          height: { value: MotionFixture.block.height * 3 },
         },
       }, {
         scrollTo: {
@@ -113,14 +113,14 @@ export class SpsSizeFixture extends MotionFixture {
         },
         size: {
           width: { value: MotionFixture.block.width },
-          height: { value: MotionFixture.block.height * 2 },
+          height: { value: MotionFixture.block.height * 3 },
         },
       }];
     },
   };
 
   static changeWidthHeight = {
-    timeFrame: SpsSizeFixture.changeWidthHeightTimeFrame,
+    timeFrame: SizeFixture.changeWidthHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: {
@@ -147,7 +147,7 @@ export class SpsSizeFixture extends MotionFixture {
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
-          height: { value: MotionFixture.block.height * 2 },
+          height: { value: MotionFixture.block.height * 3 },
         },
       }, {
         scrollTo: {
@@ -156,7 +156,7 @@ export class SpsSizeFixture extends MotionFixture {
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
-          height: { value: MotionFixture.block.height * 2 },
+          height: { value: MotionFixture.block.height * 3 },
         },
       }];
     },
