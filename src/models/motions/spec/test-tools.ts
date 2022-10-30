@@ -1,4 +1,5 @@
 import { Actor } from '../../actors/actor.model';
+import { Util } from '../../../util';
 
 export type StageContextFn = (stage: number, label?: string) => string;
 export const DefaultContextFn: StageContextFn = (stage: number, label?: string) => `stage ${stage}` + (label ? ` (${label})` : '');
@@ -32,29 +33,26 @@ export class TestTools {
       promise = promise.then(() => {
         return new Promise(resolve => {
           block.afterRender = () => {
-            setTimeout(() => {
-              // console.log('expect', blockElement.getBoundingClientRect().x, blockElement.getBoundingClientRect().y);
-              if (stage.coords) {
-                expect(blockElement.getBoundingClientRect().x)
-                  .withContext(stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x'))
-                  .toEqual(stage.coords.x.value);
-                expect(blockElement.getBoundingClientRect().y)
-                  .withContext(stage.coords.y.withContext ? stage.coords.y.withContext(i, 'y') : DefaultContextFn(i, 'y'))
-                  .toEqual(stage.coords.y.value);
-              }
-              if (stage.size) {
-                expect(blockElement.clientWidth)
-                  .withContext(stage.size.width.withContext ? stage.size.width.withContext(i, 'width') : DefaultContextFn(i, 'width'))
-                  .toEqual(stage.size.width.value);
-                expect(blockElement.clientHeight)
-                  .withContext(stage.size.height.withContext ? stage.size.height.withContext(i, 'height') : DefaultContextFn(i, 'width'))
-                  .toEqual(stage.size.height.value);
-              }
-              resolve();
-            }, 500);
+            if (stage.coords) {
+              console.log('In test: ', Util.displayWidth(), Util.displayHeight());
+              expect(blockElement.getBoundingClientRect().x)
+                .withContext(stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x'))
+                .toEqual(stage.coords.x.value);
+              expect(blockElement.getBoundingClientRect().y)
+                .withContext(stage.coords.y.withContext ? stage.coords.y.withContext(i, 'y') : DefaultContextFn(i, 'y'))
+                .toEqual(stage.coords.y.value);
+            }
+            if (stage.size) {
+              expect(blockElement.clientWidth)
+                .withContext(stage.size.width.withContext ? stage.size.width.withContext(i, 'width') : DefaultContextFn(i, 'width'))
+                .toEqual(stage.size.width.value);
+              expect(blockElement.clientHeight)
+                .withContext(stage.size.height.withContext ? stage.size.height.withContext(i, 'height') : DefaultContextFn(i, 'width'))
+                .toEqual(stage.size.height.value);
+            }
+            resolve();
           };
           if (stage.scrollTo) {
-            // console.log('scrollTo', stage.scrollTo.y);
             window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
           }
         });
