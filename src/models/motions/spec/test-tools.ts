@@ -34,7 +34,6 @@ export class TestTools {
         return new Promise(resolve => {
           block.afterRender = () => {
             if (stage.coords) {
-              console.log('In test: ', Util.displayWidth(), Util.displayHeight());
               expect(blockElement.getBoundingClientRect().x)
                 .withContext(stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x'))
                 .toEqual(stage.coords.x.value);

@@ -14,7 +14,7 @@ export class FasMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.displayHeight() },
+          y: { value: Util.innerHeight() },
         },
       }, {
         scrollTo: {
