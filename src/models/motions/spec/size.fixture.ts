@@ -48,7 +48,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight(),
+          y: Util.innerHeight(),
         },
         size: {
           width: { value: MotionFixture.block.width },
@@ -57,7 +57,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 2,
+          y: Util.innerHeight() * 2,
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
@@ -66,7 +66,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 3,
+          y: Util.innerHeight() * 3,
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
@@ -91,7 +91,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight(),
+          y: Util.innerHeight(),
         },
         size: {
           width: { value: MotionFixture.block.width },
@@ -100,7 +100,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 2,
+          y: Util.innerHeight() * 2,
         },
         size: {
           width: { value: MotionFixture.block.width },
@@ -109,7 +109,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 3,
+          y: Util.innerHeight() * 3,
         },
         size: {
           width: { value: MotionFixture.block.width },
@@ -134,7 +134,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight(),
+          y: Util.innerHeight(),
         },
         size: {
           width: { value: MotionFixture.block.width },
@@ -143,7 +143,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 2,
+          y: Util.innerHeight() * 2,
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
@@ -152,7 +152,7 @@ export class SizeFixture extends MotionFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.displayHeight() * 3,
+          y: Util.innerHeight() * 3,
         },
         size: {
           width: { value: MotionFixture.block.width * 2 },
