@@ -41,7 +41,7 @@ export class FasMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: Util.displayWidth() - MoveFixture.block.width },
-          y: { value: -Util.displayHeight() },
+          y: { value: -Util.innerHeight() },
         },
       }];
     },
