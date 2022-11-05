@@ -1,7 +1,6 @@
 import { MotionFixture } from './motion.fixture';
 import { TimeFrame } from '../../time-frame.model';
 import { MoveMotion } from '../move.motion';
-import { Util } from '../../../util';
 
 export abstract class MoveFixture extends MotionFixture {
 
@@ -11,7 +10,7 @@ export abstract class MoveFixture extends MotionFixture {
       endX: (w: number) => w - MotionFixture.block.width,
       startY: () => 0,
       endY: (w: number, h: number) => 0,
-    }), (w: number, h: number) => 0, (w: number, h: number) => { console.log('In time frame', Util.displayWidth(), Util.displayHeight()); return h; });
+    }), (w: number, h: number) => 0, (w: number, h: number) => h);
   };
 
   static changeYTimeFrame(): TimeFrame {
