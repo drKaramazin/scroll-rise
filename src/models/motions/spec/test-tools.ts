@@ -1,5 +1,4 @@
 import { Actor } from '../../actors/actor.model';
-import { Util } from '../../../util';
 
 export type StageContextFn = (stage: number, label?: string) => string;
 export const DefaultContextFn: StageContextFn = (stage: number, label?: string) => `stage ${stage}` + (label ? ` (${label})` : '');
