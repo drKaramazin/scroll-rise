@@ -4,6 +4,7 @@ import { FixedActorsScene } from '../../scenes/fixed-actors.scene';
 import { MotionFixture } from './motion.fixture';
 import { TestTools } from './test-tools';
 import { FasMoveFixture } from './fas-move.fixture';
+import { Util } from '../../../util';
 
 describe("Fixed Actors Scene's move motion test", function() {
   let sceneElement: HTMLElement;
@@ -19,7 +20,7 @@ describe("Fixed Actors Scene's move motion test", function() {
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => h,
+      (w: number, h: number) => Util.innerHeight(),
     );
 
     sr = new ScrollRise(scene);
