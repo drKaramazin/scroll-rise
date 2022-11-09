@@ -6,22 +6,37 @@ export class Util {
     return Math.trunc(num);
   }
 
+  /**
+   * @returns The interior width of the browser window in pixels. This doesn't include the width of the vertical scrollbar.
+   */
   static clientWidth(): number {
     return document.documentElement.clientWidth;
   }
 
+  /**
+   * @returns The interior height of the browser window in pixels. This doesn't include the height of the horizontal scrollbar.
+   */
   static clientHeight(): number {
     return document.documentElement.clientHeight;
   }
 
+  /**
+   * @returns The interior width of the browser window in pixels. This includes the width of the vertical scrollbar, if one is present.
+   */
   static innerWidth(): number {
     return window.innerWidth;
   }
 
+  /**
+   * @returns The interior height of the browser window in pixels. This includes the height of the horizontal scrollbar, if one is present.
+   */
   static innerHeight(): number {
     return window.innerHeight;
   }
 
+  /**
+   * @returns Full document height, with scrolled out part in pixels.
+   */
   static documentHeight(): number {
     return Math.max(
       document.body.scrollHeight, document.documentElement.scrollHeight,
