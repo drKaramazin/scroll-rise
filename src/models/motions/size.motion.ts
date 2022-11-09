@@ -31,17 +31,17 @@ export class SizeMotion extends Motion {
   renderWidth(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
-        element.style.width = `${this.startWidth(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.width = `${this.startWidth(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
       if (scrollPos > frame.getEndPos()) {
-        element.style.width = `${this.endWidth(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.width = `${this.endWidth(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
 
-      const motionL = this.endWidth(Util.displayWidth(), Util.displayHeight()) - this.startWidth(Util.displayWidth(), Util.displayHeight());
+      const motionL = this.endWidth(Util.clientWidth(), Util.clientHeight()) - this.startWidth(Util.clientWidth(), Util.clientHeight());
       const d = motionL / frame.length();
-      const width = this.startWidth(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
+      const width = this.startWidth(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.width = `${width}px`;
     }
@@ -50,17 +50,17 @@ export class SizeMotion extends Motion {
   renderHeight(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
-        element.style.height = `${this.startHeight(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.height = `${this.startHeight(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
       if (scrollPos > frame.getEndPos()) {
-        element.style.height = `${this.endHeight(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.height = `${this.endHeight(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
 
-      const motionL = this.endHeight(Util.displayWidth(), Util.displayHeight()) - this.startHeight(Util.displayWidth(), Util.displayHeight());
+      const motionL = this.endHeight(Util.clientWidth(), Util.clientHeight()) - this.startHeight(Util.clientWidth(), Util.clientHeight());
       const d = motionL / frame.length();
-      const height = this.startHeight(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos());
+      const height = this.startHeight(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
 
       element.style.height = `${height}px`;
     }

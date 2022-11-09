@@ -37,9 +37,9 @@ export abstract class SceneModel<Options extends SceneOptions> {
 
   offset(): number {
     return this.options!.offset(
-      Util.displayWidth(),
-      Util.displayHeight(),
-      this.height(Util.displayWidth(), Util.displayHeight()),
+      Util.clientWidth(),
+      Util.clientHeight(),
+      this.height(Util.clientWidth(), Util.clientHeight()),
     );
   }
 

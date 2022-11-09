@@ -32,12 +32,12 @@ export class StaticActor extends InitiableActor {
       }
       if (this.options?.initSize) {
         const startDimensions = this.calcStartSize();
-        this.element.style.width = `${startDimensions.width(Util.displayWidth(), Util.displayHeight())}px`;
-        this.element.style.height = `${startDimensions.height(Util.displayWidth(), Util.displayHeight())}px`;
+        this.element.style.width = `${startDimensions.width(Util.clientWidth(), Util.clientHeight())}px`;
+        this.element.style.height = `${startDimensions.height(Util.clientWidth(), Util.clientHeight())}px`;
       }
       if (this.options?.initOpacity) {
         const startOpacity = this.calcStartOpacity();
-        this.element.style.opacity = `${startOpacity(Util.displayWidth(), Util.displayHeight())}`;
+        this.element.style.opacity = `${startOpacity(Util.clientWidth(), Util.clientHeight())}`;
       }
     }
     return this.element;

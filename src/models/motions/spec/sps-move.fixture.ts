@@ -14,7 +14,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.displayHeight() },
+          y: { value: Util.clientHeight() },
         },
       }, {
         scrollTo: {
@@ -31,8 +31,8 @@ export class SpsMoveFixture extends MoveFixture {
           y: Util.innerHeight() * 2,
         },
         coords: {
-          x: { value: Util.displayWidth() - MoveFixture.block.width },
-          y: { value: -Util.displayHeight() },
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() },
         },
       }, {
         scrollTo: {
@@ -40,8 +40,8 @@ export class SpsMoveFixture extends MoveFixture {
           y: Util.innerHeight() * 3,
         },
         coords: {
-          x: { value: Util.displayWidth() - MoveFixture.block.width },
-          y: { value: -Util.displayHeight() * 2 },
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() * 2 },
         },
       }];
     },
@@ -57,7 +57,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.displayHeight() },
+          y: { value: Util.clientHeight() },
         },
       }, {
         scrollTo: {
@@ -84,7 +84,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: -Util.displayHeight() - MoveFixture.block.height },
+          y: { value: -Util.clientHeight() - MoveFixture.block.height },
         },
       }];
     },
@@ -100,7 +100,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.displayHeight() },
+          y: { value: Util.clientHeight() },
         },
       }, {
         scrollTo: {
@@ -117,7 +117,7 @@ export class SpsMoveFixture extends MoveFixture {
           y: Util.innerHeight() * 2,
         },
         coords: {
-          x: { value: Util.displayWidth() - MoveFixture.block.width },
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: -MoveFixture.block.height },
         },
       }, {
@@ -126,8 +126,8 @@ export class SpsMoveFixture extends MoveFixture {
           y: Util.innerHeight() * 3,
         },
         coords: {
-          x: { value: Util.displayWidth() - MoveFixture.block.width },
-          y: { value: -Util.displayHeight() - MoveFixture.block.height },
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() - MoveFixture.block.height },
         },
       }];
     },

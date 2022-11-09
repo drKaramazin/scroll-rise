@@ -1,19 +1,9 @@
-export interface WindowSizes {
-  clientWidth: number;
-  clientHeight: number;
-  innerWidth: number;
-  innerHeight: number;
-  documentHeight: number;
-}
+import { WindowSizes } from './window-sizes';
 
 export class Util {
 
-  static displayWidth(): number {
-    return this.clientWidth();
-  }
-
-  static displayHeight(): number {
-    return this.clientHeight();
+  static castToInt(num: number): number {
+    return Math.trunc(num);
   }
 
   static clientWidth(): number {
@@ -59,10 +49,6 @@ export class Util {
     console.log('document.documentElement.offsetWidth, offsetHeight', document.documentElement.offsetWidth, document.documentElement.offsetHeight);
     console.log('document.body.clientWidth, clientHeight', document.body.clientWidth, document.body.clientHeight);
     console.log('window.innerWidth, innerHeight', window.innerWidth, window.innerHeight);
-  }
-
-  static castToInt(num: number): number {
-    return Math.trunc(num);
   }
 
 }
