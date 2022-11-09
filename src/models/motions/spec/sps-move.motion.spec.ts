@@ -3,6 +3,7 @@ import { StickyPlatformScene } from '../../scenes/sticky-platform.scene';
 import { StaticActor } from '../../actors/static.actor';
 import { SpsMoveFixture } from './sps-move.fixture';
 import { TestTools } from './test-tools';
+import { Util } from '../../../util';
 
 describe("Sticky Platforms Scene's move motion test", function() {
   let sceneElement: HTMLElement;
@@ -18,7 +19,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => h,
+      (w: number, h: number) => Util.innerHeight(),
     );
 
     sr = new ScrollRise(scene);
