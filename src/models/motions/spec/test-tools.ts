@@ -32,6 +32,7 @@ export class TestTools {
       promise = promise.then(() => {
         return new Promise(resolve => {
           block.afterRender = () => {
+            console.log('BEGIN: ----------------------------------------------------------------------------------------------------');
             if (stage.coords) {
               expect(blockElement.getBoundingClientRect().x)
                 .withContext(stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x'))
@@ -48,6 +49,7 @@ export class TestTools {
                 .withContext(stage.size.height.withContext ? stage.size.height.withContext(i, 'height') : DefaultContextFn(i, 'width'))
                 .toEqual(stage.size.height.value);
             }
+            console.log('END: ----------------------------------------------------------------------------------------------------');
             resolve();
           };
           if (stage.scrollTo) {
