@@ -30,9 +30,6 @@ export class MoveMotion extends Motion {
   }
 
   renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    console.log('scrollPos', scrollPos);
-    console.log('frame.getStartPos()', frame.getStartPos());
-    console.log('frame.getEndPos()', frame.getEndPos());
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.clientWidth(), Util.clientHeight())}px`;
@@ -44,11 +41,8 @@ export class MoveMotion extends Motion {
       }
 
       const motionL = this.endX(Util.clientWidth(), Util.clientHeight()) - this.startX(Util.clientWidth(), Util.clientHeight());
-      console.log('motionL', motionL);
       const d = motionL / frame.length();
-      console.log('frame.length()', frame.length());
       const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos()));
-      console.log('x = ', x);
 
       element.style.left = `${x}px`;
     }
