@@ -44,7 +44,9 @@ export class MoveMotion extends Motion {
       }
 
       const motionL = this.endX(Util.clientWidth(), Util.clientHeight()) - this.startX(Util.clientWidth(), Util.clientHeight());
+      console.log('motionL', motionL);
       const d = motionL / frame.length();
+      console.log('frame.length()', frame.length());
       const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos()));
       console.log('x = ', x);
 
