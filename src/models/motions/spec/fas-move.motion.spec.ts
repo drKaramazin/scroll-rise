@@ -47,6 +47,8 @@ describe("Fixed Actors Scene's move motion test", function() {
   });
 
   it('should have a correct X, Y coords in changing X', function() {
+    Util.logWindowSizes();
+
     block.addFrames([
       FasMoveFixture.changeX.timeFrame(),
     ]);
