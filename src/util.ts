@@ -3,7 +3,7 @@ import { WindowSizes } from './window-sizes';
 export class Util {
 
   static castToInt(num: number): number {
-    return Math.trunc(num);
+    return Math.round(num);
   }
 
   /**
