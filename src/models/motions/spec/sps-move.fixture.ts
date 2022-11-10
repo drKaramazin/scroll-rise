@@ -28,20 +28,20 @@ export class SpsMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() },
+          y: { value: -Util.clientHeight() },
         },
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() * 2 },
+          y: { value: -Util.innerHeight() - Util.clientHeight() },
         },
       }];
     },
@@ -71,7 +71,7 @@ export class SpsMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: 0 },
@@ -80,7 +80,7 @@ export class SpsMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: 0 },
@@ -114,7 +114,7 @@ export class SpsMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
@@ -123,7 +123,7 @@ export class SpsMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
