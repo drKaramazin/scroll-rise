@@ -47,6 +47,8 @@ describe("Fixed Actors Scene's move motion test", function() {
   });
 
   it('should have a correct X, Y coords in changing X', function() {
+    console.log('----------------------------------------------------------------------------------------------------');
+    console.log('BEGIN: should have a correct X, Y coords in changing X');
     Util.logWindowSizes();
 
     block.addFrames([
@@ -55,6 +57,8 @@ describe("Fixed Actors Scene's move motion test", function() {
 
     scene.add(block);
 
+    console.log('END: should have a correct X, Y coords in changing X');
+    console.log('----------------------------------------------------------------------------------------------------');
     return TestTools.testGoingStages(
       block,
       blockElement,
