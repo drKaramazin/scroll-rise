@@ -28,7 +28,7 @@ export class FasMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
@@ -37,7 +37,7 @@ export class FasMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
@@ -71,16 +71,16 @@ export class FasMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: 0 },
-          y: { value: Util.innerHeight() - MoveFixture.block.height },
+          y: { value: Util.clientHeight() - MoveFixture.block.height },
         },
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: 0 },
@@ -114,16 +114,16 @@ export class FasMoveFixture extends MoveFixture {
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 2,
+          y: Util.innerHeight() + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: Util.innerHeight() - MoveFixture.block.height },
+          y: { value: Util.clientHeight() - MoveFixture.block.height },
         },
       }, {
         scrollTo: {
           x: 0,
-          y: Util.innerHeight() * 3,
+          y: Util.innerHeight() * 2 + Util.clientHeight(),
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },

@@ -11,7 +11,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: (w: number, h: number) => 0,
-    }), (w: number, h: number) => 0, (w: number, h: number) => Util.innerHeight());
+    }), (w: number, h: number) => 0, (w: number, h: number) => h);
   };
 
   static changeYTimeFrame(): TimeFrame {
@@ -20,7 +20,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => 0,
       endY: (w: number, h: number) => Util.innerHeight() - MotionFixture.block.height,
-    }), (w: number, h: number) => 0, (w: number, h: number) => Util.innerHeight());
+    }), (w: number, h: number) => 0, (w: number, h: number) => h);
   }
 
   static changeXYTimeFrame(): TimeFrame {
@@ -29,7 +29,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: (w: number, h: number) => Util.innerHeight() - MotionFixture.block.height,
-    }), (w: number, h: number) => 0, (w: number, h: number) => Util.innerHeight());
+    }), (w: number, h: number) => 0, (w: number, h: number) => h);
   }
 
 }

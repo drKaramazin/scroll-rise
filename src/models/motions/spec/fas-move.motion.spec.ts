@@ -20,7 +20,7 @@ describe("Fixed Actors Scene's move motion test", function() {
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => Util.innerHeight(),
+      (w: number, h: number) => h,
     );
 
     sr = new ScrollRise(scene);
@@ -47,8 +47,6 @@ describe("Fixed Actors Scene's move motion test", function() {
   });
 
   it('should have a correct X, Y coords in changing X', function() {
-    Util.logWindowSizes();
-
     block.addFrames([
       FasMoveFixture.changeX.timeFrame(),
     ]);
