@@ -1,7 +1,6 @@
 import { MotionFixture } from './motion.fixture';
 import { TimeFrame } from '../../time-frame.model';
 import { MoveMotion } from '../move.motion';
-import { Util } from '../../../util';
 
 export abstract class MoveFixture extends MotionFixture {
 
