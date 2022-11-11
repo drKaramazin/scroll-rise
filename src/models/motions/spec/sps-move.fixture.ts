@@ -32,7 +32,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.clientHeight() },
+          y: { value: -MoveFixture.block.height },
         },
       }, {
         scrollTo: {
@@ -41,7 +41,7 @@ export class SpsMoveFixture extends MoveFixture {
         },
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() - Util.clientHeight() },
+          y: { value: -Util.innerHeight() - MoveFixture.block.height },
         },
       }];
     },
