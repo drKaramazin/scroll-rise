@@ -1,7 +1,12 @@
 body, html {
-    height: 4vh;
-    min-height: 4vh;
+    height: 400vh;
+    min-height: 400vh;
 }
+
+/*#test-body {*/
+/*    height: 400vh;*/
+/*    min-height: 400vh;*/
+/*}*/
 
 #scene {
     background: #00ccff;
