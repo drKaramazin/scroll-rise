@@ -20,13 +20,11 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
   }
 
   override resizeHeight(): void {
-    console.log('Set scene height', this.height(Util.clientWidth(), Util.clientHeight()));
     this.el.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
     this.resizePlatform();
   }
 
   resizePlatform(): void {
-    console.log('Set platform height', this.options!.stickyPlatformHeight!(Util.clientWidth(), Util.clientHeight()));
     this.platform.style.height = `${this.options!.stickyPlatformHeight!(Util.clientWidth(), Util.clientHeight())}px`;
   }
 

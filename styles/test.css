@@ -1,12 +1,9 @@
 body, html {
+    /* Begin: the page's height initialization to show scrollbars */
     height: 400vh;
     min-height: 400vh;
+    /* End: the page's height initialization to show scrollbars */
 }
-
-/*#test-body {*/
-/*    height: 400vh;*/
-/*    min-height: 400vh;*/
-/*}*/
 
 #scene {
     background: #00ccff;
