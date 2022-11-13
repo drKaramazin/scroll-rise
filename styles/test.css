@@ -1,3 +1,8 @@
+body, html {
+    height: 4vh;
+    min-height: 4vh;
+}
+
 #scene {
     background: #00ccff;
 }
