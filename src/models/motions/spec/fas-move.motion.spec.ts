@@ -4,7 +4,6 @@ import { FixedActorsScene } from '../../scenes/fixed-actors.scene';
 import { MotionFixture } from './motion.fixture';
 import { TestTools } from './test-tools';
 import { FasMoveFixture } from './fas-move.fixture';
-import { Util } from '../../../util';
 
 describe("Fixed Actors Scene's move motion test", function() {
   let sceneElement: HTMLElement;
@@ -39,8 +38,6 @@ describe("Fixed Actors Scene's move motion test", function() {
   });
 
   it('should be inited', function() {
-    console.log('Sizes:', Util.windowSizes());
-
     expect(blockElement).toBeTruthy();
     expect(block).toBeTruthy();
     expect(sceneElement).toBeTruthy();

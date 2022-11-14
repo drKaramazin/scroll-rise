@@ -7,7 +7,6 @@ export class FixedActorsScene extends SceneModel<SceneOptions> {
   public override name = 'FixedActorsScene';
 
   override resizeHeight(): void {
-    console.log('Fas set scene height', this.height(Util.clientWidth(), Util.clientHeight()));
     this.el.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
   }
 
