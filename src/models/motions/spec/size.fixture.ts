@@ -36,25 +36,21 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeWidthTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
@@ -67,25 +63,21 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
-        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
@@ -98,25 +90,21 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeWidthHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
-        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height * 3 },

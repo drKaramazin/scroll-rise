@@ -1,4 +1,5 @@
 import { Actor } from '../../actors/actor.model';
+import { MotionFixture, TestStage } from './motion.fixture';
 
 export type StageContextFn = (stage: number, label?: string) => string;
 export const DefaultContextFn: StageContextFn = (stage: number, label?: string) => `stage ${stage}` + (label ? ` (${label})` : '');
@@ -8,10 +9,7 @@ export interface StageValue {
 }
 
 export interface ChangeStage {
-  scrollTo?: {
-    x: number;
-    y: number;
-  };
+  scrollTo?: TestStage;
   coords?: {
     x: StageValue;
     y: StageValue;
@@ -52,6 +50,9 @@ export class TestTools {
           };
           if (stage.scrollTo) {
             window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
+          } else {
+            const scrollTo = MotionFixture.stages()[i];
+            window.scrollTo(scrollTo.x, scrollTo.y);
           }
         });
       });
