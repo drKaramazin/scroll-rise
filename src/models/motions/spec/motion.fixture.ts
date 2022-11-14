@@ -1,3 +1,10 @@
+import { Util } from '../../../util';
+
+export interface TestStage {
+  x: number;
+  y: number;
+}
+
 export abstract class MotionFixture {
 
   static block = {
@@ -17,5 +24,19 @@ export abstract class MotionFixture {
       </div>
     `;
   }
+
+  static stages: TestStage[] = [{
+    x: 0,
+    y: 0,
+  }, {
+    x: 0,
+    y: Util.innerHeight(),
+  }, {
+    x: 0,
+    y: Util.innerHeight() + Util.clientHeight(),
+  }, {
+    x: 0,
+    y: Util.innerHeight() * 2 + Util.clientHeight(),
+  }];
 
 }

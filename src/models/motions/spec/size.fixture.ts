@@ -2,7 +2,6 @@ import { MotionFixture } from './motion.fixture';
 import { ChangeStage } from './test-tools';
 import { TimeFrame } from '../../time-frame.model';
 import { SizeMotion } from '../size.motion';
-import { Util } from '../../../util';
 
 export class SizeFixture extends MotionFixture {
 
@@ -12,7 +11,7 @@ export class SizeFixture extends MotionFixture {
       startHeight: () => MotionFixture.block.height,
       endWidth: () => MotionFixture.block.width * 2,
       endHeight: () => MotionFixture.block.height,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => h);
   };
 
   static changeHeightTimeFrame(): TimeFrame {
@@ -21,7 +20,7 @@ export class SizeFixture extends MotionFixture {
       startHeight: () => MotionFixture.block.height,
       endWidth: () => MotionFixture.block.width,
       endHeight: () => MotionFixture.block.height * 3,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => h);
   };
 
   static changeWidthHeightTimeFrame(): TimeFrame {
@@ -30,44 +29,32 @@ export class SizeFixture extends MotionFixture {
       startHeight: () => MotionFixture.block.height,
       endWidth: () => MotionFixture.block.width * 2,
       endHeight: () => MotionFixture.block.height * 3,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => h);
   };
 
   static changeWidth = {
     timeFrame: SizeFixture.changeWidthTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: {
-          x: 0,
-          y: 0,
-        },
+        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight(),
-        },
+        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 2,
-        },
+        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 3,
-        },
+        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
@@ -80,37 +67,25 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: {
-          x: 0,
-          y: 0,
-        },
+        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight(),
-        },
+        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 2,
-        },
+        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 3,
-        },
+        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
@@ -123,37 +98,25 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeWidthHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
-        scrollTo: {
-          x: 0,
-          y: 0,
-        },
+        scrollTo: MotionFixture.stages[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight(),
-        },
+        scrollTo: MotionFixture.stages[1],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 2,
-        },
+        scrollTo: MotionFixture.stages[2],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
-        scrollTo: {
-          x: 0,
-          y: Util.innerHeight() * 3,
-        },
+        scrollTo: MotionFixture.stages[3],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height * 3 },
