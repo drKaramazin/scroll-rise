@@ -48,33 +48,45 @@ export class MoveMotion extends Motion {
     }
   }
 
+  private setY(element: HTMLElement, y: number): void {
+    element.style.top = `${y}px`;
+  }
+
   renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
+    const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
+    const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
+
     if (element) {
       if (scene.name === 'StickyPlatformScene') {
         if (scrollPos < frame.getStartPos()) {
-          element.style.top = `${this.startY(Util.clientWidth(), Util.clientHeight())}px`;
+          this.setY(element, startY());
           return;
         }
         if (scrollPos > frame.getEndPos()) {
-          element.style.top = `${this.endY(Util.clientWidth(), Util.clientHeight())}px`;
-          return;
-        }
-      } else if (scene.name === 'FixedActorsScene') {
-        if (scrollPos < frame.getStartPos()) {
-          element.style.top = `${scene.elementY() + this.startY(Util.clientWidth(), Util.clientHeight())}px`;
-          return;
-        }
-        if (scrollPos > frame.getEndPos()) {
-          element.style.top = `${this.endY(Util.clientWidth(), Util.clientHeight()) - (scrollPos - frame.getEndPos())}px`;
+          this.setY(element, endY());
           return;
         }
       }
 
-      const motionL = this.endY(Util.clientWidth(), Util.clientHeight()) - this.startY(Util.clientWidth(), Util.clientHeight());
+      const motionL = endY() - startY();
       const d = motionL / frame.length();
-      const y = Util.castToInt(this.startY(Util.clientWidth(), Util.clientHeight()) + d * (frame.getStartPos() + scrollPos));
+      let y = Util.castToInt(startY() + d * (frame.getStartPos() + scrollPos));
 
-      element.style.top = `${y}px`;
+      if (scene.name === 'FixedActorsScene') {
+        const fasD = scene.elementY();
+        y += fasD;
+
+        if (scrollPos < frame.getStartPos()) {
+          this.setY(element, fasD + startY());
+          return;
+        }
+        if (scrollPos > frame.getEndPos()) {
+          this.setY(element, fasD + endY());
+          return;
+        }
+      }
+
+      this.setY(element, y);
     }
   }
 

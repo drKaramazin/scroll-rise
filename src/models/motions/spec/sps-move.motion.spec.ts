@@ -1,8 +1,8 @@
 import { ScrollRise } from '../../../scroll-rise';
 import { StickyPlatformScene } from '../../scenes/sticky-platform.scene';
 import { StaticActor } from '../../actors/static.actor';
-import { SpsMoveFixture } from './sps-move.fixture';
 import { TestTools } from './test-tools';
+import { MoveFixture } from './move.fixture';
 
 describe("Sticky Platforms Scene's move motion test", function() {
   let sceneElement: HTMLElement;
@@ -12,7 +12,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
   let sr: ScrollRise;
 
   beforeEach(function() {
-    document.body.insertAdjacentHTML('afterbegin', SpsMoveFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MoveFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
@@ -46,7 +46,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
   it('should have a correct X, Y coords in changing X', function() {
     block.addFrames([
-      SpsMoveFixture.changeX.timeFrame(),
+      MoveFixture.changeX.timeFrame(),
     ]);
 
     scene.add(block);
@@ -54,13 +54,13 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SpsMoveFixture.changeX.stages(),
+      MoveFixture.changeX.stages(),
     );
   });
 
   it('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
-      SpsMoveFixture.changeY.timeFrame(),
+      MoveFixture.changeY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -68,13 +68,13 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SpsMoveFixture.changeY.stages(),
+      MoveFixture.changeY.stages(),
     );
   });
 
   it('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
-      SpsMoveFixture.changeXY.timeFrame(),
+      MoveFixture.changeXY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -82,7 +82,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SpsMoveFixture.changeXY.stages(),
+      MoveFixture.changeXY.stages(),
     );
   });
 });

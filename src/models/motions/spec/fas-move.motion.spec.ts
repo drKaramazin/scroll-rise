@@ -3,7 +3,7 @@ import { ScrollRise } from '../../../scroll-rise';
 import { FixedActorsScene } from '../../scenes/fixed-actors.scene';
 import { MotionFixture } from './motion.fixture';
 import { TestTools } from './test-tools';
-import { FasMoveFixture } from './fas-move.fixture';
+import { MoveFixture } from './move.fixture';
 
 describe("Fixed Actors Scene's move motion test", function() {
   let sceneElement: HTMLElement;
@@ -47,7 +47,7 @@ describe("Fixed Actors Scene's move motion test", function() {
 
   it('should have a correct X, Y coords in changing X', function() {
     block.addFrames([
-      FasMoveFixture.changeX.timeFrame(),
+      MoveFixture.changeX.timeFrame(),
     ]);
 
     scene.add(block);
@@ -55,13 +55,13 @@ describe("Fixed Actors Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      FasMoveFixture.changeX.stages(),
+      MoveFixture.changeX.stages(),
     );
   });
 
   it('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
-      FasMoveFixture.changeY.timeFrame(),
+      MoveFixture.changeY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -69,13 +69,13 @@ describe("Fixed Actors Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      FasMoveFixture.changeY.stages(),
+      MoveFixture.changeY.stages(),
     );
   });
 
   it('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
-      FasMoveFixture.changeXY.timeFrame(),
+      MoveFixture.changeXY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -83,7 +83,7 @@ describe("Fixed Actors Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      FasMoveFixture.changeXY.stages(),
+      MoveFixture.changeXY.stages(),
     );
   });
 });
