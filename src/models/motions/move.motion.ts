@@ -48,45 +48,21 @@ export class MoveMotion extends Motion {
     }
   }
 
-  private setY(element: HTMLElement, y: number): void {
-    element.style.top = `${y}px`;
-  }
-
   renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
     const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
     const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
 
     if (element) {
-      if (scene.name === 'StickyPlatformScene') {
-        if (scrollPos < frame.getStartPos()) {
-          this.setY(element, startY());
-          return;
-        }
-        if (scrollPos > frame.getEndPos()) {
-          this.setY(element, endY());
-          return;
-        }
-      }
-
       const motionL = endY() - startY();
       const d = motionL / frame.length();
       let y = Util.castToInt(startY() + d * (frame.getStartPos() + scrollPos));
 
-      if (scene.name === 'FixedActorsScene') {
-        const fasD = scene.elementY();
-        y += fasD;
-
-        if (scrollPos < frame.getStartPos()) {
-          this.setY(element, fasD + startY());
-          return;
-        }
-        if (scrollPos > frame.getEndPos()) {
-          this.setY(element, fasD + endY());
-          return;
-        }
+      const sceneInterceptor = scene.interceptY(scrollPos, frame, startY, endY);
+      if (sceneInterceptor !== undefined) {
+        y = sceneInterceptor;
       }
 
-      this.setY(element, y);
+      element.style.top = `${y}px`;
     }
   }
 

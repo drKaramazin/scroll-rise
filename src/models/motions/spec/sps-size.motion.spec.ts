@@ -3,6 +3,7 @@ import { StickyPlatformScene } from '../../scenes/sticky-platform.scene';
 import { ScrollRise } from '../../../scroll-rise';
 import { StaticActor } from '../../actors/static.actor';
 import { TestTools } from './test-tools';
+import { customMatchers } from './custom-matchers';
 
 describe("Sticky Platforms Scene's size motion test", function() {
   let sceneElement: HTMLElement;
@@ -12,13 +13,18 @@ describe("Sticky Platforms Scene's size motion test", function() {
   let sr: ScrollRise;
 
   beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+
     document.body.insertAdjacentHTML('afterbegin', SizeFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => h,
+      (w: number, h: number) => 2 * h,
+      {
+        stickyPlatformHeight: (w, h) => h,
+      },
     );
 
     sr = new ScrollRise(scene);

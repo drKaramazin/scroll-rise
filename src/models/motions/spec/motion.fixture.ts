@@ -16,6 +16,7 @@ export abstract class MotionFixture {
     return `
       <div id="test-body">
         <div class="display"></div>
+        <div class="display"></div>
         <div id="scene">
           <div id="block" style="width: ${MotionFixture.block.width}px; height: ${MotionFixture.block.height}px;"></div>
         </div>
@@ -34,10 +35,16 @@ export abstract class MotionFixture {
       y: Util.innerHeight(),
     }, {
       x: 0,
-      y: Util.innerHeight() + Util.clientHeight(),
+      y: 2 * Util.innerHeight(),
     }, {
       x: 0,
-      y: Util.innerHeight() * 2 + Util.clientHeight(),
+      y: 2 * Util.innerHeight() + Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + 2 * Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 3 * Util.innerHeight() + 2 * Util.clientHeight(),
     }];
   };
 

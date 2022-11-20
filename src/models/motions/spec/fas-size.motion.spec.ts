@@ -4,6 +4,7 @@ import { ScrollRise } from '../../../scroll-rise';
 import { MotionFixture } from './motion.fixture';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
+import { customMatchers } from './custom-matchers';
 
 describe("Fixed Actors Scene's size motion test", function() {
   let sceneElement: HTMLElement;
@@ -13,13 +14,15 @@ describe("Fixed Actors Scene's size motion test", function() {
   let sr: ScrollRise;
 
   beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+
     document.body.insertAdjacentHTML('afterbegin', MotionFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => h,
+      (w: number, h: number) => 2 * h,
     );
 
     sr = new ScrollRise(scene);

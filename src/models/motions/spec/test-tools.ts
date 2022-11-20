@@ -1,11 +1,23 @@
 import { Actor } from '../../actors/actor.model';
 import { MotionFixture, TestStage } from './motion.fixture';
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace jasmine {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface Matchers<T> {
+      // eslint-disable-next-line @typescript-eslint/method-signature-style
+      approximatelyEqualTo(expected: number, margin: number): boolean;
+    }
+  }
+}
+
 export type StageContextFn = (stage: number, label?: string) => string;
 export const DefaultContextFn: StageContextFn = (stage: number, label?: string) => `stage ${stage}` + (label ? ` (${label})` : '');
 export interface StageValue {
   value: number;
   withContext?: StageContextFn;
+  margin?: number;
 }
 
 export interface ChangeStage {
@@ -31,20 +43,53 @@ export class TestTools {
         return new Promise(resolve => {
           block.afterRender = () => {
             if (stage.coords) {
-              expect(blockElement.getBoundingClientRect().x)
-                .withContext(stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x'))
-                .toEqual(stage.coords.x.value);
-              expect(blockElement.getBoundingClientRect().y)
-                .withContext(stage.coords.y.withContext ? stage.coords.y.withContext(i, 'y') : DefaultContextFn(i, 'y'))
-                .toEqual(stage.coords.y.value);
+              const contextX = stage.coords.x.withContext ? stage.coords.x.withContext(i, 'x') : DefaultContextFn(i, 'x');
+              const contextY = stage.coords.y.withContext ? stage.coords.y.withContext(i, 'y') : DefaultContextFn(i, 'y');
+
+              if (stage.coords.x.margin) {
+                expect(blockElement.getBoundingClientRect().x)
+                  .withContext(contextX)
+                  .approximatelyEqualTo(stage.coords.x.value, stage.coords.x.margin);
+              } else {
+                expect(blockElement.getBoundingClientRect().x)
+                  .withContext(contextX)
+                  .toEqual(stage.coords.x.value);
+              }
+
+              if (stage.coords.y.margin) {
+                expect(blockElement.getBoundingClientRect().y)
+                  .withContext(contextY)
+                  .approximatelyEqualTo(stage.coords.y.value, stage.coords.y.margin);
+              } else {
+                expect(blockElement.getBoundingClientRect().y)
+                  .withContext(contextY)
+                  .toEqual(stage.coords.y.value);
+              }
             }
+
             if (stage.size) {
-              expect(blockElement.clientWidth)
-                .withContext(stage.size.width.withContext ? stage.size.width.withContext(i, 'width') : DefaultContextFn(i, 'width'))
-                .toEqual(stage.size.width.value);
-              expect(blockElement.clientHeight)
-                .withContext(stage.size.height.withContext ? stage.size.height.withContext(i, 'height') : DefaultContextFn(i, 'width'))
-                .toEqual(stage.size.height.value);
+              const contextWidth = stage.size.width.withContext ? stage.size.width.withContext(i, 'width') : DefaultContextFn(i, 'width');
+              const contextHeight = stage.size.height.withContext ? stage.size.height.withContext(i, 'height') : DefaultContextFn(i, 'height');
+
+              if (stage.size.width.margin) {
+                expect(blockElement.clientWidth)
+                  .withContext(contextWidth)
+                  .approximatelyEqualTo(stage.size.width.value, stage.size.width.margin);
+              } else {
+                expect(blockElement.clientWidth)
+                  .withContext(contextWidth)
+                  .toEqual(stage.size.width.value);
+              }
+
+              if (stage.size.height.margin) {
+                expect(blockElement.clientHeight)
+                  .withContext(contextHeight)
+                  .approximatelyEqualTo(stage.size.height.value, stage.size.height.margin);
+              } else {
+                expect(blockElement.clientHeight)
+                  .withContext(contextHeight)
+                  .toEqual(stage.size.height.value);
+              }
             }
             resolve();
           };

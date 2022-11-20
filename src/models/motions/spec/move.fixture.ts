@@ -12,7 +12,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: () => 0,
-    }), () => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => 2 * h);
   };
 
   static changeYTimeFrame(): TimeFrame {
@@ -21,7 +21,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: () => 0,
       endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), () => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => 2 * h);
   }
 
   static changeXYTimeFrame(): TimeFrame {
@@ -30,7 +30,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), () => 0, (w: number, h: number) => h);
+    }), () => 0, (w: number, h: number) => 2 * h);
   }
 
   static changeX = {
@@ -39,11 +39,21 @@ export abstract class MoveFixture extends MotionFixture {
       return [{
         coords: {
           x: { value: 0 },
+          y: { value: 2 * Util.innerHeight() },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
           y: { value: Util.innerHeight() },
         },
       }, {
         coords: {
           x: { value: 0 },
+          y: { value: 0 },
+        },
+      }, {
+        coords: {
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
           y: { value: 0 },
         },
       }, {
@@ -66,12 +76,22 @@ export abstract class MoveFixture extends MotionFixture {
       return [{
         coords: {
           x: { value: 0 },
+          y: { value: 2 * Util.innerHeight() },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
           y: { value: Util.innerHeight() },
         },
       }, {
         coords: {
           x: { value: 0 },
           y: { value: 0 },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2) },
         },
       }, {
         coords: {
@@ -93,12 +113,22 @@ export abstract class MoveFixture extends MotionFixture {
       return [{
         coords: {
           x: { value: 0 },
+          y: { value: 2 * Util.innerHeight() },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
           y: { value: Util.innerHeight() },
         },
       }, {
         coords: {
           x: { value: 0 },
           y: { value: 0 },
+        },
+      }, {
+        coords: {
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2) },
         },
       }, {
         coords: {
