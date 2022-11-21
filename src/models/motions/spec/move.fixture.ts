@@ -59,6 +59,11 @@ export abstract class MoveFixture extends MotionFixture {
       }, {
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: 0 },
+        },
+      }, {
+        coords: {
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: -Util.clientHeight() },
         },
       }, {
@@ -96,6 +101,11 @@ export abstract class MoveFixture extends MotionFixture {
       }, {
         coords: {
           x: { value: 0 },
+          y: { value: Util.clientHeight() - MoveFixture.block.height },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
           y: { value: -MoveFixture.block.height },
         },
       }, {
@@ -112,33 +122,38 @@ export abstract class MoveFixture extends MotionFixture {
     stages: (): ChangeStage[] => {
       return [{
         coords: {
-          x: { value: 0 },
-          y: { value: 2 * Util.innerHeight() },
+          x: this.changeX.stages()[0].coords!.x,
+          y: this.changeY.stages()[0].coords!.y,
         },
       }, {
         coords: {
-          x: { value: 0 },
-          y: { value: Util.innerHeight() },
+          x: this.changeX.stages()[1].coords!.x,
+          y: this.changeY.stages()[1].coords!.y,
         },
       }, {
         coords: {
-          x: { value: 0 },
-          y: { value: 0 },
+          x: this.changeX.stages()[2].coords!.x,
+          y: this.changeY.stages()[2].coords!.y,
         },
       }, {
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2) },
+          x: this.changeX.stages()[3].coords!.x,
+          y: this.changeY.stages()[3].coords!.y,
         },
       }, {
         coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -MoveFixture.block.height },
+          x: this.changeX.stages()[4].coords!.x,
+          y: this.changeY.stages()[4].coords!.y,
         },
       }, {
         coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() - MoveFixture.block.height },
+          x: this.changeX.stages()[5].coords!.x,
+          y: this.changeY.stages()[5].coords!.y,
+        },
+      }, {
+        coords: {
+          x: this.changeX.stages()[6].coords!.x,
+          y: this.changeY.stages()[6].coords!.y,
         },
       }];
     },

@@ -22,7 +22,7 @@ describe("Fixed Actors Scene's move motion test", function() {
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => 2 * h,
+      (w: number, h: number) => 3 * h,
     );
 
     sr = new ScrollRise(scene);

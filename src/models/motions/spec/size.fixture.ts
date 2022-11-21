@@ -65,6 +65,11 @@ export class SizeFixture extends MotionFixture {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
         },
+      }, {
+        size: {
+          width: { value: MotionFixture.block.width * 2 },
+          height: { value: MotionFixture.block.height },
+        },
       }];
     },
   };
@@ -102,6 +107,11 @@ export class SizeFixture extends MotionFixture {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
         },
+      }, {
+        size: {
+          width: { value: MotionFixture.block.width },
+          height: { value: MotionFixture.block.height * 3 },
+        },
       }];
     },
   };
@@ -111,33 +121,38 @@ export class SizeFixture extends MotionFixture {
     stages: (): ChangeStage[] => {
       return [{
         size: {
-          width: { value: MotionFixture.block.width },
-          height: { value: MotionFixture.block.height },
+          width: this.changeWidth.stages()[0].size!.width,
+          height: this.changeHeight.stages()[0].size!.height,
         },
       }, {
         size: {
-          width: { value: MotionFixture.block.width },
-          height: { value: MotionFixture.block.height },
+          width: this.changeWidth.stages()[1].size!.width,
+          height: this.changeHeight.stages()[1].size!.height,
         },
       }, {
         size: {
-          width: { value: MotionFixture.block.width },
-          height: { value: MotionFixture.block.height },
+          width: this.changeWidth.stages()[2].size!.width,
+          height: this.changeHeight.stages()[2].size!.height,
         },
       }, {
         size: {
-          width: { value: MotionFixture.block.width + MotionFixture.block.width / 2, margin: 1 },
-          height: { value: MotionFixture.block.height * 2 },
+          width: this.changeWidth.stages()[3].size!.width,
+          height: this.changeHeight.stages()[3].size!.height,
         },
       }, {
         size: {
-          width: { value: MotionFixture.block.width * 2 },
-          height: { value: MotionFixture.block.height * 3 },
+          width: this.changeWidth.stages()[4].size!.width,
+          height: this.changeHeight.stages()[4].size!.height,
         },
       }, {
         size: {
-          width: { value: MotionFixture.block.width * 2 },
-          height: { value: MotionFixture.block.height * 3 },
+          width: this.changeWidth.stages()[5].size!.width,
+          height: this.changeHeight.stages()[5].size!.height,
+        },
+      }, {
+        size: {
+          width: this.changeWidth.stages()[6].size!.width,
+          height: this.changeHeight.stages()[6].size!.height,
         },
       }];
     },

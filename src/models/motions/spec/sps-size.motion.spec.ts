@@ -21,10 +21,7 @@ describe("Sticky Platforms Scene's size motion test", function() {
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => 2 * h,
-      {
-        stickyPlatformHeight: (w, h) => h,
-      },
+      (w: number, h: number) => 3 * h,
     );
 
     sr = new ScrollRise(scene);
