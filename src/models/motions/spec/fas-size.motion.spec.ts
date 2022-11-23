@@ -1,13 +1,14 @@
-import { ScrollRise } from '../../../scroll-rise';
-import { StickyPlatformScene } from '../../scenes/sticky-platform.scene';
+import { FixedActorsScene } from '../../scenes/fixed-actors.scene';
 import { StaticActor } from '../../actors/static.actor';
+import { ScrollRise } from '../../../scroll-rise';
+import { MotionFixture } from './motion.fixture';
+import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
-import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 
-describe("Sticky Platforms Scene's move motion test", function() {
+describe("Fixed Actors Scene's size motion test", function() {
   let sceneElement: HTMLElement;
-  let scene: StickyPlatformScene;
+  let scene: FixedActorsScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
@@ -15,12 +16,12 @@ describe("Sticky Platforms Scene's move motion test", function() {
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', MoveFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MotionFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
-    scene = new StickyPlatformScene(
-      sceneElement,
+    scene = new FixedActorsScene(
+      sceneElement!,
       (w: number, h: number) => 3 * h,
     );
 
@@ -28,9 +29,9 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
     blockElement = document.getElementById('block')!;
 
-    block = new StaticActor(blockElement, {
-      initSize: false,
+    block = new StaticActor(blockElement!, {
       initOpacity: false,
+      initPosition: false,
     });
   });
 
@@ -47,9 +48,9 @@ describe("Sticky Platforms Scene's move motion test", function() {
     expect(sr).toBeTruthy();
   });
 
-  it('should have a correct X, Y coords in changing X', function() {
+  it('should have a correct size in changing width', function() {
     block.addFrames([
-      MoveFixture.changeX.timeFrame(),
+      SizeFixture.changeWidth.timeFrame(),
     ]);
 
     scene.add(block);
@@ -57,13 +58,13 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      MoveFixture.changeX.stages(),
+      SizeFixture.changeWidth.stages(),
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  it('should have a correct size in changing height', function() {
     block.addFrames([
-      MoveFixture.changeY.timeFrame(),
+      SizeFixture.changeHeight.timeFrame(),
     ]);
 
     scene.add(block);
@@ -71,13 +72,13 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      MoveFixture.changeY.stages(),
+      SizeFixture.changeHeight.stages(),
     );
   });
 
-  it('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have a correct size in changing width and height', function() {
     block.addFrames([
-      MoveFixture.changeXY.timeFrame(),
+      SizeFixture.changeWidthHeight.timeFrame(),
     ]);
 
     scene.add(block);
@@ -85,7 +86,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      MoveFixture.changeXY.stages(),
+      SizeFixture.changeWidthHeight.stages(),
     );
   });
 });

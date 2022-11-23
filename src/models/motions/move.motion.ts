@@ -32,47 +32,35 @@ export class MoveMotion extends Motion {
   renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPos < frame.getStartPos()) {
-        element.style.left = `${this.startX(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.left = `${this.startX(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
       if (scrollPos > frame.getEndPos()) {
-        element.style.left = `${this.endX(Util.displayWidth(), Util.displayHeight())}px`;
+        element.style.left = `${this.endX(Util.clientWidth(), Util.clientHeight())}px`;
         return;
       }
 
-      const motionL = this.endX(Util.displayWidth(), Util.displayHeight()) - this.startX(Util.displayWidth(), Util.displayHeight());
+      const motionL = this.endX(Util.clientWidth(), Util.clientHeight()) - this.startX(Util.clientWidth(), Util.clientHeight());
       const d = motionL / frame.length();
-      const x = Util.castToInt(this.startX(Util.displayWidth(), Util.displayHeight()) + d * (scrollPos - frame.getStartPos()));
+      const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos()));
 
       element.style.left = `${x}px`;
     }
   }
 
   renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
-    if (element) {
-      if (scene.name === 'StickyPlatformScene') {
-        if (scrollPos < frame.getStartPos()) {
-          element.style.top = `${this.startY(Util.displayWidth(), Util.displayHeight())}px`;
-          return;
-        }
-        if (scrollPos > frame.getEndPos()) {
-          element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight())}px`;
-          return;
-        }
-      } else if (scene.name === 'FixedActorsScene') {
-        if (scrollPos < frame.getStartPos()) {
-          element.style.top = `${scene.elementY() + this.startY(Util.displayWidth(), Util.displayHeight())}px`;
-          return;
-        }
-        if (scrollPos > frame.getEndPos()) {
-          element.style.top = `${this.endY(Util.displayWidth(), Util.displayHeight()) - (scrollPos - frame.getEndPos())}px`;
-          return;
-        }
-      }
+    const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
+    const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
 
-      const motionL = this.endY(Util.displayWidth(), Util.displayHeight()) - this.startY(Util.displayWidth(), Util.displayHeight());
+    if (element) {
+      const motionL = endY() - startY();
       const d = motionL / frame.length();
-      const y = Util.castToInt(this.startY(Util.displayWidth(), Util.displayHeight()) + d * (frame.getStartPos() + scrollPos));
+      let y = Util.castToInt(startY() + d * (frame.getStartPos() + scrollPos));
+
+      const sceneInterceptor = scene.interceptY(scrollPos, frame, startY, endY);
+      if (sceneInterceptor !== undefined) {
+        y = sceneInterceptor;
+      }
 
       element.style.top = `${y}px`;
     }

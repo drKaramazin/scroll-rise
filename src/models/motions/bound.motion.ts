@@ -32,9 +32,9 @@ export class BoundMotion extends Motion {
   override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
     if (element) {
       if (scrollPosForFrame < frame.getStartPos()) {
-        this.applyProperties(element, this.before(Util.displayWidth(), Util.displayHeight()));
+        this.applyProperties(element, this.before(Util.clientWidth(), Util.clientHeight()));
       } else {
-        this.applyProperties(element, this.after(Util.displayWidth(), Util.displayHeight()));
+        this.applyProperties(element, this.after(Util.clientWidth(), Util.clientHeight()));
       }
     }
   }

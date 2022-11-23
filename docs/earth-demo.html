@@ -106,9 +106,9 @@
             scene,
         ) {
             if (scrollPosForFrame > 0) {
-                const motionL = this.end(Util.displayWidth(), Util.displayHeight()) - this.start(Util.displayWidth(), Util.displayHeight());
+                const motionL = this.end(Util.clientWidth(), Util.clientHeight()) - this.start(Util.clientWidth(), Util.clientHeight());
                 const d = motionL/frame.length();
-                const angle = this.start(Util.displayWidth(), Util.displayHeight()) + d * (scrollPosForFrame - frame.getStartPos());
+                const angle = this.start(Util.clientWidth(), Util.clientHeight()) + d * (scrollPosForFrame - frame.getStartPos());
                 world.rotation.y = angle;
             }
         }

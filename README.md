@@ -36,6 +36,7 @@ This method also has an _offset_ and _stickyPlatformHeight_ options. To see an e
 - MoveMotion
 - SizeMotion
 - OpacityMotion
+- BoundMotion
 
 ## Actors
 - **StaticActor** should have MoveMotion, SizeMotion and OpacityMotion in its TimeFrame to calc start/end values. You can also set false into _initPosition_, _initSize_, _initOpacity_ to prevent this behavior:

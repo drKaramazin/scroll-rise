@@ -1,5 +1,9 @@
-import { TimeFrame } from '../../time-frame.model';
-import { MoveMotion } from '../move.motion';
+import { Util } from '../../../util';
+
+export interface TestStage {
+  x: number;
+  y: number;
+}
 
 export abstract class MotionFixture {
 
@@ -12,6 +16,7 @@ export abstract class MotionFixture {
     return `
       <div id="test-body">
         <div class="display"></div>
+        <div class="display"></div>
         <div id="scene">
           <div id="block" style="width: ${MotionFixture.block.width}px; height: ${MotionFixture.block.height}px;"></div>
         </div>
@@ -21,31 +26,29 @@ export abstract class MotionFixture {
     `;
   }
 
-  static changeXTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      endX: (w: number) => w - MotionFixture.block.width,
-      startY: () => 0,
-      endY: (w: number, h: number) => 0,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
+  static stages: () => TestStage[] = function() {
+    return [{
+      x: 0,
+      y: 0,
+    }, {
+      x: 0,
+      y: Util.innerHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + 2 * Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + 3 * Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 3 * Util.innerHeight() + 3 * Util.clientHeight(),
+    }];
   };
-
-  static changeYTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      endX: (w: number) => 0,
-      startY: () => 0,
-      endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
-  }
-
-  static changeXYTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      endX: (w: number) => w - MotionFixture.block.width,
-      startY: () => 0,
-      endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), (w: number, h: number) => 0, (w: number, h: number) => h);
-  }
 
 }

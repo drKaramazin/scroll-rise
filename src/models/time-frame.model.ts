@@ -18,11 +18,11 @@ export class TimeFrame {
   }
 
   getStartPos(): number {
-    return this.start(Util.displayWidth(), Util.displayHeight());
+    return this.start(Util.clientWidth(), Util.clientHeight());
   }
 
   getEndPos(): number {
-    return this.end(Util.displayWidth(), Util.displayHeight());
+    return this.end(Util.clientWidth(), Util.clientHeight());
   }
 
   length(): number {

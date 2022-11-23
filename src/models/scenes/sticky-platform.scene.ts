@@ -1,6 +1,7 @@
 import { Actor } from '../actors/actor.model';
 import { Util } from '../../util';
 import { SceneModel, SceneOptions } from './scene.model';
+import { TimeFrame } from '../time-frame.model';
 
 export interface StickyPlatformSceneOptions extends SceneOptions {
   stickyPlatformHeight?: (deviceWidth: number, deviceHeight: number) => number;
@@ -20,12 +21,12 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
   }
 
   override resizeHeight(): void {
-    this.el.style.height = `${this.height(Util.displayWidth(), Util.displayHeight())}px`;
+    this.el.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
     this.resizePlatform();
   }
 
   resizePlatform(): void {
-    this.platform.style.height = `${this.options!.stickyPlatformHeight!(Util.displayWidth(), Util.displayHeight())}px`;
+    this.platform.style.height = `${this.options!.stickyPlatformHeight!(Util.clientWidth(), Util.clientHeight())}px`;
   }
 
   protected override init(): void {
@@ -49,6 +50,17 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
       actor.element.style.position = 'absolute';
     }
     actor.initElement(this.elementY(), this);
+  }
+
+  interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
+    if (scrollPos < frame.getStartPos()) {
+      return startY();
+    }
+    if (scrollPos > frame.getEndPos()) {
+      return endY();
+    }
+
+    return super.interceptY(scrollPos, frame, startY, endY);
   }
 
 }

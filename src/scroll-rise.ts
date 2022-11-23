@@ -20,8 +20,8 @@ export class ScrollRise {
   }
 
   saveDisplaySize(): void {
-    this.displayWidth = Util.displayWidth();
-    this.displayHeight = Util.displayHeight();
+    this.displayWidth = Util.clientWidth();
+    this.displayHeight = Util.clientHeight();
   }
 
   isNeedResize(): boolean {
