@@ -12,7 +12,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: () => 0,
-    }), () => 0, (w: number, h: number) => 2 * h);
+    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
   };
 
   static changeYTimeFrame(): TimeFrame {
@@ -21,7 +21,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: () => 0,
       endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), () => 0, (w: number, h: number) => 2 * h);
+    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
   }
 
   static changeXYTimeFrame(): TimeFrame {
@@ -30,7 +30,7 @@ export abstract class MoveFixture extends MotionFixture {
       startY: () => 0,
       endX: (w: number) => w - MotionFixture.block.width,
       endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), () => 0, (w: number, h: number) => 2 * h);
+    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
   }
 
   static changeX = {
@@ -45,6 +45,11 @@ export abstract class MoveFixture extends MotionFixture {
         coords: {
           x: { value: 0 },
           y: { value: Util.innerHeight() },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
+          y: { value: 0 },
         },
       }, {
         coords: {
@@ -87,6 +92,11 @@ export abstract class MoveFixture extends MotionFixture {
         coords: {
           x: { value: 0 },
           y: { value: Util.innerHeight() },
+        },
+      }, {
+        coords: {
+          x: { value: 0 },
+          y: { value: 0 },
         },
       }, {
         coords: {
@@ -154,6 +164,11 @@ export abstract class MoveFixture extends MotionFixture {
         coords: {
           x: this.changeX.stages()[6].coords!.x,
           y: this.changeY.stages()[6].coords!.y,
+        },
+      }, {
+        coords: {
+          x: this.changeX.stages()[7].coords!.x,
+          y: this.changeY.stages()[7].coords!.y,
         },
       }];
     },

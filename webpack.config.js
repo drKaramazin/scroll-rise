@@ -6,6 +6,7 @@ const esConfig = {
   module: {
     rules: [{
       use: 'ts-loader',
+      test: /\.ts?$/,
       exclude: /node_modules/,
     }],
   },

@@ -47,7 +47,10 @@ export abstract class MotionFixture {
       y: 2 * Util.innerHeight() + 3 * Util.clientHeight(),
     }, {
       x: 0,
-      y: 3 * Util.innerHeight() + 3 * Util.clientHeight(),
+      y: 2 * Util.innerHeight() + 4 * Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 3 * Util.innerHeight() + 4 * Util.clientHeight(),
     }];
   };
 
