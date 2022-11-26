@@ -6,7 +6,7 @@ import {
   SizeMotion,
   OpacityMotion,
   StickyPlatformScene,
-} from "../../src/index";
+} from "../../lib";
 
 const firstBlock = new StaticActor(document.getElementById('first-block')!);
 const secondBlock = new StaticActor(document.getElementById('second-block')!);
