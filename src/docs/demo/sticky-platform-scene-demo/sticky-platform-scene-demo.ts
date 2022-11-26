@@ -6,7 +6,8 @@ import {
   SizeMotion,
   OpacityMotion,
   StickyPlatformScene,
-} from "../../lib";
+  Value,
+} from "../../../lib/index";
 
 const firstBlock = new StaticActor(document.getElementById('first-block')!);
 const secondBlock = new StaticActor(document.getElementById('second-block')!);
@@ -14,21 +15,19 @@ const thirdBlock = new StaticActor(document.getElementById('third-block')!);
 const fourthBlock = new StaticActor(document.getElementById('fourth-block')!);
 const agenda = new StaticActor(document.getElementById('agenda')!);
 
-type Fn = (w: number, h: number) => number;
+const offset: Value = (w, h) => -h/2;
+const sceneHeight: Value = (w, h) => (h * 2) + offset(w, h);
 
-const offset: Fn = (w, h) => -h/2;
-const sceneHeight: Fn = (w, h) => (h * 2) + offset(w, h);
+const blockWidth: Value = (w, h) => w/4;
+const blockHeight: Value = (w, h) => h/8;
 
-const blockWidth: Fn = (w, h) => w/4;
-const blockHeight: Fn = (w, h) => h/8;
+const firstHalfBlockX: Value = (w, h) => w/4 - blockWidth(w, h)/2;
+const secondHalfStartBlockX: Value = (w, h) => w/4 * 3 - blockWidth(w, h)/2;
+const secondHalfEndBlockX: Value = (w, h) => w/2;
+const firstHalfBlockY: Value = (w, h) => h/8 - blockHeight(w, h)/2;
+const secondHalfBlockY: Value = (w, h) => h/8 * 3 - blockHeight(w, h)/2;
 
-const firstHalfBlockX: Fn = (w, h) => w/4 - blockWidth(w, h)/2;
-const secondHalfStartBlockX: Fn = (w, h) => w/4 * 3 - blockWidth(w, h)/2;
-const secondHalfEndBlockX: Fn = (w, h) => w/2;
-const firstHalfBlockY: Fn = (w, h) => h/8 - blockHeight(w, h)/2;
-const secondHalfBlockY: Fn = (w, h) => h/8 * 3 - blockHeight(w, h)/2;
-
-const endBlockWidth: Fn = (w, h) => w/2 - firstHalfBlockX(w, h);
+const endBlockWidth: Value = (w, h) => w/2 - firstHalfBlockX(w, h);
 
 const hideBlockFrame = new TimeFrame(new OpacityMotion({
   start: () => 1,
@@ -99,10 +98,10 @@ fourthBlock.addFrames([
   hideBlockFrame,
 ]);
 
-const agendaStartWidth: Fn = (w, h) => w/4;
-const agendaStartHeight: Fn = (w, h) => h/4;
-const agendaEndWidth: Fn = (w, h) => w/2;
-const agendaEndHeight: Fn = (w, h) => h/2;
+const agendaStartWidth: Value = (w, h) => w/4;
+const agendaStartHeight: Value = (w, h) => h/4;
+const agendaEndWidth: Value = (w, h) => w/2;
+const agendaEndHeight: Value = (w, h) => h/2;
 
 agenda.addFrames([
   new TimeFrame(new MoveMotion({

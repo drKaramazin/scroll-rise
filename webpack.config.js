@@ -11,7 +11,7 @@ const esConfig = {
     }],
   },
   resolve: {
-    extensions: ['.ts'],
+    extensions: ['.ts', '.js'],
   },
   output: {
     filename: 'index.es.js',

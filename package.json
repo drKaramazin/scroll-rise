@@ -16,7 +16,9 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "watch": "webpack --watch --mode production",
-    "docs": "npx webpack serve --config webpack.docs.js"
+    "serve:docs": "webpack serve --config webpack.docs.config.js --mode development",
+    "build:docs:dev": "webpack --config webpack.docs.config.js --mode development",
+    "build:docs": "webpack --config webpack.docs.config.js --mode production"
   },
   "repository": {
     "type": "git",

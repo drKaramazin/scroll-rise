@@ -7,37 +7,57 @@ const esConfig = configs[0];
 
 const pages = [
   {
+    name: 'earth-demo',
+    template: 'demo/earth-demo/earth-demo.html',
+    ts: 'demo/earth-demo/earth-demo.ts',
+  },
+  {
     name: 'sps-simple-demo',
-    template: 'sps-simple-demo/sps-simple-demo.html',
-    ts: 'sps-simple-demo/sps-simple-demo.ts',
+    template: 'demo/sps-simple-demo/sps-simple-demo.html',
+    ts: 'demo/sps-simple-demo/sps-simple-demo.ts',
+  },
+  {
+    name: 'fixed-actors-scene-demo',
+    template: 'demo/fixed-actors-scene-demo/fixed-actors-scene-demo.html',
+    ts: 'demo/fixed-actors-scene-demo/fixed-actors-scene-demo.ts',
+  },
+  {
+    name: 'sticky-platform-scene-demo',
+    template: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.html',
+    ts: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.ts',
+  },
+  {
+    name: 'index',
+    template: 'index.html',
+    ts: 'main.ts',
   },
 ];
 
 const htmlPlugins = pages.map(entry => new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, 'src-docs', entry.template),
+  template: path.resolve(__dirname, 'src', 'docs', entry.template),
   filename: `${entry.name}.html`,
   chunks: [entry.name],
-  // inject: 'body',
   scriptLoading: 'module',
 }));
 
 const entry = {};
-pages.forEach(page => { entry[page.name] = path.resolve(__dirname, 'src-docs', page.ts); });
+pages.forEach(page => { entry[page.name] = path.resolve(__dirname, 'src', 'docs', page.ts); });
 
 module.exports = {
   ...esConfig,
   entry,
   output: {
     ...esConfig.output,
-    path: path.resolve(__dirname, 'docs-dist'),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'docs'),
   },
   plugins: [
     ...esConfig.plugins ?? [],
     ...htmlPlugins,
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(__dirname, 'src-docs', 'styles'), to: 'styles' },
-        { from: path.resolve(__dirname, 'src-docs', 'assets'), to: 'assets' },
+        { from: path.resolve(__dirname, 'src', 'docs', 'styles'), to: 'styles' },
+        { from: path.resolve(__dirname, 'src', 'docs', 'assets'), to: 'assets' },
       ],
     }),
   ],
