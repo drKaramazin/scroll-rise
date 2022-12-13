@@ -1,6 +1,8 @@
 import { Util } from './util';
 import { SceneModel, SceneOptions } from './scenes/scene.model';
 
+declare const VERSION: string;
+
 export class ScrollRise {
 
   private initialized = false;
@@ -85,6 +87,10 @@ export class ScrollRise {
     for (const actor of this.scene.actors) {
       actor.render(this.pos(scrollPos), this.scene);
     }
+  }
+
+  static version() {
+    return VERSION;
   }
 
 }

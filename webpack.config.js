@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const path = require('path');
+const packageFile = require('./package.json');
 
 const esConfig = {
   entry: './src/lib/index.ts',
@@ -21,6 +23,11 @@ const esConfig = {
       type: 'module',
     },
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(packageFile.version),
+    }),
+  ],
   watchOptions: {
     ignored: /node_modules/,
   },

@@ -4,7 +4,8 @@ import {
   StickyPlatformScene,
   RefActor,
   Motion,
-  Util, Value,
+  Util,
+  Value,
 } from "../../../lib/index";
 import {SceneModel} from "../../../lib/scenes/scene.model";
 
