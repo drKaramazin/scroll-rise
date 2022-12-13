@@ -7,6 +7,12 @@ const esConfig = configs[0];
 
 const pages = [
   {
+    name: 'index',
+    template: 'index.html',
+    ts: 'main.ts',
+  },
+
+  {
     name: 'earth-demo',
     template: 'demo/earth-demo/earth-demo.html',
     ts: 'demo/earth-demo/earth-demo.ts',
@@ -26,10 +32,11 @@ const pages = [
     template: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.html',
     ts: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.ts',
   },
+
   {
-    name: 'index',
-    template: 'index.html',
-    ts: 'main.ts',
+    name: 'sps-move-motion-spec',
+    template: 'specs/sps-move-motion-spec/sps-move-motion-spec.html',
+    ts: 'specs/sps-move-motion-spec/sps-move-motion-spec.ts',
   },
 ];
 
@@ -46,6 +53,18 @@ pages.forEach(page => { entry[page.name] = path.resolve(__dirname, 'src', 'docs'
 module.exports = {
   ...esConfig,
   entry,
+  module: {
+    rules: [{
+      use: [{
+        loader: 'ts-loader',
+        options: {
+          configFile: 'tsconfig.docs.json',
+        },
+      }],
+      test: /\.ts?$/,
+      exclude: /node_modules/,
+    }],
+  },
   output: {
     ...esConfig.output,
     filename: '[name].bundle.js',
@@ -57,6 +76,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, 'src', 'docs', 'styles'), to: 'styles' },
+        { from: path.resolve(__dirname, 'src', 'lib', 'specs', 'styles'), to: 'styles' },
         { from: path.resolve(__dirname, 'src', 'docs', 'assets'), to: 'assets' },
       ],
     }),
