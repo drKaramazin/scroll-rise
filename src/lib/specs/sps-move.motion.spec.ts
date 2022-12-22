@@ -5,7 +5,7 @@ import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 
-describe("Sticky Platforms Scene's move motion test", function() {
+describe("Sticky Platforms Scene: move motion test", function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;

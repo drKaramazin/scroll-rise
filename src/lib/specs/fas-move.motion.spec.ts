@@ -6,7 +6,7 @@ import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 
-xdescribe("Fixed Actors Scene's move motion test", function() {
+xdescribe("Fixed Actors Scene: move motion test", function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;

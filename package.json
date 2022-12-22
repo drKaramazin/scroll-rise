@@ -18,7 +18,8 @@
     "watch": "webpack --watch --mode production",
     "serve:docs": "webpack serve --config webpack.docs.config.js --mode development",
     "build:docs:dev": "webpack --config webpack.docs.config.js --mode development",
-    "build:docs": "webpack --config webpack.docs.config.js --mode production"
+    "build:docs": "webpack --config webpack.docs.config.js --mode production",
+    "generate:examples-from-specs": "npx ts-node-esm -P src/docs/spec-examples-generator/tsconfig.spec.examples.json src/docs/spec-examples-generator/generate-spec-examples.ts"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "eslint-plugin-import": "~2.26.0",
     "eslint-plugin-n": "~15.3.0",
     "eslint-plugin-promise": "~6.1.1",
+    "glob": "^8.0.3",
     "html-webpack-plugin": "~5.5.0",
     "jasmine-core": "~4.0.1",
     "karma": "~6.3.17",
@@ -51,8 +53,12 @@
     "karma-jasmine": "~4.0.2",
     "karma-typescript": "~5.5.3",
     "karma-typescript-es6-transform": "~5.5.3",
+    "mustache": "^4.2.0",
+    "mustache-loader": "^1.4.3",
     "puppeteer": "~19.2.0",
+    "sanitize-filename-truncate": "^1.0.2",
     "ts-loader": "~9.2.7",
+    "ts-node": "^10.9.1",
     "typescript": "~4.8.4",
     "webpack": "~5.70.0",
     "webpack-cli": "~4.9.2",

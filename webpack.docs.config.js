@@ -2,16 +2,11 @@ const configs = require('./webpack.config.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const fs = require('fs');
 
 const esConfig = configs[0];
 
 const pages = [
-  {
-    name: 'index',
-    template: 'index.html',
-    ts: 'main.ts',
-  },
-
   {
     name: 'earth-demo',
     template: 'demo/earth-demo/earth-demo.html',
@@ -32,27 +27,61 @@ const pages = [
     template: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.html',
     ts: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.ts',
   },
-
-  {
-    name: 'sps-move-motion-spec',
-    template: 'specs/sps-move-motion-spec/sps-move-motion-spec.html',
-    ts: 'specs/sps-move-motion-spec/sps-move-motion-spec.ts',
-  },
 ];
 
-const htmlPlugins = pages.map(entry => new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, 'src', 'docs', entry.template),
-  filename: `${entry.name}.html`,
-  chunks: [entry.name],
-  scriptLoading: 'module',
-}));
+const specsPath = path.resolve(__dirname, 'src', 'docs', 'specs');
+const specs = fs.readdirSync(specsPath);
 
-const entry = {};
-pages.forEach(page => { entry[page.name] = path.resolve(__dirname, 'src', 'docs', page.ts); });
+function entries() {
+  let entries = pages.reduce((acc, page) => {
+    acc[page.name] = path.resolve(__dirname, 'src', 'docs', page.ts);
+    return acc;
+  }, {});
+  entries.index = path.resolve(__dirname, 'src', 'docs', 'main.ts');
+
+  entries = {
+    ...entries,
+    ...specs.reduce((acc, spec) => {
+      acc[spec] = path.resolve(specsPath, spec);
+      return acc;
+    }, {}),
+  };
+
+  return entries;
+}
+
+function htmlPlugins() {
+  let htmlPlugins = pages.map(entry => new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'src', 'docs', entry.template),
+    filename: `${entry.name}.html`,
+    chunks: [entry.name],
+    scriptLoading: 'module',
+  }));
+
+  htmlPlugins.push(new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'src', 'docs', 'index.mustache'),
+    filename: 'index.html',
+    chunks: ['index'],
+    scriptLoading: 'module',
+    inject: 'body',
+  }));
+
+  htmlPlugins = [
+    ...htmlPlugins,
+    ...specs.map(spec => new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'docs', 'spec-examples-generator', 'spec.html'),
+      filename: `${spec}.html`,
+      chunks: [spec],
+      scriptLoading: 'module',
+    })),
+  ];
+
+  return htmlPlugins;
+}
 
 module.exports = {
   ...esConfig,
-  entry,
+  entry: entries(),
   module: {
     rules: [{
       use: [{
@@ -63,6 +92,15 @@ module.exports = {
       }],
       test: /\.ts?$/,
       exclude: /node_modules/,
+    }, {
+      test: /index\.mustache$/,
+      loader: 'mustache-loader',
+      options: {
+        tiny: true,
+        render: {
+          specs,
+        },
+      },
     }],
   },
   output: {
@@ -72,7 +110,7 @@ module.exports = {
   },
   plugins: [
     ...esConfig.plugins ?? [],
-    ...htmlPlugins,
+    ...htmlPlugins(),
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, 'src', 'docs', 'styles'), to: 'styles' },
@@ -83,7 +121,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'src-docs'),
+      directory: path.join(__dirname, 'src', 'docs'),
     },
     compress: false,
     port: 9000,

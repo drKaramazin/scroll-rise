@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Demos</title>
+    <title>ScrollRise Examples</title>
 
     <link href="styles/reset.css" rel="stylesheet">
     <link href="styles/common.css" rel="stylesheet">
@@ -12,26 +12,27 @@
 </head>
 <body>
 <div class="contents">
-    <h1>Demo</h1>
-    <div class="agenda">
-        Choose the demo:
-    </div>
+    <h1>Examples</h1>
     <div class="items">
         <a href="/earth-demo.html" class="demo earth">
-            Earth Demo
+            Earth
         </a>
         <a href="/fixed-actors-scene-demo.html" class="demo fixed-actors-scene">
-            Fixed Actors Scene Demo
+            Fixed Actors Scene
         </a>
         <a href="/sps-simple-demo.html" class="demo sticky-platform-scene">
-            Sticky Platform Scene Simple Demo
+            Sticky Platform Scene Simple
         </a>
         <a href="/sticky-platform-scene-demo.html" class="demo sticky-platform-scene">
-            Sticky Platform Scene Demo
+            Sticky Platform Scene
         </a>
         <div class="from-tests-link">
-            <div>From tests</div>
-            <div><a href="/sps-move-motion-spec.html">sps-move.motion.spec</a></div>
+            <div class="title">Generated from tests</div>
+            <div class="items">
+                {{#specs}}
+                    <div class="item"><a href="/{{.}}.html">{{.}}</a></div>
+                {{/specs}}
+            </div>
         </div>
         <div class="promo">
             <a class="promo-item" href="https://github.com/drKaramazin/scroll-rise">

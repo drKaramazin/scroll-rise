@@ -5,7 +5,7 @@ import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
 
-xdescribe("Sticky Platforms Scene's size motion test", function() {
+xdescribe("Sticky Platforms Scene: size motion test", function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;

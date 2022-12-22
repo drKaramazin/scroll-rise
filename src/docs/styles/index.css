@@ -43,3 +43,25 @@
 .from-tests-link {
     text-align: center;
 }
+
+.from-tests-link .title {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.from-tests-link .item {
+    text-align: left;
+    margin-bottom: 4px;
+}
+
+.from-tests-link .item a {
+    text-decoration: none;
+}
+
+.from-tests-link .item a:hover {
+    text-decoration: underline;
+}
+
+.from-tests-link .items div:nth-child(odd) a {
+    color: #cdcdcd;
+}
