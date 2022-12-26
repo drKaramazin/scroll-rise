@@ -73,6 +73,7 @@ function htmlPlugins() {
       filename: `${spec}.html`,
       chunks: [spec],
       scriptLoading: 'module',
+      title: spec,
     })),
   ];
 
