@@ -1,9 +1,9 @@
 import { Actor } from '../actors/actor.model';
 import { Util } from '../util';
-import { SceneModel, SceneOptions } from './scene.model';
-import { TimeFrame } from '../time-frame.model';
+import { Scene, SceneOptions } from './scene';
+import { TimeFrame } from '../time-frame';
 
-export class FixedActorsScene extends SceneModel<SceneOptions> {
+export class FixedActorsScene extends Scene<SceneOptions> {
 
   public override name = 'FixedActorsScene';
 
@@ -12,7 +12,9 @@ export class FixedActorsScene extends SceneModel<SceneOptions> {
   }
 
   protected override init(): void {
+    this.el.style.position = 'relative';
     this.resizeHeight();
+    this.redrawMeasuringGrid();
   }
 
   override add(actor: Actor): void {

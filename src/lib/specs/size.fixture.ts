@@ -1,6 +1,6 @@
 import { MotionFixture } from './motion.fixture';
 import { ChangeStage } from './test-tools';
-import { TimeFrame } from '../time-frame.model';
+import { TimeFrame } from '../time-frame';
 import { SizeMotion } from '../motions/size.motion';
 
 export class SizeFixture extends MotionFixture {
@@ -36,36 +36,43 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeWidthTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
+        scrollTo: this.stages()[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[2],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[4],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[6],
         size: {
           width: { value: MotionFixture.block.width + MotionFixture.block.width / 2, margin: 1 },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[8],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[10],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[12],
         size: {
           width: { value: MotionFixture.block.width * 2 },
           height: { value: MotionFixture.block.height },
@@ -78,36 +85,43 @@ export class SizeFixture extends MotionFixture {
     timeFrame: SizeFixture.changeHeightTimeFrame,
     stages: (): ChangeStage[] => {
       return [{
+        scrollTo: this.stages()[0],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[2],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[4],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height },
         },
       }, {
+        scrollTo: this.stages()[6],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 2 },
         },
       }, {
+        scrollTo: this.stages()[8],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
+        scrollTo: this.stages()[10],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
         },
       }, {
+        scrollTo: this.stages()[12],
         size: {
           width: { value: MotionFixture.block.width },
           height: { value: MotionFixture.block.height * 3 },
@@ -119,42 +133,13 @@ export class SizeFixture extends MotionFixture {
   static changeWidthHeight = {
     timeFrame: SizeFixture.changeWidthHeightTimeFrame,
     stages: (): ChangeStage[] => {
-      return [{
-        size: {
-          width: this.changeWidth.stages()[0].size!.width,
-          height: this.changeHeight.stages()[0].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[1].size!.width,
-          height: this.changeHeight.stages()[1].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[2].size!.width,
-          height: this.changeHeight.stages()[2].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[3].size!.width,
-          height: this.changeHeight.stages()[3].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[4].size!.width,
-          height: this.changeHeight.stages()[4].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[5].size!.width,
-          height: this.changeHeight.stages()[5].size!.height,
-        },
-      }, {
-        size: {
-          width: this.changeWidth.stages()[6].size!.width,
-          height: this.changeHeight.stages()[6].size!.height,
-        },
-      }];
+      return this.changeWidth.stages().map((stage, index) => ({
+        scrollTo: this.changeWidth.stages()[index].scrollTo,
+        coords: {
+          x: this.changeWidth.stages()[index].size!.width,
+          y: this.changeHeight.stages()[index].size!.height,
+        }
+      }));
     },
   };
 

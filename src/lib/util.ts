@@ -1,4 +1,4 @@
-import { WindowSizes } from './window-sizes';
+import { WindowSizesModel } from './models/window-sizes.model';
 
 export class Util {
 
@@ -45,7 +45,7 @@ export class Util {
     );
   }
 
-  static windowSizes(): WindowSizes {
+  static windowSizes(): WindowSizesModel {
     return {
       clientWidth: this.clientWidth(),
       clientHeight: this.clientHeight(),

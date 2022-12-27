@@ -1,4 +1,4 @@
-export interface WindowSizes {
+export interface WindowSizesModel {
   clientWidth: number;
   clientHeight: number;
   innerWidth: number;

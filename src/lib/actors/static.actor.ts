@@ -1,7 +1,7 @@
 import { InitiableActor } from './initiable.actor';
 import { Util } from '../util';
 import { MoveMotion } from '../motions/move.motion';
-import { SceneModel } from '../scenes/scene.model';
+import { Scene } from '../scenes/scene';
 
 export interface StaticActorOptions {
   initPosition?: boolean;
@@ -24,7 +24,7 @@ export class StaticActor extends InitiableActor {
     };
   }
 
-  override bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined {
+  override bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined {
     if (this.element) {
       if (this.options?.initPosition) {
         const timeFrame = this.findFirstMoveMotionFrame();

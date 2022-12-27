@@ -21,7 +21,7 @@ export interface StageValue {
 }
 
 export interface ChangeStage {
-  scrollTo?: TestStage;
+  scrollTo: TestStage;
   coords?: {
     x: StageValue;
     y: StageValue;
@@ -93,12 +93,8 @@ export class TestTools {
             }
             resolve();
           };
-          if (stage.scrollTo) {
-            window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
-          } else {
-            const scrollTo = MotionFixture.stages()[i];
-            window.scrollTo(scrollTo.x, scrollTo.y);
-          }
+
+          window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
         });
       });
     }

@@ -21,7 +21,24 @@ describe("Sticky Platforms Scene: move motion test", function() {
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => 4 * h,
+      (w: number, h: number) => 5 * h,
+      {
+        measuringGrid: {
+          height: (deviceWidth, deviceHeight) => deviceHeight,
+          color: '#fff',
+          subgrid: {
+            height: (gridHeight) => gridHeight / 2,
+            color: '#637D8F',
+            borderStyle: 'dashed',
+          },
+          measuring: {
+            startWith: 4,
+            top: 10,
+            left: 10,
+            fontSize: '16px',
+          }
+        }
+      }
     );
 
     sr = new ScrollRise(scene);
@@ -47,7 +64,7 @@ describe("Sticky Platforms Scene: move motion test", function() {
     expect(sr).toBeTruthy();
   });
 
-  xit('should have a correct X, Y coords in changing X', function() {
+  it('should have a correct X, Y coords in changing X', function() {
     block.addFrames([
       MoveFixture.changeX.timeFrame(),
     ]);
@@ -61,7 +78,7 @@ describe("Sticky Platforms Scene: move motion test", function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  xit('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);

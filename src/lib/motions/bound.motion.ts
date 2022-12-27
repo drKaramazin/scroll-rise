@@ -1,5 +1,5 @@
-import { Motion } from './motion.model';
-import { TimeFrame } from '../time-frame.model';
+import { Motion } from './motion';
+import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
 
 export declare type BoundValue = (deviceWidth: number, deviceHeight: number) => Partial<CSSStyleDeclaration>;

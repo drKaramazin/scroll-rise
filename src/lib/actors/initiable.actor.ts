@@ -1,10 +1,10 @@
 import { Actor } from './actor.model';
-import { TimeFrame } from '../time-frame.model';
-import { Dimensions } from '../dimensions';
+import { TimeFrame } from '../time-frame';
+import { Dimensions } from '../models/dimensions.model';
 import { SizeMotion } from '../motions/size.motion';
 import { OpacityMotion } from '../motions/opacity.motion';
-import { Value } from '../value.model';
-import { SceneModel } from '../scenes/scene.model';
+import { Value } from '../models/value.model';
+import { Scene } from '../scenes/scene';
 
 export abstract class InitiableActor extends Actor {
 
@@ -64,7 +64,7 @@ export abstract class InitiableActor extends Actor {
     }
   }
 
-  override bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined {
+  override bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined {
     return this.element;
   }
 

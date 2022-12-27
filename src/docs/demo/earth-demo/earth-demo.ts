@@ -6,7 +6,7 @@ import {
   Motion,
   Util, Value,
 } from "../../../lib/index";
-import {SceneModel} from "../../../lib/scenes/scene.model";
+import {Scene} from "../../../lib/scenes/scene";
 
 declare const THREE: any;
 
@@ -50,7 +50,7 @@ class EarthMotion extends Motion {
     scrollPosForFrame: number,
     frame: TimeFrame,
     element: HTMLElement,
-    scene: SceneModel<any>,
+    scene: Scene<any>,
   ) {
     if (scrollPosForFrame > 0) {
       const motionL = this.end(Util.clientWidth(), Util.clientHeight()) - this.start(Util.clientWidth(), Util.clientHeight());

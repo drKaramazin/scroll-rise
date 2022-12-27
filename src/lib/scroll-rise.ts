@@ -1,5 +1,5 @@
 import { Util } from './util';
-import { SceneModel, SceneOptions } from './scenes/scene.model';
+import { Scene, SceneOptions } from './scenes/scene';
 
 export class ScrollRise {
 
@@ -12,7 +12,7 @@ export class ScrollRise {
   private displayHeight: number;
 
   constructor(
-    public scene: SceneModel<SceneOptions>,
+    public scene: Scene<SceneOptions>,
   ) {
     this.saveDisplaySize();
     this.init();
@@ -50,6 +50,7 @@ export class ScrollRise {
   resize(): void {
     if (this.isNeedResize()) {
       this.scene.resizeHeight();
+      this.scene.redrawMeasuringGrid();
       this.tick();
     }
   }

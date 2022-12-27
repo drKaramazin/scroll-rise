@@ -1,11 +1,11 @@
-import { TimeFrame } from '../time-frame.model';
+import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
-import { SceneModel } from '../scenes/scene.model';
+import { Scene } from '../scenes/scene';
 
 export abstract class Actor {
 
   public element?: HTMLElement;
-  abstract bindElement(scrollPosOnFrame: number, scene: SceneModel<any>): HTMLElement | undefined;
+  abstract bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined;
 
   protected frames: TimeFrame[] = [];
 
@@ -28,7 +28,7 @@ export abstract class Actor {
     );
   }
 
-  render(scrollPos: number, scene: SceneModel<any>): void {
+  render(scrollPos: number, scene: Scene<any>): void {
     if (this.beforeRender) {
       this.beforeRender();
     }
@@ -91,7 +91,7 @@ export abstract class Actor {
     this.frames = this.frames.concat(frames);
   }
 
-  initElement(scrollPosOnFrame: number, scene: SceneModel<any>): void {
+  initElement(scrollPosOnFrame: number, scene: Scene<any>): void {
     this.element = this.bindElement(scrollPosOnFrame, scene);
     this.afterBindElement();
   }

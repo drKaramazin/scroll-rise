@@ -1,13 +1,13 @@
 import { Actor } from '../actors/actor.model';
 import { Util } from '../util';
-import { SceneModel, SceneOptions } from './scene.model';
-import { TimeFrame } from '../time-frame.model';
+import { Scene, SceneOptions } from './scene';
+import { TimeFrame } from '../time-frame';
 
 export interface StickyPlatformSceneOptions extends SceneOptions {
   stickyPlatformHeight?: (deviceWidth: number, deviceHeight: number) => number;
 }
 
-export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> {
+export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
 
   public override name = 'StickyPlatformScene';
 
@@ -39,6 +39,7 @@ export class StickyPlatformScene extends SceneModel<StickyPlatformSceneOptions> 
     this.platform.style.left = '0';
     this.platform.style.width = '100%';
     this.resizeHeight();
+    this.redrawMeasuringGrid();
 
     this.el.appendChild(this.platform);
   }
