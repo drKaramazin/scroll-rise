@@ -26,6 +26,7 @@ describe("Fixed Actors Scene: move motion test", function() {
       {
         measuringGrid: {
           height: (deviceWidth, deviceHeight) => deviceHeight,
+          width: deviceWidth => deviceWidth / 2,
           color: '#fff',
           subgrid: {
             height: (gridHeight) => gridHeight / 2,

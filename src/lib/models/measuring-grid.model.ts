@@ -1,6 +1,6 @@
 import { Color } from "./color.model";
 
-export interface MeasuringGrid {
+export interface MeasuringGridModel {
   width?: (deviceWidth: number, deviceHeight: number) => number;
   height?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
   color: Color;
@@ -17,5 +17,5 @@ export interface MeasuringGrid {
   }
 }
 
-export type HorizontalMeasuringGrid = Required<Omit<MeasuringGrid, 'width'>>;
-export type VerticalMeasuringGrid = Required<Omit<MeasuringGrid, 'height'>>;
+export type HorizontalMeasuringGrid = Required<Omit<MeasuringGridModel, 'width'>>;
+export type VerticalMeasuringGrid = Required<Omit<MeasuringGridModel, 'height'>>;

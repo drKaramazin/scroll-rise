@@ -8,13 +8,11 @@ export class FixedActorsScene extends Scene<SceneOptions> {
   public override name = 'FixedActorsScene';
 
   override resizeHeight(): void {
-    this.el.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
+    this.element.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
   }
 
   protected override init(): void {
-    this.el.style.position = 'relative';
-    this.resizeHeight();
-    this.redrawMeasuringGrid();
+    this.element.style.position = 'relative';
   }
 
   override add(actor: Actor): void {
