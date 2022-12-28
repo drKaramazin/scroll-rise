@@ -25,13 +25,14 @@ describe("Sticky Platforms Scene: move motion test", function() {
       {
         measuringGrid: {
           height: (deviceWidth, deviceHeight) => deviceHeight,
+          width: deviceWidth => deviceWidth / 2,
           color: '#fff',
           subgrid: {
             height: (gridHeight) => gridHeight / 2,
             color: '#637D8F',
             borderStyle: 'dashed',
           },
-          measuring: {
+          label: {
             startWith: 4,
             top: 10,
             left: 10,

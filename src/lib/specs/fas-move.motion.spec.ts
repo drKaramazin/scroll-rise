@@ -32,7 +32,7 @@ describe("Fixed Actors Scene: move motion test", function() {
             color: '#637D8F',
             borderStyle: 'dashed',
           },
-          measuring: {
+          label: {
             startWith: 4,
             top: 10,
             left: 10,
