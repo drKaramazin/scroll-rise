@@ -1,3 +1,5 @@
+import { DocsSpecsGlobalEnv } from "./docs-specs-global-env";
+
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
@@ -20,7 +22,7 @@ console.log('Generation...');
 const outcomePath = path.join(__dirname, '..', 'specs');
 prepareOutcomeDir(outcomePath);
 
-(global as any).runnerResult = {
+(global as DocsSpecsGlobalEnv).runnerResult = {
   total: 0,
   generated: 0,
 }
@@ -34,7 +36,7 @@ import(path.resolve(__dirname, 'spec-aot-proxy.ts')).then(async proxy => {
 }).then(() => {
   console.log(
     'Done. '
-    + colors.green(`Generated ${(global as any).runnerResult.generated} of ${(global as any).runnerResult.total}.`)
-    + ` Skipped ${(global as any).runnerResult.total - (global as any).runnerResult.generated}.`
+    + colors.green(`Generated ${(global as DocsSpecsGlobalEnv).runnerResult.generated} of ${(global as DocsSpecsGlobalEnv).runnerResult.total}.`)
+    + ` Skipped ${(global as DocsSpecsGlobalEnv).runnerResult.total - (global as DocsSpecsGlobalEnv).runnerResult.generated}.`
   );
 });

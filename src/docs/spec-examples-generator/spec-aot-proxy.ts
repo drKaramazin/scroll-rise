@@ -1,3 +1,5 @@
+import { DocsSpecsGlobalEnv } from "./docs-specs-global-env";
+
 const sanitize = require("sanitize-filename-truncate");
 const Mustache = require('mustache');
 const fs = require('fs');
@@ -12,12 +14,12 @@ export function runSpec(outcomePath: string, spec: string) {
 
     global.beforeEach = global.afterEach = function (action: jasmine.ImplementationCallback) {};
 
-    (global as any).generateExamples = function (expectations: Array<string>) {
+    (global as DocsSpecsGlobalEnv).generateExamples = function (expectations: Array<string>) {
       expectationsForGeneration = expectations;
     };
 
     global.it = global.xit = function (expectation: string, assertion?: jasmine.ImplementationCallback) {
-      (global as any).runnerResult.total++;
+      (global as DocsSpecsGlobalEnv).runnerResult.total++;
       if (expectationsForGeneration.includes(expectation)) {
         const filename = sanitize(`${description} ${expectation}`, {
           convertWhiteSpace: '-'
@@ -33,7 +35,7 @@ export function runSpec(outcomePath: string, spec: string) {
 
         fs.writeFileSync(path.join(outcomePath, filename), output,{ encoding:'utf8' });
 
-        (global as any).runnerResult.generated++;
+        (global as DocsSpecsGlobalEnv).runnerResult.generated++;
       } else {
         console.log(colors.red('Skipped.') + ` ${description} ${expectation}`);
       }

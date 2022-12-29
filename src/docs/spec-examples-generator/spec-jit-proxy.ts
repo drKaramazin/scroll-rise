@@ -1,6 +1,8 @@
+import { DocsSpecsGlobalEnv } from "./docs-specs-global-env";
+
 export function runTest(targetDescription: string, targetExpectation: string) {
 
-  (window as any).skipTesting = true;
+  (window as DocsSpecsGlobalEnv).skipTesting = true;
 
   window.describe = window.xdescribe = function (description: string, specDefinitions: () => void): void {
 

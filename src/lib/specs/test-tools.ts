@@ -1,5 +1,6 @@
 import { Actor } from '../actors/actor.model';
-import { MotionFixture, TestStage } from './motion.fixture';
+import { TestStage } from './motion.fixture';
+import { DocsSpecsGlobalEnv } from "../../docs/spec-examples-generator/docs-specs-global-env";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -35,7 +36,7 @@ export interface ChangeStage {
 export class TestTools {
 
   static testGoingStages(block: Actor, blockElement: HTMLElement, stages: ChangeStage[]): Promise<void> {
-    if (typeof window !== 'undefined' && (window as any).skipTesting) {
+    if (typeof window !== 'undefined' && (window as DocsSpecsGlobalEnv).skipTesting) {
       return Promise.resolve();
     }
 
