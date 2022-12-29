@@ -96,6 +96,7 @@ export class MeasuringGrid {
       line.style.width = '0px';
       line.style.height = '100%';
       line.style.borderLeft = `1px solid ${measuringGrid.color}`;
+      line.style.top = '0';
 
       this.appendToMeasuringGrid(line);
 
