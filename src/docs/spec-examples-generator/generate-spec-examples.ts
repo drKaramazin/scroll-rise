@@ -1,7 +1,7 @@
 const fs = require('fs');
-
 const path = require('path');
 const glob = require('glob');
+const colors = require('colors/safe');
 
 function prepareOutcomeDir(outcomePath: string) {
   fs.rmSync(outcomePath, {
@@ -20,10 +20,21 @@ console.log('Generation...');
 const outcomePath = path.join(__dirname, '..', 'specs');
 prepareOutcomeDir(outcomePath);
 
+(global as any).runnerResult = {
+  total: 0,
+  generated: 0,
+}
+
 import(path.resolve(__dirname, 'spec-aot-proxy.ts')).then(async proxy => {
   for (const spec of specs) {
     console.log('Spec:', spec);
     proxy.runSpec(outcomePath, path.basename(spec));
     await import(spec);
   }
-}).then(() => console.log('Done.'));
+}).then(() => {
+  console.log(
+    'Done. '
+    + colors.green(`Generated ${(global as any).runnerResult.generated} of ${(global as any).runnerResult.total}.`)
+    + ` Skipped ${(global as any).runnerResult.total - (global as any).runnerResult.generated}.`
+  );
+});

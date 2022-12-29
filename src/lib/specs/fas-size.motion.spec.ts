@@ -5,6 +5,7 @@ import { MotionFixture } from './motion.fixture';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
+import { generateExamples } from "./generate-examples";
 
 xdescribe("Fixed Actors Scene: size motion test", function() {
   let sceneElement: HTMLElement;
@@ -12,6 +13,12 @@ xdescribe("Fixed Actors Scene: size motion test", function() {
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have a correct size in changing width',
+    'should have a correct size in changing height',
+    'should have a correct size in changing width and height',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);

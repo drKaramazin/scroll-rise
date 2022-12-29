@@ -5,6 +5,7 @@ import { MotionFixture } from './motion.fixture';
 import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
+import { generateExamples } from "./generate-examples";
 
 describe("Fixed Actors Scene: move motion test", function() {
   let sceneElement: HTMLElement;
@@ -12,6 +13,12 @@ describe("Fixed Actors Scene: move motion test", function() {
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have a correct X, Y coords in changing X',
+    'should have a correct X, Y coords in changing Y',
+    'should have a correct X, Y coords in changing both X and Y',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
