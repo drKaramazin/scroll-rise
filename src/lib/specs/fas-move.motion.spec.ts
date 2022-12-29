@@ -6,6 +6,7 @@ import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from "./generate-examples";
+import { TestMeasuringGrid } from "./test-measuring-grid";
 
 describe("Fixed Actors Scene: move motion test", function() {
   let sceneElement: HTMLElement;
@@ -31,22 +32,7 @@ describe("Fixed Actors Scene: move motion test", function() {
       sceneElement!,
       (w: number, h: number) => 5 * h,
       {
-        measuringGrid: {
-          height: (deviceWidth, deviceHeight) => deviceHeight,
-          width: deviceWidth => deviceWidth / 2,
-          color: '#fff',
-          subgrid: {
-            height: (gridHeight) => gridHeight / 2,
-            color: '#637D8F',
-            borderStyle: 'dashed',
-          },
-          label: {
-            startWith: 4,
-            top: 10,
-            left: 10,
-            fontSize: '16px',
-          }
-        }
+        measuringGrid: TestMeasuringGrid,
       }
     );
 

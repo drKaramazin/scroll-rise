@@ -1,5 +1,9 @@
 import { Color } from "./models/color.model";
-import { HorizontalMeasuringGrid, MeasuringGridModel, VerticalMeasuringGrid } from "./models/measuring-grid.model";
+import {
+  HorizontalMeasuringGrid,
+  MeasuringGridModel,
+  VerticalMeasuringGrid, VerticalMeasuringSubgrid
+} from "./models/measuring-grid.model";
 import { Util } from "./util";
 
 export class MeasuringGrid {
@@ -62,7 +66,7 @@ export class MeasuringGrid {
         }
       }
 
-      if (measuringGrid.subgrid && i + 1 <= gridCount) {
+      if (measuringGrid.subgrid?.height && i + 1 <= gridCount) {
         const subgridHeight = measuringGrid.subgrid.height(gridHeight);
         let subgridTop = top + subgridHeight;
 
@@ -84,23 +88,44 @@ export class MeasuringGrid {
     }
   }
 
+  protected createVerticalLine(left: number, borderStyle: string, color: Color): HTMLElement {
+    const line = document.createElement('div');
+
+    line.style.position = 'absolute';
+    line.style.left = `${left}px`;
+    line.style.width = '0px';
+    line.style.height = '100%';
+    line.style.borderLeft = `1px ${borderStyle} ${color}`;
+    line.style.top = '0';
+
+    return line;
+  }
+
+  protected appendVerticalSubgridLined(left: number, gridWidth: number, subgrid: VerticalMeasuringSubgrid) {
+    const subgridWidth = subgrid.width(gridWidth);
+
+    let subgridLeft = left + subgridWidth;
+    while (subgridLeft < left + gridWidth) {
+      this.appendToMeasuringGrid(this.createVerticalLine(subgridLeft, subgrid.borderStyle, subgrid.color));
+      subgridLeft += subgridWidth;
+    }
+  }
+
   protected appendVerticalGridLines(measuringGrid: VerticalMeasuringGrid) {
-    const width = measuringGrid.width(Util.clientWidth(), Util.clientHeight());
+    const gridWidth = measuringGrid.width(Util.clientWidth(), Util.clientHeight());
 
-    let left = width;
+    if (measuringGrid.subgrid?.width) {
+      this.appendVerticalSubgridLined(0, gridWidth, measuringGrid.subgrid as VerticalMeasuringSubgrid);
+    }
+
+    let left = gridWidth;
     while (left < this.element.getBoundingClientRect().width) {
-      const line = document.createElement('div');
+      this.appendToMeasuringGrid(this.createVerticalLine(left, 'solid', measuringGrid.color));
 
-      line.style.position = 'absolute';
-      line.style.left = `${left}px`;
-      line.style.width = '0px';
-      line.style.height = '100%';
-      line.style.borderLeft = `1px solid ${measuringGrid.color}`;
-      line.style.top = '0';
-
-      this.appendToMeasuringGrid(line);
-
-      left += left;
+      if (measuringGrid.subgrid?.width) {
+        this.appendVerticalSubgridLined(left, gridWidth, measuringGrid.subgrid as VerticalMeasuringSubgrid);
+      }
+      left += gridWidth;
     }
   }
 

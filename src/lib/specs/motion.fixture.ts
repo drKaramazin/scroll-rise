@@ -32,49 +32,49 @@ export abstract class MotionFixture {
       y: 0,
     }, {
       x: 0,
-      y: Util.castToInt(Util.innerHeight() / 2), // new
+      y: Util.castToInt(Util.innerHeight() / 2),
     }, {
       x: 0,
       y: Util.innerHeight(),
     }, {
       x: 0,
-      y: Util.innerHeight() + Util.castToInt(Util.innerHeight() / 2), // new
+      y: Util.innerHeight() + Util.castToInt(Util.innerHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + Util.castToInt(Util.clientHeight() / 2), // new
+      y: 2 * Util.innerHeight() + Util.castToInt(Util.clientHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight() + Util.clientHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2), // new
+      y: 2 * Util.innerHeight() + Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight() + 2 * Util.clientHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + 2 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2), // new
+      y: 2 * Util.innerHeight() + 2 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight() + 3 * Util.clientHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + 3 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2), // new
+      y: 2 * Util.innerHeight() + 3 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight() + 4 * Util.clientHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + 4 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2), // new
+      y: 2 * Util.innerHeight() + 4 * Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2),
     }, {
       x: 0,
       y: 2 * Util.innerHeight() + 5 * Util.clientHeight(),
     }, {
       x: 0,
-      y: 2 * Util.innerHeight() + 5 * Util.clientHeight() + Util.castToInt(Util.innerHeight() / 2), // new
+      y: 2 * Util.innerHeight() + 5 * Util.clientHeight() + Util.castToInt(Util.innerHeight() / 2),
     }, {
       x: 0,
       y: 3 * Util.innerHeight() + 5 * Util.clientHeight(),
