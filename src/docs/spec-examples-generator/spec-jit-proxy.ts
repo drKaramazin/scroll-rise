@@ -1,5 +1,7 @@
 export function runTest(targetDescription: string, targetExpectation: string) {
 
+  (window as any).skipTesting = true;
+
   window.describe = window.xdescribe = function (description: string, specDefinitions: () => void): void {
 
     window.expect = function () {

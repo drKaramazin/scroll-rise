@@ -35,6 +35,10 @@ export interface ChangeStage {
 export class TestTools {
 
   static testGoingStages(block: Actor, blockElement: HTMLElement, stages: ChangeStage[]): Promise<void> {
+    if (typeof window !== 'undefined' && (window as any).skipTesting) {
+      return Promise.resolve();
+    }
+
     let promise: Promise<void> = Promise.resolve();
 
     for (let i = 0; i < stages.length; i++) {
