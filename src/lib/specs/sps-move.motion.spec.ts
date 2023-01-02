@@ -15,7 +15,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
   let block: StaticActor;
   let sr: ScrollRise;
 
-  console.log(Util.windowSizes());
+  Util.logWindowSizes();
 
   generateExamples([
     'should have a correct X, Y coords in changing X',
