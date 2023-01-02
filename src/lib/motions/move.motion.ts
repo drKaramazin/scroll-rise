@@ -44,6 +44,8 @@ export class MoveMotion extends Motion {
       const d = motionL / frame.length();
       const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos()));
 
+      console.log('x = ', x);
+
       element.style.left = `${x}px`;
     }
   }
