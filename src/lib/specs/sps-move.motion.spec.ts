@@ -5,7 +5,7 @@ import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
-import { TestMeasuringGrid } from './test-measuring-grid';
+// import { TestMeasuringGrid } from './test-measuring-grid';
 
 describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
@@ -30,9 +30,9 @@ describe('Sticky Platforms Scene: move motion test', function() {
     scene = new StickyPlatformScene(
       sceneElement,
       (w: number, h: number) => 5 * h,
-      {
-        // measuringGrid: TestMeasuringGrid,
-      },
+      // {
+      // measuringGrid: TestMeasuringGrid,
+      // },
     );
 
     sr = new ScrollRise(scene);
