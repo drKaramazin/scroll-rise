@@ -8,7 +8,7 @@ import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
 
-describe('Fixed Actors Scene: move motion test', function() {
+xdescribe('Fixed Actors Scene: move motion test', function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;

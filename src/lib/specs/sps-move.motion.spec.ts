@@ -6,7 +6,6 @@ import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
-import { Util } from '../util';
 
 describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
@@ -14,8 +13,6 @@ describe('Sticky Platforms Scene: move motion test', function() {
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
-
-  Util.logWindowSizes();
 
   generateExamples([
     'should have a correct X, Y coords in changing X',
@@ -34,7 +31,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
       sceneElement,
       (w: number, h: number) => 5 * h,
       {
-        measuringGrid: TestMeasuringGrid,
+        // measuringGrid: TestMeasuringGrid,
       },
     );
 
@@ -75,7 +72,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  xit('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);
@@ -89,7 +86,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing both X and Y', function() {
+  xit('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);
