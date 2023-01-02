@@ -1,4 +1,4 @@
-import { Actor } from '../actors/actor.model';
+import { Actor } from '../actors/actor';
 import { Util } from '../util';
 import { Scene, SceneOptions } from './scene';
 import { TimeFrame } from '../time-frame';

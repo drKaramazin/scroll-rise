@@ -1,4 +1,4 @@
-import { Actor } from './actor.model';
+import { Actor } from './actor';
 import { TimeFrame } from '../time-frame';
 import { Dimensions } from '../models/dimensions.model';
 import { SizeMotion } from '../motions/size.motion';

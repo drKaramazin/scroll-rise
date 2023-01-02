@@ -1,4 +1,4 @@
-import { Actor } from '../actors/actor.model';
+import { Actor } from '../actors/actor';
 import { Util } from '../util';
 import { TimeFrame } from '../time-frame';
 import { MeasuringGrid } from '../measuring-grid';

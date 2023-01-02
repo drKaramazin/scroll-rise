@@ -30,6 +30,7 @@ export class MoveMotion extends Motion {
   }
 
   renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
+    console.log('renderX');
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.clientWidth(), Util.clientHeight())}px`;
