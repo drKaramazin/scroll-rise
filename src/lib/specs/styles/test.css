@@ -1,7 +1,7 @@
 body, html {
     /* Begin: the page's height initialization to show scrollbars */
-    height: calc(100vh * 8);
-    min-height: calc(100vh * 8);
+    height: calc(100vh * 9);
+    min-height: calc(100vh * 9);
     /* End: the page's height initialization to show scrollbars */
 }
 
