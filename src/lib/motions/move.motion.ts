@@ -55,7 +55,7 @@ export class MoveMotion extends Motion {
     if (element) {
       const motionL = endY() - startY();
       const d = motionL / frame.length();
-      let y = Util.castToInt(startY() + d * (frame.getStartPos() + scrollPos));
+      let y = Util.castToInt(startY() + d * (scrollPos - frame.getStartPos()));
 
       const sceneInterceptor = scene.interceptY(scrollPos, frame, startY, endY);
       if (sceneInterceptor !== undefined) {

@@ -73,7 +73,7 @@ describe("Fixed Actors Scene: move motion test", function() {
     );
   });
 
-  xit('should have a correct X, Y coords in changing Y', function() {
+  it('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);
@@ -87,7 +87,7 @@ describe("Fixed Actors Scene: move motion test", function() {
     );
   });
 
-  xit('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);

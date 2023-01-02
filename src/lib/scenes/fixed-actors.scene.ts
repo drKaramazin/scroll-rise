@@ -6,6 +6,7 @@ import { TimeFrame } from '../time-frame';
 export class FixedActorsScene extends Scene<SceneOptions> {
 
   public override name = 'FixedActorsScene';
+  protected platformHeight = Util.clientHeight;
 
   override resizeHeight(): void {
     this.element.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
@@ -23,12 +24,11 @@ export class FixedActorsScene extends Scene<SceneOptions> {
 
   interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
     if (scrollPos < frame.getStartPos()) {
-      return this.elementY() + startY();
+      return this.elementY() < 0 ? startY() : this.elementY() + startY();
     }
-    const left = this.elementHeight() + this.elementY();
-    if (left < Util.clientHeight()) {
-      const d = Util.clientHeight() - left;
-      return endY() - d;
+    if (scrollPos > frame.getEndPos()) {
+      const top = this.elementHeight() + this.elementY();
+      return top < this.platformHeight() ? endY() - (this.platformHeight() - top) : endY();
     }
 
     return super.interceptY(scrollPos, frame, startY, endY);
