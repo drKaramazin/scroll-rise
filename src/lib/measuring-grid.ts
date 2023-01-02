@@ -1,10 +1,11 @@
-import { Color } from "./models/color.model";
+import { Color } from './models/color.model';
 import {
   HorizontalMeasuringGrid,
   MeasuringGridModel,
-  VerticalMeasuringGrid, VerticalMeasuringSubgrid
-} from "./models/measuring-grid.model";
-import { Util } from "./util";
+  VerticalMeasuringGrid,
+  VerticalMeasuringSubgrid,
+} from './models/measuring-grid.model';
+import { Util } from './util';
 
 export class MeasuringGrid {
 
@@ -29,7 +30,7 @@ export class MeasuringGrid {
     }
   }
 
-  protected appendToMeasuringGrid(element: HTMLElement) {
+  protected appendToMeasuringGrid(element: HTMLElement): void {
     this.elements.push(element);
     this.element.append(element);
   }
@@ -47,11 +48,11 @@ export class MeasuringGrid {
     return line;
   }
 
-  protected appendHorizontalGridLines(measuringGrid: HorizontalMeasuringGrid) {
+  protected appendHorizontalGridLines(measuringGrid: HorizontalMeasuringGrid): void {
     const gridHeight = measuringGrid.height(Util.clientWidth(), Util.clientHeight(), this.element.getBoundingClientRect().height);
     const gridCount = this.element.getBoundingClientRect().height / gridHeight;
 
-    let m = measuringGrid.label?.startWith || 0;
+    let m = measuringGrid.label?.startWith ?? 0;
     for (let i = 0; i <= gridCount; i++) {
       const top = i * gridHeight;
 
@@ -101,7 +102,7 @@ export class MeasuringGrid {
     return line;
   }
 
-  protected appendVerticalSubgridLined(left: number, gridWidth: number, subgrid: VerticalMeasuringSubgrid) {
+  protected appendVerticalSubgridLined(left: number, gridWidth: number, subgrid: VerticalMeasuringSubgrid): void {
     const subgridWidth = subgrid.width(gridWidth);
 
     let subgridLeft = left + subgridWidth;
@@ -111,7 +112,7 @@ export class MeasuringGrid {
     }
   }
 
-  protected appendVerticalGridLines(measuringGrid: VerticalMeasuringGrid) {
+  protected appendVerticalGridLines(measuringGrid: VerticalMeasuringGrid): void {
     const gridWidth = measuringGrid.width(Util.clientWidth(), Util.clientHeight());
 
     if (measuringGrid.subgrid?.width) {
@@ -129,12 +130,12 @@ export class MeasuringGrid {
     }
   }
 
-  protected clearMeasuringGrid() {
+  protected clearMeasuringGrid(): void {
     this.elements.forEach(element => element.remove());
     this.elements = [];
   }
 
-  public redrawMeasuringGrid() {
+  public redrawMeasuringGrid(): void {
     this.clearMeasuringGrid();
 
     if (this.grid.height) {

@@ -138,7 +138,7 @@ export class SizeFixture extends MotionFixture {
         coords: {
           x: this.changeWidth.stages()[index].size!.width,
           y: this.changeHeight.stages()[index].size!.height,
-        }
+        },
       }));
     },
   };

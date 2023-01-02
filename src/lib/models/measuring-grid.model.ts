@@ -1,4 +1,4 @@
-import { Color } from "./color.model";
+import { Color } from './color.model';
 
 export interface MeasuringSubgrid {
   width?: (gridWidth: number) => number;
@@ -11,13 +11,13 @@ export interface MeasuringGridModel {
   width?: (deviceWidth: number, deviceHeight: number) => number;
   height?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
   color: Color;
-  subgrid?: MeasuringSubgrid,
+  subgrid?: MeasuringSubgrid;
   label?: {
     startWith?: number;
     top: number;
     left: number;
     fontSize: string;
-  }
+  };
 }
 
 export type HorizontalMeasuringGrid = Required<Omit<MeasuringGridModel, 'width'>>;

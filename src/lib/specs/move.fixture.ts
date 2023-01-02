@@ -48,7 +48,7 @@ export abstract class MoveFixture extends MotionFixture {
           x: { value: 0 },
           y: { value: Util.innerHeight() + Util.innerHeight() / 2 },
         },
-      },{
+      }, {
         scrollTo: this.stages()[2],
         coords: {
           x: { value: 0 },
@@ -259,7 +259,7 @@ export abstract class MoveFixture extends MotionFixture {
         coords: {
           x: this.changeX.stages()[index].coords!.x,
           y: this.changeY.stages()[index].coords!.y,
-        }
+        },
       }));
     },
   };

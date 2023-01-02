@@ -1,6 +1,6 @@
 import { Actor } from '../actors/actor.model';
 import { TestStage } from './motion.fixture';
-import { DocsSpecsGlobalEnv } from "../../docs/spec-examples-generator/docs-specs-global-env";
+import { DocsSpecsGlobalEnv } from '../../docs/spec-examples-generator/docs-specs-global-env';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

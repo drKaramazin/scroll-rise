@@ -4,10 +4,10 @@ import { StaticActor } from '../actors/static.actor';
 import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
-import { generateExamples } from "./generate-examples";
-import { TestMeasuringGrid } from "./test-measuring-grid";
+import { generateExamples } from './generate-examples';
+import { TestMeasuringGrid } from './test-measuring-grid';
 
-describe("Sticky Platforms Scene: move motion test", function() {
+describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
@@ -32,7 +32,7 @@ describe("Sticky Platforms Scene: move motion test", function() {
       (w: number, h: number) => 5 * h,
       {
         measuringGrid: TestMeasuringGrid,
-      }
+      },
     );
 
     sr = new ScrollRise(scene);

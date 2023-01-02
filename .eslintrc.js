@@ -4,8 +4,14 @@ module.exports = {
     es6: true,
   },
   extends: 'standard-with-typescript',
-  overrides: [
-  ],
+  overrides: [{
+    files: ['*.ts'],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': ['error', {
+        allowExpressions: true,
+      }],
+    },
+  }],
   parserOptions: {
     project: './tsconfig.linter.json',
     ecmaVersion: 'latest',
@@ -19,9 +25,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     'comma-dangle': ['error', 'always-multiline'],
     '@typescript-eslint/comma-dangle': 'off',
-    '@typescript-eslint/explicit-function-return-type': ['error', {
-      allowExpressions: true,
-    }],
+    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-extraneous-class': ['error', { allowStaticOnly: true }],
     '@typescript-eslint/member-delimiter-style': ['error', {

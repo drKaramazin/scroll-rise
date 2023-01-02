@@ -5,9 +5,9 @@ import { MotionFixture } from './motion.fixture';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
-import { generateExamples } from "./generate-examples";
+import { generateExamples } from './generate-examples';
 
-xdescribe("Fixed Actors Scene: size motion test", function() {
+xdescribe('Fixed Actors Scene: size motion test', function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;

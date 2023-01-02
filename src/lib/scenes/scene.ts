@@ -1,12 +1,12 @@
 import { Actor } from '../actors/actor.model';
 import { Util } from '../util';
 import { TimeFrame } from '../time-frame';
-import { MeasuringGrid } from "../measuring-grid";
-import { MeasuringGridModel } from "../models/measuring-grid.model";
+import { MeasuringGrid } from '../measuring-grid';
+import { MeasuringGridModel } from '../models/measuring-grid.model';
 
 export interface SceneOptions {
   offset?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
-  measuringGrid?: MeasuringGridModel,
+  measuringGrid?: MeasuringGridModel;
 }
 
 export abstract class Scene<Options extends SceneOptions> {
@@ -52,7 +52,7 @@ export abstract class Scene<Options extends SceneOptions> {
     );
   }
 
-  initMeasuringGrid() {
+  initMeasuringGrid(): void {
     if (this.options?.measuringGrid) {
       this.grid = new MeasuringGrid(this.element, this.options.measuringGrid);
     }
@@ -78,7 +78,7 @@ export abstract class Scene<Options extends SceneOptions> {
     return undefined;
   }
 
-  public redrawMeasuringGrid() {
+  public redrawMeasuringGrid(): void {
     if (this.grid) {
       this.grid.redrawMeasuringGrid();
     }

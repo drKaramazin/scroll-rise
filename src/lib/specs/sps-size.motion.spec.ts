@@ -4,9 +4,9 @@ import { StaticActor } from '../actors/static.actor';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
-import { generateExamples } from "./generate-examples";
+import { generateExamples } from './generate-examples';
 
-xdescribe("Sticky Platforms Scene: size motion test", function() {
+xdescribe('Sticky Platforms Scene: size motion test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
