@@ -6,6 +6,7 @@ import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
+import { Util } from '../util';
 
 describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
@@ -13,6 +14,8 @@ describe('Sticky Platforms Scene: move motion test', function() {
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  console.log(Util.windowSizes());
 
   generateExamples([
     'should have a correct X, Y coords in changing X',
