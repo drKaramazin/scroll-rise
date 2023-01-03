@@ -4,13 +4,21 @@ import { StaticActor } from '../actors/static.actor';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
+import { generateExamples } from './generate-examples';
+import { TestMeasuringGrid } from './test-measuring-grid';
 
-xdescribe("Sticky Platforms Scene's size motion test", function() {
+describe('Sticky Platforms Scene: size motion test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have a correct size in changing width',
+    'should have a correct size in changing height',
+    'should have a correct size in changing width and height',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
@@ -21,7 +29,10 @@ xdescribe("Sticky Platforms Scene's size motion test", function() {
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => 4 * h,
+      (w: number, h: number) => 5 * h,
+      {
+        measuringGrid: TestMeasuringGrid,
+      },
     );
 
     sr = new ScrollRise(scene);

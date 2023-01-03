@@ -1,6 +1,6 @@
-import { Value } from '../value.model';
-import { Motion } from './motion.model';
-import { TimeFrame } from '../time-frame.model';
+import { Value } from '../models/value.model';
+import { Motion } from './motion';
+import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
 
 export interface ISizeMotion {

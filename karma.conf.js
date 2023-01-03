@@ -7,7 +7,7 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
       '**/*.ts',
-      { pattern: '../../docs/styles/reset.css', included: true, watched: false },
+      { pattern: '../docs/styles/reset.css', included: true, watched: false },
       { pattern: './specs/styles/test.css', included: true, watched: false },
     ],
     exclude: [],

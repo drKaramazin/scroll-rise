@@ -1,8 +1,8 @@
-import { Value } from '../value.model';
-import { Motion } from './motion.model';
-import { TimeFrame } from '../time-frame.model';
+import { Value } from '../models/value.model';
+import { Motion } from './motion';
+import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
-import { SceneModel } from '../scenes/scene.model';
+import { Scene } from '../scenes/scene';
 
 export interface IMoveMotion {
   startX: Value;
@@ -48,14 +48,14 @@ export class MoveMotion extends Motion {
     }
   }
 
-  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
+  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {
     const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
     const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
 
     if (element) {
       const motionL = endY() - startY();
       const d = motionL / frame.length();
-      let y = Util.castToInt(startY() + d * (frame.getStartPos() + scrollPos));
+      let y = Util.castToInt(startY() + d * (scrollPos - frame.getStartPos()));
 
       const sceneInterceptor = scene.interceptY(scrollPos, frame, startY, endY);
       if (sceneInterceptor !== undefined) {
@@ -66,7 +66,7 @@ export class MoveMotion extends Motion {
     }
   }
 
-  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: SceneModel<any>): void {
+  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {
     this.renderX(scrollPosOnFrame, frame, element);
     this.renderY(scrollPosOnFrame, frame, element, scene);
   }

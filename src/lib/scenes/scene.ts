@@ -1,12 +1,15 @@
-import { Actor } from '../actors/actor.model';
+import { Actor } from '../actors/actor';
 import { Util } from '../util';
-import { TimeFrame } from '../time-frame.model';
+import { TimeFrame } from '../time-frame';
+import { MeasuringGrid } from '../measuring-grid';
+import { MeasuringGridModel } from '../models/measuring-grid.model';
 
 export interface SceneOptions {
   offset?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
+  measuringGrid?: MeasuringGridModel;
 }
 
-export abstract class SceneModel<Options extends SceneOptions> {
+export abstract class Scene<Options extends SceneOptions> {
 
   protected _actors: Actor[] = [];
   public abstract name: string;
@@ -14,13 +17,18 @@ export abstract class SceneModel<Options extends SceneOptions> {
   protected abstract init(): void;
   public abstract resizeHeight(): void;
 
+  protected grid: MeasuringGrid;
+
   constructor(
-    protected el: HTMLElement,
+    protected element: HTMLElement,
     protected height: (deviceWidth: number, deviceHeight: number) => number,
     protected options?: Options,
   ) {
     this.setDefaults();
     this.init();
+    this.resizeHeight();
+    this.initMeasuringGrid();
+    this.redrawMeasuringGrid();
   }
 
   protected setDefaults(): void {
@@ -44,8 +52,14 @@ export abstract class SceneModel<Options extends SceneOptions> {
     );
   }
 
+  initMeasuringGrid(): void {
+    if (this.options?.measuringGrid) {
+      this.grid = new MeasuringGrid(this.element, this.options.measuringGrid);
+    }
+  }
+
   elementY(): number {
-    return this.el.getBoundingClientRect().y;
+    return this.element.getBoundingClientRect().y;
   }
 
   elementHeight(): number {
@@ -62,6 +76,12 @@ export abstract class SceneModel<Options extends SceneOptions> {
 
   public interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
     return undefined;
+  }
+
+  public redrawMeasuringGrid(): void {
+    if (this.grid) {
+      this.grid.redrawMeasuringGrid();
+    }
   }
 
 }

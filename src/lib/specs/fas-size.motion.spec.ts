@@ -5,13 +5,21 @@ import { MotionFixture } from './motion.fixture';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
+import { generateExamples } from './generate-examples';
+import { TestMeasuringGrid } from './test-measuring-grid';
 
-xdescribe("Fixed Actors Scene's size motion test", function() {
+describe('Fixed Actors Scene: size motion test', function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have a correct size in changing width',
+    'should have a correct size in changing height',
+    'should have a correct size in changing width and height',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
@@ -22,7 +30,10 @@ xdescribe("Fixed Actors Scene's size motion test", function() {
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => 4 * h,
+      (w: number, h: number) => 5 * h,
+      {
+        measuringGrid: TestMeasuringGrid,
+      },
     );
 
     sr = new ScrollRise(scene);

@@ -1,5 +1,6 @@
-import { Actor } from '../actors/actor.model';
-import { MotionFixture, TestStage } from './motion.fixture';
+import { Actor } from '../actors/actor';
+import { TestStage } from './motion.fixture';
+import { DocsSpecsGlobalEnv } from '../../docs/spec-examples-generator/docs-specs-global-env';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -21,7 +22,7 @@ export interface StageValue {
 }
 
 export interface ChangeStage {
-  scrollTo?: TestStage;
+  scrollTo: TestStage;
   coords?: {
     x: StageValue;
     y: StageValue;
@@ -35,6 +36,10 @@ export interface ChangeStage {
 export class TestTools {
 
   static testGoingStages(block: Actor, blockElement: HTMLElement, stages: ChangeStage[]): Promise<void> {
+    if (typeof window !== 'undefined' && (window as DocsSpecsGlobalEnv).skipTesting) {
+      return Promise.resolve();
+    }
+
     let promise: Promise<void> = Promise.resolve();
 
     for (let i = 0; i < stages.length; i++) {
@@ -93,12 +98,8 @@ export class TestTools {
             }
             resolve();
           };
-          if (stage.scrollTo) {
-            window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
-          } else {
-            const scrollTo = MotionFixture.stages()[i];
-            window.scrollTo(scrollTo.x, scrollTo.y);
-          }
+
+          window.scrollTo(stage.scrollTo.x, stage.scrollTo.y);
         });
       });
     }

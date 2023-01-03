@@ -1,5 +1,5 @@
-import { TimeFrame } from '../time-frame.model';
-import { SceneModel } from '../scenes/scene.model';
+import { TimeFrame } from '../time-frame';
+import { Scene } from '../scenes/scene';
 
 export abstract class Motion {
 
@@ -9,7 +9,7 @@ export abstract class Motion {
     scrollPosForFrame: number,
     frame: TimeFrame,
     element: HTMLElement,
-    scene: SceneModel<any>,
+    scene: Scene<any>,
   ): void;
 
 }

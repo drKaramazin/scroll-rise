@@ -4,13 +4,21 @@ import { StaticActor } from '../actors/static.actor';
 import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';
+import { generateExamples } from './generate-examples';
+import { TestMeasuringGrid } from './test-measuring-grid';
 
-describe("Sticky Platforms Scene's move motion test", function() {
+describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have a correct X, Y coords in changing X',
+    'should have a correct X, Y coords in changing Y',
+    'should have a correct X, Y coords in changing both X and Y',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
@@ -21,7 +29,10 @@ describe("Sticky Platforms Scene's move motion test", function() {
 
     scene = new StickyPlatformScene(
       sceneElement,
-      (w: number, h: number) => 4 * h,
+      (w: number, h: number) => 5 * h,
+      {
+        measuringGrid: TestMeasuringGrid,
+      },
     );
 
     sr = new ScrollRise(scene);
@@ -47,7 +58,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
     expect(sr).toBeTruthy();
   });
 
-  xit('should have a correct X, Y coords in changing X', function() {
+  it('should have a correct X, Y coords in changing X', function() {
     block.addFrames([
       MoveFixture.changeX.timeFrame(),
     ]);
@@ -75,7 +86,7 @@ describe("Sticky Platforms Scene's move motion test", function() {
     );
   });
 
-  xit('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);

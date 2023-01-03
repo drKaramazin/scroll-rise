@@ -1,4 +1,4 @@
-import { Motion } from './motions/motion.model';
+import { Motion } from './motions/motion';
 import { Util } from './util';
 
 export class TimeFrame {

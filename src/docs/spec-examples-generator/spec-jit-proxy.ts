@@ -1,11 +1,19 @@
-export function runTest(targetExpectation: string) {
+import { DocsSpecsGlobalEnv } from "./docs-specs-global-env";
 
-  window.describe = function (description: string, specDefinitions: () => void): void {
+export function runTest(targetDescription: string, targetExpectation: string) {
+
+  (window as DocsSpecsGlobalEnv).skipTesting = true;
+
+  window.describe = window.xdescribe = function (description: string, specDefinitions: () => void): void {
 
     window.expect = function () {
       return {
+        toBeTruthy: (val: any) => {},
         withContext: () => {
-          toEqual: (val: any) => {}
+          return {
+            toEqual: (val: any) => {},
+            approximatelyEqualTo: (val: any) => {},
+          };
         },
       } as any;
     }
@@ -27,19 +35,14 @@ export function runTest(targetExpectation: string) {
     window.afterEach = function (action: jasmine.ImplementationCallback) {}
 
     function surroundedIt(expectation: string, assertion?: jasmine.ImplementationCallback) {
-      if (expectation === targetExpectation) {
+      if (description === targetDescription && expectation === targetExpectation) {
         if (assertion) {
           const result = assertion((() => {}) as any);
-          console.log(result);
         }
       }
     }
 
-    window.it = function (expectation: string, assertion?: jasmine.ImplementationCallback) {
-      surroundedIt(expectation, assertion);
-    }
-
-    window.xit = function (expectation: string, assertion?: jasmine.ImplementationCallback) {
+    window.it = window.xit = function (expectation: string, assertion?: jasmine.ImplementationCallback) {
       surroundedIt(expectation, assertion);
     }
 

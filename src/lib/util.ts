@@ -1,4 +1,4 @@
-import { WindowSizes } from './window-sizes';
+import { WindowSizesModel } from './models/window-sizes.model';
 
 export class Util {
 
@@ -45,7 +45,7 @@ export class Util {
     );
   }
 
-  static windowSizes(): WindowSizes {
+  static windowSizes(): WindowSizesModel {
     return {
       clientWidth: this.clientWidth(),
       clientHeight: this.clientHeight(),
@@ -57,13 +57,21 @@ export class Util {
 
   static logWindowSizes(): void {
     console.log('Window size:');
-    console.log('document.documentElement.clientWidth, clientHeight', document.documentElement.clientWidth, document.documentElement.clientHeight);
-    console.log('document.documentElement.scrollWidth, scrollHeight', document.documentElement.scrollWidth, document.documentElement.scrollHeight);
-    console.log('document.body.scrollWidth, scrollHeight', document.body.scrollWidth, document.body.scrollHeight);
-    console.log('document.body.offsetWidth, offsetHeight', document.body.offsetWidth, document.body.offsetHeight);
-    console.log('document.documentElement.offsetWidth, offsetHeight', document.documentElement.offsetWidth, document.documentElement.offsetHeight);
-    console.log('document.body.clientWidth, clientHeight', document.body.clientWidth, document.body.clientHeight);
-    console.log('window.innerWidth, innerHeight', window.innerWidth, window.innerHeight);
+    if (typeof document !== 'undefined') {
+      console.log('document.documentElement.clientWidth, clientHeight', document.documentElement.clientWidth, document.documentElement.clientHeight);
+      console.log('document.documentElement.scrollWidth, scrollHeight', document.documentElement.scrollWidth, document.documentElement.scrollHeight);
+      console.log('document.body.scrollWidth, scrollHeight', document.body.scrollWidth, document.body.scrollHeight);
+      console.log('document.body.offsetWidth, offsetHeight', document.body.offsetWidth, document.body.offsetHeight);
+      console.log('document.documentElement.offsetWidth, offsetHeight', document.documentElement.offsetWidth, document.documentElement.offsetHeight);
+      console.log('document.body.clientWidth, clientHeight', document.body.clientWidth, document.body.clientHeight);
+    } else {
+      console.log('document is not defined');
+    }
+    if (typeof window !== 'undefined') {
+      console.log('window.innerWidth, innerHeight', window.innerWidth, window.innerHeight);
+    } else {
+      console.log('window is not defined');
+    }
   }
 
 }
