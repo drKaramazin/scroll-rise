@@ -40,25 +40,6 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
     this.platform.style.width = '100%';
 
     this.element.appendChild(this.platform);
-    console.log('scene',
-      this.element.getBoundingClientRect().left,
-      this.element.getBoundingClientRect().top,
-      this.element.getBoundingClientRect().width,
-      this.element.getBoundingClientRect().height,
-    );
-
-    if (typeof document !== 'undefined') {
-      const testBody = document.getElementById('test-body');
-      console.log('test-body',
-        testBody!.getBoundingClientRect().left,
-        testBody!.getBoundingClientRect().top,
-        testBody!.getBoundingClientRect().width,
-        testBody!.getBoundingClientRect().height,
-      );
-
-      const elem = document.elementFromPoint(2, 2);
-      console.log(elem, elem?.tagName);
-    }
   }
 
   override add(actor: Actor): void {
