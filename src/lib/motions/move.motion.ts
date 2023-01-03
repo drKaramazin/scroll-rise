@@ -14,6 +14,7 @@ export interface IMoveMotion {
 export class MoveMotion extends Motion {
 
   override name = 'MoveMotion';
+  i = 0;
 
   startX: Value;
   endX: Value;
@@ -30,7 +31,8 @@ export class MoveMotion extends Motion {
   }
 
   renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    console.log('renderX');
+    console.log('renderX', this.i);
+    console.log('left, top = ', element.getBoundingClientRect().left, element.getBoundingClientRect().top);
     if (element) {
       if (scrollPos < frame.getStartPos()) {
         element.style.left = `${this.startX(Util.clientWidth(), Util.clientHeight())}px`;
@@ -70,8 +72,10 @@ export class MoveMotion extends Motion {
   }
 
   make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {
+    console.log('make', this.i);
     this.renderX(scrollPosOnFrame, frame, element);
     this.renderY(scrollPosOnFrame, frame, element, scene);
+    this.i++;
   }
 
 }
