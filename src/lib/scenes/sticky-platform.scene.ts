@@ -40,6 +40,7 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
     this.platform.style.width = '100%';
 
     this.element.appendChild(this.platform);
+    console.log('scene', this.element.getBoundingClientRect());
   }
 
   override add(actor: Actor): void {
