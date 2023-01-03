@@ -6,8 +6,9 @@ import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
+import { TestMeasuringGrid } from './test-measuring-grid';
 
-xdescribe('Fixed Actors Scene: size motion test', function() {
+describe('Fixed Actors Scene: size motion test', function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;
@@ -29,7 +30,10 @@ xdescribe('Fixed Actors Scene: size motion test', function() {
 
     scene = new FixedActorsScene(
       sceneElement!,
-      (w: number, h: number) => 4 * h,
+      (w: number, h: number) => 5 * h,
+      {
+        measuringGrid: TestMeasuringGrid,
+      },
     );
 
     sr = new ScrollRise(scene);
