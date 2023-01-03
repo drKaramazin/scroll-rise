@@ -46,6 +46,16 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
       this.element.getBoundingClientRect().width,
       this.element.getBoundingClientRect().height,
     );
+
+    if (typeof document !== 'undefined') {
+      const testBody = document.getElementById('test-body');
+      console.log('test-body',
+        testBody!.getBoundingClientRect().left,
+        testBody!.getBoundingClientRect().top,
+        testBody!.getBoundingClientRect().width,
+        testBody!.getBoundingClientRect().height,
+      );
+    }
   }
 
   override add(actor: Actor): void {
