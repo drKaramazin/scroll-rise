@@ -46,7 +46,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[1],
         coords: {
           x: { value: 0 },
-          y: { value: Util.innerHeight() + Util.innerHeight() / 2 },
+          y: { value: Util.innerHeight() + Util.innerHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[2],
@@ -58,7 +58,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[3],
         coords: {
           x: { value: 0 },
-          y: { value: Util.innerHeight() / 2 },
+          y: { value: Util.innerHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[4],
@@ -81,7 +81,7 @@ export abstract class MoveFixture extends MotionFixture {
       }, {
         scrollTo: this.stages()[7],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
           y: { value: 0 },
         },
       }, {
@@ -118,7 +118,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[13],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.clientHeight() / 2 },
+          y: { value: -Util.clientHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[14],
@@ -155,7 +155,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[1],
         coords: {
           x: { value: 0 },
-          y: { value: Util.innerHeight() + Util.innerHeight() / 2 },
+          y: { value: Util.innerHeight() + Util.innerHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[2],
@@ -167,7 +167,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[3],
         coords: {
           x: { value: 0 },
-          y: { value: Util.innerHeight() / 2 },
+          y: { value: Util.innerHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[4],
@@ -191,19 +191,19 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[7],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[8],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2) },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[9],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[10],
@@ -227,7 +227,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[13],
         coords: {
           x: { value: 0 },
-          y: { value: Util.clientHeight() / 2 - MoveFixture.block.height },
+          y: { value: Util.clientHeight() / 2 - MoveFixture.block.height, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[14],
@@ -239,7 +239,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[15],
         coords: {
           x: { value: 0 },
-          y: { value: -(Util.innerHeight() / 2) - MoveFixture.block.height },
+          y: { value: -(Util.innerHeight() / 2) - MoveFixture.block.height, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[16],
