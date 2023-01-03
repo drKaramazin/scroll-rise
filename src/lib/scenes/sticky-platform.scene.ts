@@ -55,6 +55,9 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
         testBody!.getBoundingClientRect().width,
         testBody!.getBoundingClientRect().height,
       );
+
+      const elem = document.elementFromPoint(2, 2);
+      console.log(elem, elem?.tagName);
     }
   }
 
