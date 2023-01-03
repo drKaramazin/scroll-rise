@@ -90,7 +90,7 @@ export class ScrollRise {
     }
   }
 
-  static version() {
+  static version(): string {
     return VERSION;
   }
 
