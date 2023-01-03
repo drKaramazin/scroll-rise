@@ -19,12 +19,12 @@ body, html {
     background: #273742;
 }
 
-::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px;
-}
+/*::-webkit-scrollbar {*/
+/*    -webkit-appearance: none;*/
+/*    width: 7px;*/
+/*}*/
 
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-}
+/*::-webkit-scrollbar-thumb {*/
+/*    background-color: rgba(0, 0, 0, .5);*/
+/*    box-shadow: 0 0 1px rgba(255, 255, 255, .5);*/
+/*}*/
