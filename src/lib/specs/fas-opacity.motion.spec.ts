@@ -7,6 +7,7 @@ import { generateExamples } from './generate-examples';
 import { FixedActorsScene } from '../scenes/fixed-actors.scene';
 import { TimeFrame } from '../time-frame';
 import { MoveMotion } from '../motions/move.motion';
+import { customMatchers } from './custom-matchers';
 
 describe('Fixed Actors Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
@@ -20,6 +21,8 @@ describe('Fixed Actors Scene: opacity motion test', function() {
   ]);
 
   beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+
     document.body.insertAdjacentHTML('afterbegin', OpacityFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;

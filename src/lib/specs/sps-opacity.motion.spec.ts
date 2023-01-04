@@ -5,6 +5,7 @@ import { TestMeasuringGrid } from './test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
 import { TestTools } from './test-tools';
 import { generateExamples } from './generate-examples';
+import { customMatchers } from './custom-matchers';
 
 describe('Sticky Platforms Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
@@ -18,6 +19,8 @@ describe('Sticky Platforms Scene: opacity motion test', function() {
   ]);
 
   beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+
     document.body.insertAdjacentHTML('afterbegin', OpacityFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
