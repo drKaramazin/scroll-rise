@@ -8,8 +8,10 @@ import {
   Value,
 } from "../../../lib/index";
 import {Scene} from "../../../lib/scenes/scene";
-
-declare const THREE: any;
+// @ts-ignore
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
+// @ts-ignore
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/controls/OrbitControls.js';
 
 // world mesh
 let world: any;
@@ -102,7 +104,7 @@ function initializeThree() {
   document.getElementById('earth')!.appendChild(renderer.domElement)
 
   // Initialize controls
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableZoom = false;
   controls.enableRotate = false;
 
