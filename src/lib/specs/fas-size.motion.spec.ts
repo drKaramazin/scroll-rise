@@ -7,6 +7,8 @@ import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
+import { TimeFrame } from '../time-frame';
+import { MoveMotion } from '../motions/move.motion';
 
 describe('Fixed Actors Scene: size motion test', function() {
   let sceneElement: HTMLElement;
@@ -42,8 +44,17 @@ describe('Fixed Actors Scene: size motion test', function() {
 
     block = new StaticActor(blockElement!, {
       initOpacity: false,
-      initPosition: false,
     });
+
+    // To show an actor in docs
+    block.addFrames([
+      new TimeFrame(new MoveMotion({
+        startX: () => 0,
+        endX: () => 0,
+        startY: () => 0,
+        endY: () => 0,
+      }), () => 0, () => 0),
+    ]);
   });
 
   afterEach(function() {
