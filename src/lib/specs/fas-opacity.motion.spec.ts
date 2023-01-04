@@ -1,14 +1,16 @@
-import { StickyPlatformScene } from '../scenes/sticky-platform.scene';
 import { StaticActor } from '../actors/static.actor';
 import { ScrollRise } from '../scroll-rise';
 import { TestMeasuringGrid } from './test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
 import { TestTools } from './test-tools';
 import { generateExamples } from './generate-examples';
+import { FixedActorsScene } from '../scenes/fixed-actors.scene';
+import { TimeFrame } from '../time-frame';
+import { MoveMotion } from '../motions/move.motion';
 
-describe('Sticky Platforms Scene: opacity motion test', function() {
+describe('Fixed Actors Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
-  let scene: StickyPlatformScene;
+  let scene: FixedActorsScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
@@ -22,7 +24,7 @@ describe('Sticky Platforms Scene: opacity motion test', function() {
 
     sceneElement = document.getElementById('scene')!;
 
-    scene = new StickyPlatformScene(
+    scene = new FixedActorsScene(
       sceneElement,
       (w: number, h: number) => 5 * h,
       {
@@ -35,9 +37,18 @@ describe('Sticky Platforms Scene: opacity motion test', function() {
     blockElement = document.getElementById('block')!;
 
     block = new StaticActor(blockElement, {
-      initPosition: false,
       initSize: false,
     });
+
+    // To show an actor in docs
+    block.addFrames([
+      new TimeFrame(new MoveMotion({
+        startX: () => 0,
+        endX: () => 0,
+        startY: () => 0,
+        endY: () => 0,
+      }), () => 0, () => 0),
+    ]);
   });
 
   afterEach(function() {
