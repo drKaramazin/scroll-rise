@@ -31,6 +31,7 @@ export interface ChangeStage {
     width: StageValue;
     height: StageValue;
   };
+  opacity?: StageValue;
 }
 
 export class TestTools {
@@ -96,6 +97,21 @@ export class TestTools {
                   .toEqual(stage.size.height.value);
               }
             }
+
+            if (stage.opacity) {
+              const context = stage.opacity.withContext ? stage.opacity.withContext(i) : DefaultContextFn(i);
+              const actualOpacity = parseFloat(window.getComputedStyle(blockElement).getPropertyValue('opacity'));
+              if (stage.opacity.margin) {
+                expect(actualOpacity)
+                  .withContext(context)
+                  .approximatelyEqualTo(stage.opacity.value, stage.opacity.margin);
+              } else {
+                expect(actualOpacity)
+                  .withContext(context)
+                  .toEqual(stage.opacity.value);
+              }
+            }
+
             resolve();
           };
 
