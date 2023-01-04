@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.json",
+  "rootDir": ".",
+  "compilerOptions": {
+    "module": "CommonJS",
+  },
+  "include": [
+    "./specs/spec-aot-proxy.ts"
+  ]
+}

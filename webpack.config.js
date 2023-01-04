@@ -1,20 +1,22 @@
 const path = require('path');
 
 const esConfig = {
-  entry: './src/index.ts',
+  entry: './src/lib/index.ts',
   devtool: 'source-map',
   module: {
     rules: [{
       use: 'ts-loader',
+      test: /\.ts?$/,
       exclude: /node_modules/,
     }],
   },
   resolve: {
-    extensions: ['.ts'],
+    extensions: ['.ts', '.js'],
   },
   output: {
     filename: 'index.es.js',
     path: path.resolve(__dirname, 'lib'),
+    clean: true,
     library: {
       type: 'module',
     },
@@ -40,12 +42,4 @@ const umdConfig = {
   },
 };
 
-const docsConfig = {
-  ...esConfig,
-  output: {
-    ...esConfig.output,
-    path: path.resolve(__dirname, 'docs/scroll-rise'),
-  },
-};
-
-module.exports = [esConfig, umdConfig, docsConfig];
+module.exports = [esConfig, umdConfig];

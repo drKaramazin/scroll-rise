@@ -3,12 +3,12 @@
 
 module.exports = function(config) {
   config.set({
-    basePath: 'src',
+    basePath: 'src/lib',
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
       '**/*.ts',
       { pattern: '../docs/styles/reset.css', included: true, watched: false },
-      { pattern: '../styles/test.css', included: true, watched: false },
+      { pattern: './specs/styles/test.css', included: true, watched: false },
     ],
     exclude: [],
     preprocessors: {
