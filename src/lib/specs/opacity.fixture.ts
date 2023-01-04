@@ -38,13 +38,13 @@ export class OpacityFixture extends MotionFixture {
         opacity: { value: 1 },
       }, {
         scrollTo: this.stages()[7],
-        opacity: { value: 1 / 4 * 3 },
+        opacity: { value: 1 / 4 * 3, margin: 0.05 },
       }, {
         scrollTo: this.stages()[8],
-        opacity: { value: 1 / 2 },
+        opacity: { value: 1 / 2, margin: 0.05 },
       }, {
         scrollTo: this.stages()[9],
-        opacity: { value: 1 / 4 },
+        opacity: { value: 1 / 4, margin: 0.05 },
       }, {
         scrollTo: this.stages()[10],
         opacity: { value: 0 },
