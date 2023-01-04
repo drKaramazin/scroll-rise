@@ -25,3 +25,7 @@
     text-align: center;
     font-size: 14px;
 }
+
+.version-box {
+    font-style: italic;
+}

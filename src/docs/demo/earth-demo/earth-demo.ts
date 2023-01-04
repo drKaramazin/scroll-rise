@@ -4,7 +4,8 @@ import {
   StickyPlatformScene,
   RefActor,
   Motion,
-  Util, Value,
+  Util,
+  Value,
 } from "../../../lib/index";
 import {Scene} from "../../../lib/scenes/scene";
 // @ts-ignore
