@@ -3,7 +3,7 @@ The typescript library for scroll animation.
 
 [![NPM](https://nodei.co/npm/scroll-rise.png)](https://nodei.co/npm/scroll-rise/)
 
-## Demo
+## Examples
 
 [https://drkaramazin.github.io/scroll-rise/](https://drkaramazin.github.io/scroll-rise/)
 
