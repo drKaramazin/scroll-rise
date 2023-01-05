@@ -105,7 +105,7 @@ module.exports = {
     }],
   },
   output: {
-    ...esConfig.output,
+    clean: true,
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'docs'),
   },
