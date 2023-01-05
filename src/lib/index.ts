@@ -18,3 +18,5 @@ export { MoveMotion } from './motions/move.motion';
 export { SizeMotion } from './motions/size.motion';
 export { OpacityMotion } from './motions/opacity.motion';
 export { BoundMotion, BoundValue } from './motions/bound.motion';
+
+export { MeasuringGridModel } from './models/measuring-grid.model';

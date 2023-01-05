@@ -18,7 +18,6 @@ const esConfig = {
   output: {
     filename: 'index.es.js',
     path: path.resolve(__dirname, 'lib'),
-    clean: true,
     library: {
       type: 'module',
     },
