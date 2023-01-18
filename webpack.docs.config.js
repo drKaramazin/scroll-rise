@@ -8,24 +8,29 @@ const esConfig = configs[0];
 
 const pages = [
   {
+    name: '4-seasons-example',
+    template: 'examples/4-seasons-example/4-seasons-example.html',
+    ts: 'examples/4-seasons-example/4-seasons-example.ts',
+  },
+  {
     name: 'earth-demo',
-    template: 'demo/earth-demo/earth-demo.html',
-    ts: 'demo/earth-demo/earth-demo.ts',
+    template: 'examples/earth-demo/earth-demo.html',
+    ts: 'examples/earth-demo/earth-demo.ts',
   },
   {
     name: 'sps-simple-demo',
-    template: 'demo/sps-simple-demo/sps-simple-demo.html',
-    ts: 'demo/sps-simple-demo/sps-simple-demo.ts',
+    template: 'examples/sps-simple-demo/sps-simple-demo.html',
+    ts: 'examples/sps-simple-demo/sps-simple-demo.ts',
   },
   {
     name: 'fixed-actors-scene-demo',
-    template: 'demo/fixed-actors-scene-demo/fixed-actors-scene-demo.html',
-    ts: 'demo/fixed-actors-scene-demo/fixed-actors-scene-demo.ts',
+    template: 'examples/fixed-actors-scene-demo/fixed-actors-scene-demo.html',
+    ts: 'examples/fixed-actors-scene-demo/fixed-actors-scene-demo.ts',
   },
   {
     name: 'sticky-platform-scene-demo',
-    template: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.html',
-    ts: 'demo/sticky-platform-scene-demo/sticky-platform-scene-demo.ts',
+    template: 'examples/sticky-platform-scene-demo/sticky-platform-scene-demo.html',
+    ts: 'examples/sticky-platform-scene-demo/sticky-platform-scene-demo.ts',
   },
 ];
 
