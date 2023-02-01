@@ -4,10 +4,6 @@ html, body {
     background: #243138;
 }
 
-/*#picture-back {*/
-/*    background: linear-gradient(0deg, rgba(222, 243, 212, 1) 35%, rgba(238, 237, 176, 1) 100%);*/
-/*}*/
-
 #path289 {
     fill: url(#mountain-gradient-1);
 }
