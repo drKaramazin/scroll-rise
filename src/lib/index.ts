@@ -6,6 +6,7 @@ export { Util } from './util';
 
 export { StickyPlatformScene } from './scenes/sticky-platform.scene';
 export { FixedActorsScene } from './scenes/fixed-actors.scene';
+export { Scene } from './scenes/scene';
 export { SceneOptions } from './scenes/scene';
 
 export { TimeFrame } from './time-frame';
