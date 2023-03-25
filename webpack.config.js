@@ -1,19 +1,28 @@
 const webpack = require('webpack');
 const path = require('path');
 const packageFile = require('./package.json');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const esConfig = {
   entry: './src/lib/index.ts',
   devtool: 'source-map',
   module: {
     rules: [{
-      use: 'ts-loader',
+      use: [{
+        loader: 'ts-loader',
+        options: {
+          configFile: 'tsconfig.json',
+        },
+      }],
       test: /\.ts?$/,
       exclude: /node_modules/,
     }],
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    plugins: [
+      new TsconfigPathsPlugin(),
+    ],
   },
   output: {
     filename: 'index.es.js',

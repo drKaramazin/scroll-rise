@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./lib/",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -14,10 +15,13 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@lib/*": ["./src/lib/*"]
+    }
   },
   "include": [
-    "src/lib/**/*"
+    "./src/lib/**/*"
   ],
   "exclude": [
     "node_modules",
