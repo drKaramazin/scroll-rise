@@ -16,6 +16,7 @@ module.exports = function(config) {
     },
     karmaTypescriptConfig: {
       tsconfig: '../../tsconfig.spec.json',
+      exclude: ['node_modules'],
       bundlerOptions: {
         transforms: [
           require('karma-typescript-es6-transform')({

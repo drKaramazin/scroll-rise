@@ -11,7 +11,7 @@ const esConfig = {
       use: [{
         loader: 'ts-loader',
         options: {
-          configFile: 'tsconfig.json',
+          configFile: 'tsconfig.lib.json',
         },
       }],
       test: /\.ts?$/,
@@ -21,7 +21,7 @@ const esConfig = {
   resolve: {
     extensions: ['.ts', '.js'],
     plugins: [
-      new TsconfigPathsPlugin(),
+      new TsconfigPathsPlugin({ configFile: 'tsconfig.lib.json' }),
     ],
   },
   output: {

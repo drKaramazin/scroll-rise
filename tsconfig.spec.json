@@ -2,13 +2,18 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./lib-spec/",
+    "module": "CommonJS",
+    "target": "ES5",
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "@lib/*": ["./src/lib/*"]
+    }
   },
   "include": [
-    "src/lib/**/*"
+    "./src/lib/**/*"
   ],
   "exclude": [
     "node_modules",

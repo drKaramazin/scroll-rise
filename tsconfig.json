@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./lib/",
+    "baseUrl": "./",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es2015",
+    "module": "ES2015",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "ES5",
     "lib": ["es6", "dom", "es2017"],
     "typeRoots": [
       "node_modules/@types"
@@ -19,13 +18,5 @@
     "paths": {
       "@lib/*": ["./src/lib/*"]
     }
-  },
-  "include": [
-    "./src/lib/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "src/lib/specs"
-  ]
+  }
 }

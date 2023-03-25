@@ -130,7 +130,7 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[15],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() / 2 - Util.clientHeight() },
+          y: { value: -Util.innerHeight() / 2 - Util.clientHeight(), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[16],
