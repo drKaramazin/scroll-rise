@@ -1,5 +1,5 @@
-import { Util } from '@lib/util';
-import { Scene, SceneOptions } from '@lib/scenes/scene';
+import { Util } from './util';
+import { Scene, SceneOptions } from './scenes/scene';
 
 declare const VERSION: string;
 

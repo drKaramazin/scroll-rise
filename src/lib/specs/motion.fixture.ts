@@ -1,4 +1,4 @@
-import { Util } from '@lib/util';
+import { Util } from '../util';
 
 export interface TestStage {
   x: number;

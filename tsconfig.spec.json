@@ -8,9 +8,6 @@
       "jasmine",
       "node"
     ],
-    "paths": {
-      "@lib/*": ["./src/lib/*"]
-    }
   },
   "include": [
     "./src/lib/**/*"

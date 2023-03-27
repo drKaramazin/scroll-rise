@@ -15,8 +15,5 @@
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": true,
-    "paths": {
-      "@lib/*": ["./src/lib/*"]
-    }
   }
 }

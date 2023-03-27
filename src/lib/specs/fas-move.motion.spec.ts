@@ -1,6 +1,6 @@
-import { StaticActor } from '@lib/actors/static.actor';
-import { ScrollRise } from '@lib/scroll-rise';
-import { FixedActorsScene } from '@lib/scenes/fixed-actors.scene';
+import { StaticActor } from '../actors/static.actor';
+import { ScrollRise } from '../scroll-rise';
+import { FixedActorsScene } from '../scenes/fixed-actors.scene';
 import { MotionFixture } from './motion.fixture';
 import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
