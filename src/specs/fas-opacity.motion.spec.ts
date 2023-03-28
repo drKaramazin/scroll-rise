@@ -1,12 +1,12 @@
-import { StaticActor } from '../actors/static.actor';
-import { ScrollRise } from '../scroll-rise';
+import { StaticActor } from '../lib/actors/static.actor';
+import { ScrollRise } from '../lib/scroll-rise';
 import { TestMeasuringGrid } from './test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
 import { TestTools } from './test-tools';
 import { generateExamples } from './generate-examples';
-import { FixedActorsScene } from '../scenes/fixed-actors.scene';
-import { TimeFrame } from '../time-frame';
-import { MoveMotion } from '../motions/move.motion';
+import { FixedActorsScene } from '../lib/scenes/fixed-actors.scene';
+import { TimeFrame } from '../lib/time-frame';
+import { MoveMotion } from '../lib/motions/move.motion';
 import { customMatchers } from './custom-matchers';
 
 describe('Fixed Actors Scene: opacity motion test', function() {

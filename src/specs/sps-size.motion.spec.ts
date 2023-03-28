@@ -1,18 +1,15 @@
-import { FixedActorsScene } from '../scenes/fixed-actors.scene';
-import { StaticActor } from '../actors/static.actor';
-import { ScrollRise } from '../scroll-rise';
-import { MotionFixture } from './motion.fixture';
+import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
+import { ScrollRise } from '../lib/scroll-rise';
+import { StaticActor } from '../lib/actors/static.actor';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
-import { TimeFrame } from '../time-frame';
-import { MoveMotion } from '../motions/move.motion';
 
-describe('Fixed Actors Scene: size motion test', function() {
+describe('Sticky Platforms Scene: size motion test', function() {
   let sceneElement: HTMLElement;
-  let scene: FixedActorsScene;
+  let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
@@ -26,12 +23,12 @@ describe('Fixed Actors Scene: size motion test', function() {
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', MotionFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', SizeFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
-    scene = new FixedActorsScene(
-      sceneElement!,
+    scene = new StickyPlatformScene(
+      sceneElement,
       (w: number, h: number) => 5 * h,
       {
         measuringGrid: TestMeasuringGrid,
@@ -42,19 +39,10 @@ describe('Fixed Actors Scene: size motion test', function() {
 
     blockElement = document.getElementById('block')!;
 
-    block = new StaticActor(blockElement!, {
+    block = new StaticActor(blockElement, {
       initOpacity: false,
+      initPosition: false,
     });
-
-    // To show an actor in docs
-    block.addFrames([
-      new TimeFrame(new MoveMotion({
-        startX: () => 0,
-        endX: () => 0,
-        startY: () => 0,
-        endY: () => 0,
-      }), () => 0, () => 0),
-    ]);
   });
 
   afterEach(function() {

@@ -10,9 +10,7 @@
     ],
   },
   "include": [
+    "./src/specs/**/*",
     "./src/lib/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-  ],
+  ]
 }

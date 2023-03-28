@@ -1,4 +1,4 @@
-import { MeasuringGridModel } from '../models/measuring-grid.model';
+import { MeasuringGridModel } from '../lib/models/measuring-grid.model';
 
 export const TestMeasuringGrid: MeasuringGridModel = {
   height: (deviceWidth, deviceHeight) => deviceHeight,

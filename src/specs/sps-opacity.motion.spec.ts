@@ -1,6 +1,6 @@
-import { StickyPlatformScene } from '../scenes/sticky-platform.scene';
-import { StaticActor } from '../actors/static.actor';
-import { ScrollRise } from '../scroll-rise';
+import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
+import { StaticActor } from '../lib/actors/static.actor';
+import { ScrollRise } from '../lib/scroll-rise';
 import { TestMeasuringGrid } from './test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
 import { TestTools } from './test-tools';

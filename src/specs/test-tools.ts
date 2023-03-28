@@ -1,4 +1,4 @@
-import { Actor } from '../actors/actor';
+import { Actor } from '../lib/actors/actor';
 import { TestStage } from './motion.fixture';
 import { DocsSpecsGlobalEnv } from './docs-specs-global-env';
 

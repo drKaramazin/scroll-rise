@@ -18,7 +18,9 @@
     "build": "npm run clear:lib && webpack --mode production",
     "build:dev": "npm run clear:lib && webpack --mode development",
     "watch": "webpack --watch --mode development",
-    "watch:prod": "webpack --watch --mode production"
+    "watch:prod": "webpack --watch --mode production",
+    "tsc:lib": "tsc --project tsconfig.lib.json",
+    "tsc:test": "tsc --project tsconfig.spec.json"
   },
   "repository": {
     "type": "git",

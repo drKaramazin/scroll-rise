@@ -1,6 +1,6 @@
-import { ScrollRise } from '../scroll-rise';
-import { StickyPlatformScene } from '../scenes/sticky-platform.scene';
-import { StaticActor } from '../actors/static.actor';
+import { ScrollRise } from '../lib/scroll-rise';
+import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
+import { StaticActor } from '../lib/actors/static.actor';
 import { TestTools } from './test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from './custom-matchers';

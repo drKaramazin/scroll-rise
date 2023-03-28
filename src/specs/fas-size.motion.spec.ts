@@ -1,15 +1,18 @@
-import { StickyPlatformScene } from '../scenes/sticky-platform.scene';
-import { ScrollRise } from '../scroll-rise';
-import { StaticActor } from '../actors/static.actor';
+import { FixedActorsScene } from '../lib/scenes/fixed-actors.scene';
+import { StaticActor } from '../lib/actors/static.actor';
+import { ScrollRise } from '../lib/scroll-rise';
+import { MotionFixture } from './motion.fixture';
 import { SizeFixture } from './size.fixture';
 import { TestTools } from './test-tools';
 import { customMatchers } from './custom-matchers';
 import { generateExamples } from './generate-examples';
 import { TestMeasuringGrid } from './test-measuring-grid';
+import { TimeFrame } from '../lib/time-frame';
+import { MoveMotion } from '../lib/motions/move.motion';
 
-describe('Sticky Platforms Scene: size motion test', function() {
+describe('Fixed Actors Scene: size motion test', function() {
   let sceneElement: HTMLElement;
-  let scene: StickyPlatformScene;
+  let scene: FixedActorsScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
@@ -23,12 +26,12 @@ describe('Sticky Platforms Scene: size motion test', function() {
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', SizeFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MotionFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
-    scene = new StickyPlatformScene(
-      sceneElement,
+    scene = new FixedActorsScene(
+      sceneElement!,
       (w: number, h: number) => 5 * h,
       {
         measuringGrid: TestMeasuringGrid,
@@ -39,10 +42,19 @@ describe('Sticky Platforms Scene: size motion test', function() {
 
     blockElement = document.getElementById('block')!;
 
-    block = new StaticActor(blockElement, {
+    block = new StaticActor(blockElement!, {
       initOpacity: false,
-      initPosition: false,
     });
+
+    // To show an actor in docs
+    block.addFrames([
+      new TimeFrame(new MoveMotion({
+        startX: () => 0,
+        endX: () => 0,
+        startY: () => 0,
+        endY: () => 0,
+      }), () => 0, () => 0),
+    ]);
   });
 
   afterEach(function() {

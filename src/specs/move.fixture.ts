@@ -1,8 +1,8 @@
 import { MotionFixture } from './motion.fixture';
-import { TimeFrame } from '../time-frame';
-import { MoveMotion } from '../motions/move.motion';
+import { TimeFrame } from '../lib/time-frame';
+import { MoveMotion } from '../lib/motions/move.motion';
 import { ChangeStage } from './test-tools';
-import { Util } from '../util';
+import { Util } from '../lib/util';
 
 export abstract class MoveFixture extends MotionFixture {
 

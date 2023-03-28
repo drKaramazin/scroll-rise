@@ -5,10 +5,5 @@
   },
   "include": [
     "./src/lib/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "src/lib/specs"
   ]
 }

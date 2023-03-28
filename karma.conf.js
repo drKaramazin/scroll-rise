@@ -3,7 +3,7 @@
 
 module.exports = function(config) {
   config.set({
-    basePath: 'src/lib',
+    basePath: 'src',
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
       '**/*.ts',
@@ -16,7 +16,6 @@ module.exports = function(config) {
     },
     karmaTypescriptConfig: {
       tsconfig: '../../tsconfig.spec.json',
-      exclude: ['node_modules'],
       bundlerOptions: {
         transforms: [
           require('karma-typescript-es6-transform')({
