@@ -3,11 +3,11 @@
 
 module.exports = function(config) {
   config.set({
-    basePath: 'src/lib',
+    basePath: 'src',
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
       '**/*.ts',
-      { pattern: '../docs/styles/reset.css', included: true, watched: false },
+      { pattern: './specs/styles/reset.css', included: true, watched: false },
       { pattern: './specs/styles/test.css', included: true, watched: false },
     ],
     exclude: [],
@@ -15,6 +15,7 @@ module.exports = function(config) {
       '**/*.ts': ['karma-typescript'],
     },
     karmaTypescriptConfig: {
+      tsconfig: '../../tsconfig.spec.json',
       bundlerOptions: {
         transforms: [
           require('karma-typescript-es6-transform')({

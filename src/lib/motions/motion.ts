@@ -3,7 +3,11 @@ import { Scene } from '../scenes/scene';
 
 export abstract class Motion {
 
-  abstract name: string;
+  abstract readonly name: string;
+
+  motionName(): string {
+    return this.name;
+  }
 
   abstract make(
     scrollPosForFrame: number,

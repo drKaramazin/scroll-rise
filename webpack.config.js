@@ -7,7 +7,12 @@ const esConfig = {
   devtool: 'source-map',
   module: {
     rules: [{
-      use: 'ts-loader',
+      use: [{
+        loader: 'ts-loader',
+        options: {
+          configFile: 'tsconfig.lib.json',
+        },
+      }],
       test: /\.ts?$/,
       exclude: /node_modules/,
     }],
