@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./lib/",
+    "baseUrl": "./",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es2015",
-    "target": "es5",
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "target": "ES5",
     "lib": ["es6", "dom", "es2017"],
     "typeRoots": [
       "node_modules/@types"
@@ -13,14 +14,6 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks": true
-  },
-  "include": [
-    "src/lib/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "src/lib/specs"
-  ]
+    "strictNullChecks": true,
+  }
 }

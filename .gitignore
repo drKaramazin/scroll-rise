@@ -20,5 +20,5 @@ Thumbs.db
 
 /node_modules/
 /lib/
+/lib-spec/
 /coverage/
-/docs/
