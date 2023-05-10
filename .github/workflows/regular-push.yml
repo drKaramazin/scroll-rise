@@ -1,4 +1,4 @@
-name: main-github-workflow
+name: regular-push
 on: [push]
 jobs:
   lint-and-test:
