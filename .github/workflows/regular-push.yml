@@ -1,5 +1,10 @@
 name: regular-push
-on: [push, workflow_call]
+on:
+  push:
+    branches:
+      - '**'
+  workflow_call:
+
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
