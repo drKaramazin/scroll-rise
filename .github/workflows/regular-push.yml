@@ -1,5 +1,5 @@
 name: regular-push
-on: [push]
+on: [push, workflow_call]
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
