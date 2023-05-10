@@ -7,10 +7,11 @@ on:
 jobs:
   tests:
     uses: ./.github/workflows/regular-push.yml
+
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    needs: tests
+    needs: package
     steps:
       - name: Create Release
         id: create_release
