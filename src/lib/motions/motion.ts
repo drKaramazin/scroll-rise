@@ -3,7 +3,7 @@ import { Scene } from '../scenes/scene';
 
 export abstract class Motion {
 
-  abstract readonly name: string;
+  protected abstract readonly name: string;
 
   motionName(): string {
     return this.name;
