@@ -19,7 +19,7 @@ export abstract class Actor {
   private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
     return frames.reduce(
       (acc: any, frame) => {
-        const motionName = frame.motion.name;
+        const motionName = frame.motion.motionName();
         acc[motionName] = acc[motionName] ? [...acc[motionName], frame] : [frame];
 
         return acc;
