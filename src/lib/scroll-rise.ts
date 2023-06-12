@@ -1,5 +1,6 @@
 import { Util } from './util';
 import { Scene, SceneOptions } from './scenes/scene';
+import { Wrapped } from './decorators/wrapped';
 
 declare const VERSION: string;
 
@@ -84,6 +85,9 @@ export class ScrollRise {
     }
   }
 
+  afterRender: () => void;
+  beforeRender: () => void;
+  @Wrapped({ before: 'beforeRender', after: 'afterRender' })
   render(scrollPos: number): void {
     for (const actor of this.scene.actors) {
       actor.render(this.pos(scrollPos), this.scene);

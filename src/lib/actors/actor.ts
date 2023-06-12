@@ -1,6 +1,11 @@
 import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
 import { Scene } from '../scenes/scene';
+import { Wrapped } from '../decorators/wrapped';
+
+interface FrameGroups {
+  [key: string]: TimeFrame[];
+}
 
 export abstract class Actor {
 
@@ -13,12 +18,9 @@ export abstract class Actor {
 
   afterBindElement(): void {}
 
-  beforeRender?: () => void;
-  afterRender?: () => void;
-
-  private groupFramesByMotion(frames: TimeFrame[]): { [key: string]: TimeFrame[] } {
+  private groupFramesByMotion(frames: TimeFrame[]): FrameGroups {
     return frames.reduce(
-      (acc: any, frame) => {
+      (acc: FrameGroups, frame) => {
         const motionName = frame.motion.motionName();
         acc[motionName] = acc[motionName] ? [...acc[motionName], frame] : [frame];
 
@@ -28,30 +30,33 @@ export abstract class Actor {
     );
   }
 
+  private filterInvisibleFrames(frames: TimeFrame[], scrollPos: number): TimeFrame[] {
+    return frames.filter(
+      frame =>
+        (scrollPos < frame.getStartPos() && scrollPos + Util.clientHeight() >= frame.getStartPos()) ||
+        (scrollPos >= frame.getStartPos() && scrollPos + Util.clientHeight() <= frame.getEndPos()) ||
+        (scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()),
+    );
+  }
+
+  beforeRender: () => void;
+  afterRender: () => void;
+  @Wrapped({ before: 'beforeRender', after: 'afterRender' })
   render(scrollPos: number, scene: Scene<any>): void {
-    if (this.beforeRender) {
-      this.beforeRender();
-    }
+    const frameGroups = this.groupFramesByMotion(this.frames);
 
-    const frames = this.groupFramesByMotion(this.frames);
+    for (const key of Object.keys(frameGroups)) {
+      if (frameGroups[key].length > 1) {
+        const visibleFrames = this.filterInvisibleFrames(frameGroups[key], scrollPos);
 
-    for (const key of Object.keys(frames)) {
-      if (frames[key].length > 1) {
-        const visible = frames[key].filter(
-          frame =>
-            (scrollPos < frame.getStartPos() && scrollPos + Util.clientHeight() >= frame.getStartPos()) ||
-            (scrollPos >= frame.getStartPos() && scrollPos + Util.clientHeight() <= frame.getEndPos()) ||
-            (scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos()),
-        );
-
-        if (visible.length === 1) {
-          frames[key] = visible;
-        } else if (visible.length === 0 && frames[key].length) {
-          frames[key].sort((a, b) => a.getStartPos() - b.getStartPos());
-          if (scrollPos + Util.clientHeight() < frames[key][0].getStartPos()) {
-            frames[key] = [frames[key][0]];
+        if (visibleFrames.length === 1) {
+          frameGroups[key] = visibleFrames;
+        } else if (visibleFrames.length === 0 && frameGroups[key].length) {
+          frameGroups[key].sort((a, b) => a.getStartPos() - b.getStartPos());
+          if (scrollPos + Util.clientHeight() < frameGroups[key][0].getStartPos()) {
+            frameGroups[key] = [frameGroups[key][0]];
           } else {
-            frames[key].sort((a, b) => {
+            frameGroups[key].sort((a, b) => {
               if (a.getEndPos() > b.getEndPos()) {
                 return -1;
               } else if (a.getEndPos() > b.getEndPos()) {
@@ -59,27 +64,23 @@ export abstract class Actor {
               }
               return 1;
             });
-            if (scrollPos > frames[key][0].getEndPos()) {
-              frames[key] = [frames[key][0]];
+            if (scrollPos > frameGroups[key][0].getEndPos()) {
+              frameGroups[key] = [frameGroups[key][0]];
             }
           }
         } else {
-          visible.sort((a, b) => a.getStartPos() - b.getStartPos());
-          frames[key] = [visible[visible.length - 1]];
+          visibleFrames.sort((a, b) => a.getStartPos() - b.getStartPos());
+          frameGroups[key] = [visibleFrames[visibleFrames.length - 1]];
         }
       }
     }
 
     if (this.element) {
-      for (const key of Object.keys(frames)) {
-        if (frames[key]?.length) {
-          frames[key][0].motion.make(scrollPos, frames[key][0], this.element, scene);
+      for (const key of Object.keys(frameGroups)) {
+        if (frameGroups[key]?.length) {
+          frameGroups[key][0].motion.make(scrollPos, frameGroups[key][0], this.element, scene);
         }
       }
-    }
-
-    if (this.afterRender) {
-      this.afterRender();
     }
   }
 
