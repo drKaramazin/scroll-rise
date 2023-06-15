@@ -2,8 +2,9 @@ import { FramesOrderFixture } from './frames-order.fixture';
 import { ScrollRise, StaticActor, StickyPlatformScene } from '../lib';
 import { TestMeasuringGrid } from './test-measuring-grid';
 import { DummyMotion } from './dummy.motion';
+import { TestTools } from './test-tools';
 
-describe('Frames order test', function() {
+fdescribe('Frames order test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
@@ -45,39 +46,46 @@ describe('Frames order test', function() {
     expect(sr).toBeTruthy();
   });
 
-  it('should have a correct order with only one frame', async function() {
+  it('should have a correct order with only one frame', function() {
     const motion = new DummyMotion('Single motion');
-
-    const timeframe = FramesOrderFixture.timeFrames[0](motion);
-
-    block.addFrames([timeframe]);
 
     const spy = spyOn(motion, 'make').and.callThrough();
 
+    const changes = FramesOrderFixture.firstChanges(spy);
+
+    const timeframe = changes.timeFrames[0](motion);
+
+    block.addFrames([timeframe]);
+
     scene.add(block);
 
-    const stages = FramesOrderFixture.stages();
-    await FramesOrderFixture.goingStages(sr, stages);
-    expect(spy).toHaveBeenCalledTimes(stages.length);
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
   });
 
-  fit('should have a correct order with two frames apart', async function() {
+  it('should have a correct order with two frames apart', function() {
     const motionOne = new DummyMotion('motion One');
     const motionTwo = new DummyMotion('motion Two');
-
-    const timeframeOne = FramesOrderFixture.timeFrames[1](motionOne);
-    const timeframeTwo = FramesOrderFixture.timeFrames[2](motionTwo);
-
-    block.addFrames([timeframeOne, timeframeTwo]);
 
     const spyOne = spyOn(motionOne, 'make').and.callThrough();
     const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
 
+    const changes = FramesOrderFixture.secondChanges(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeOne, timeframeTwo]);
+
     scene.add(block);
 
-    const stages = FramesOrderFixture.stages();
-    await FramesOrderFixture.goingStages(sr, stages);
-    expect(spyOne).toHaveBeenCalledTimes(10);
-    expect(spyTwo).toHaveBeenCalledTimes(7);
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
   });
 });
