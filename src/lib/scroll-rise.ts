@@ -42,10 +42,6 @@ export class ScrollRise {
     }
   }
 
-  pos(scrollPos: number): number {
-    return -(scrollPos + this.scene.offset());
-  }
-
   scroll(): void {
     this.tick();
   }
@@ -89,9 +85,7 @@ export class ScrollRise {
   beforeRender: () => void;
   @Wrapped({ before: 'beforeRender', after: 'afterRender' })
   render(scrollPos: number): void {
-    for (const actor of this.scene.actors) {
-      actor.render(this.pos(scrollPos), this.scene);
-    }
+    this.scene.render(scrollPos);
   }
 
   static version(): string {

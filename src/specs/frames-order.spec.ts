@@ -3,7 +3,7 @@ import { ScrollRise, StaticActor, StickyPlatformScene } from '../lib';
 import { TestMeasuringGrid } from './test-measuring-grid';
 import { DummyMotion } from './dummy.motion';
 
-fdescribe('Frames order test', function() {
+describe('Frames order test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
@@ -46,7 +46,7 @@ fdescribe('Frames order test', function() {
   });
 
   it('should have a correct order with only one frame', async function() {
-    const motion = new DummyMotion();
+    const motion = new DummyMotion('Single motion');
 
     const timeframe = FramesOrderFixture.timeFrames[0](motion);
 
@@ -62,8 +62,8 @@ fdescribe('Frames order test', function() {
   });
 
   fit('should have a correct order with two frames apart', async function() {
-    const motionOne = new DummyMotion();
-    const motionTwo = new DummyMotion();
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
 
     const timeframeOne = FramesOrderFixture.timeFrames[1](motionOne);
     const timeframeTwo = FramesOrderFixture.timeFrames[2](motionTwo);
