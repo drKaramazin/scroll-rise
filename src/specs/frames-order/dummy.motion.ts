@@ -1,4 +1,4 @@
-import { Motion, Scene, TimeFrame } from '../lib';
+import { Motion, Scene, TimeFrame } from '../../lib';
 
 export class DummyMotion extends Motion {
 

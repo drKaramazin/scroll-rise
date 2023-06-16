@@ -1,10 +1,10 @@
 import { FramesOrderFixture } from './frames-order.fixture';
-import { ScrollRise, StaticActor, StickyPlatformScene } from '../lib';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { ScrollRise, StaticActor, StickyPlatformScene } from '../../lib';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 import { DummyMotion } from './dummy.motion';
-import { TestTools } from './test-tools';
+import { TestTools } from '../test-tools';
 
-fdescribe('Frames order test', function() {
+describe('Frames order test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;

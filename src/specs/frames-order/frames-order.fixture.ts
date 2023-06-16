@@ -1,7 +1,7 @@
-import { Motion, TimeFrame, Util } from '../lib';
+import { Motion, TimeFrame, Util } from '../../lib';
 import { DummyMotion } from './dummy.motion';
-import { TestStage } from './motion.fixture';
-import { ChangeStage } from './test-tools';
+import { TestStage } from '../motion.fixture';
+import { ChangeStage } from '../test-tools';
 
 interface OrderChanges {
   timeFrames: Array<(motion: Motion) => TimeFrame>;

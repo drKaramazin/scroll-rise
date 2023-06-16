@@ -1,13 +1,11 @@
-import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
-import { ScrollRise } from '../lib/scroll-rise';
-import { StaticActor } from '../lib/actors/static.actor';
-import { SizeFixture } from './size.fixture';
-import { TestTools } from './test-tools';
-import { customMatchers } from './custom-matchers';
-import { generateExamples } from './generate-examples';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { ScrollRise, StickyPlatformScene, StaticActor } from '../../lib';
+import { TestTools } from '../test-tools';
+import { MoveFixture } from './move.fixture';
+import { customMatchers } from '../custom-matchers';
+import { generateExamples } from '../generate-examples';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 
-describe('Sticky Platforms Scene: size motion test', function() {
+describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
@@ -15,15 +13,15 @@ describe('Sticky Platforms Scene: size motion test', function() {
   let sr: ScrollRise;
 
   generateExamples([
-    'should have a correct size in changing width',
-    'should have a correct size in changing height',
-    'should have a correct size in changing width and height',
+    'should have a correct X, Y coords in changing X',
+    'should have a correct X, Y coords in changing Y',
+    'should have a correct X, Y coords in changing both X and Y',
   ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', SizeFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MoveFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
@@ -40,8 +38,8 @@ describe('Sticky Platforms Scene: size motion test', function() {
     blockElement = document.getElementById('block')!;
 
     block = new StaticActor(blockElement, {
+      initSize: false,
       initOpacity: false,
-      initPosition: false,
     });
   });
 
@@ -58,9 +56,9 @@ describe('Sticky Platforms Scene: size motion test', function() {
     expect(sr).toBeTruthy();
   });
 
-  it('should have a correct size in changing width', function() {
+  it('should have a correct X, Y coords in changing X', function() {
     block.addFrames([
-      SizeFixture.changeWidth.timeFrame(),
+      MoveFixture.changeX.timeFrame(),
     ]);
 
     scene.add(block);
@@ -68,13 +66,13 @@ describe('Sticky Platforms Scene: size motion test', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SizeFixture.changeWidth.stages(),
+      MoveFixture.changeX.stages(),
     );
   });
 
-  it('should have a correct size in changing height', function() {
+  it('should have a correct X, Y coords in changing Y', function() {
     block.addFrames([
-      SizeFixture.changeHeight.timeFrame(),
+      MoveFixture.changeY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -82,13 +80,13 @@ describe('Sticky Platforms Scene: size motion test', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SizeFixture.changeHeight.stages(),
+      MoveFixture.changeY.stages(),
     );
   });
 
-  it('should have a correct size in changing width and height', function() {
+  it('should have a correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
-      SizeFixture.changeWidthHeight.timeFrame(),
+      MoveFixture.changeXY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -96,7 +94,7 @@ describe('Sticky Platforms Scene: size motion test', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      SizeFixture.changeWidthHeight.stages(),
+      MoveFixture.changeXY.stages(),
     );
   });
 });

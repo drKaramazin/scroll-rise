@@ -1,12 +1,10 @@
-import { StaticActor } from '../lib/actors/static.actor';
-import { ScrollRise } from '../lib/scroll-rise';
-import { FixedActorsScene } from '../lib/scenes/fixed-actors.scene';
-import { MotionFixture } from './motion.fixture';
-import { TestTools } from './test-tools';
+import { StaticActor, ScrollRise, FixedActorsScene } from '../../lib';
+import { MotionFixture } from '../motion.fixture';
+import { TestTools } from '../test-tools';
 import { MoveFixture } from './move.fixture';
-import { customMatchers } from './custom-matchers';
-import { generateExamples } from './generate-examples';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { customMatchers } from '../custom-matchers';
+import { generateExamples } from '../generate-examples';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 
 describe('Fixed Actors Scene: move motion test', function() {
   let sceneElement: HTMLElement;

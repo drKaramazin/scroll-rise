@@ -1,7 +1,6 @@
-import { MotionFixture } from './motion.fixture';
-import { TimeFrame } from '../lib/time-frame';
-import { OpacityMotion } from '../lib/motions/opacity.motion';
-import { ChangeStage } from './test-tools';
+import { MotionFixture } from '../motion.fixture';
+import { TimeFrame, OpacityMotion } from '../../lib';
+import { ChangeStage } from '../test-tools';
 
 export class OpacityFixture extends MotionFixture {
 

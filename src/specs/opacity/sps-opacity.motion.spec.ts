@@ -1,11 +1,9 @@
-import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
-import { StaticActor } from '../lib/actors/static.actor';
-import { ScrollRise } from '../lib/scroll-rise';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { StickyPlatformScene, StaticActor, ScrollRise } from '../../lib';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
-import { TestTools } from './test-tools';
-import { generateExamples } from './generate-examples';
-import { customMatchers } from './custom-matchers';
+import { TestTools } from '../test-tools';
+import { generateExamples } from '../generate-examples';
+import { customMatchers } from '../custom-matchers';
 
 describe('Sticky Platforms Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
