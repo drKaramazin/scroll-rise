@@ -33,10 +33,10 @@ export class RenderingActorStrategy {
         this.endFrame = group[0];
 
         for (const frame of group) {
-          if (frame.getStartPos() <= this.startFrame.getStartPos()) {
+          if (frame.getStartPos() < this.startFrame.getStartPos()) {
             this.startFrame = frame;
           }
-          if (frame.getEndPos() >= this.endFrame.getEndPos()) {
+          if (frame.getEndPos() > this.endFrame.getEndPos()) {
             this.endFrame = frame;
           }
         }
@@ -44,8 +44,8 @@ export class RenderingActorStrategy {
     }
   }
 
-  private findHits(group: TimeFrame[], scrollPos: number): TimeFrame[] {
-    return group.filter(frame => scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos());
+  private findFirstHit(group: TimeFrame[], scrollPos: number): TimeFrame | undefined {
+    return group.find(frame => scrollPos >= frame.getStartPos() && scrollPos <= frame.getEndPos());
   }
 
   private findNearestFrameForHole(group: TimeFrame[], scrollPos: number): TimeFrame | undefined {
@@ -62,23 +62,22 @@ export class RenderingActorStrategy {
     }
   }
 
+  private lookIntoHoles(group: TimeFrame[], scrollPos: number): TimeFrame | undefined {
+    if (scrollPos <= this.startFrame!.getStartPos()) {
+      return this.startFrame!;
+    }
+    if (scrollPos >= this.endFrame!.getEndPos()) {
+      return this.endFrame!;
+    }
+
+    return this.findNearestFrameForHole(group, scrollPos);
+  }
+
   takeRenderFrame(scrollPos: number): TimeFrame | undefined {
     for (const key of Object.keys(this.frameGroups)) {
       const group = this.frameGroups[key];
       if (group?.length) {
-        const hits = this.findHits(group, scrollPos);
-        if (hits.length > 0) {
-          return hits[0];
-        } else {
-          if (scrollPos <= this.startFrame!.getStartPos()) {
-            return this.startFrame!;
-          }
-          if (scrollPos >= this.endFrame!.getEndPos()) {
-            return this.endFrame!;
-          }
-
-          return this.findNearestFrameForHole(group, scrollPos);
-        }
+        return this.findFirstHit(group, scrollPos) ?? this.lookIntoHoles(group, scrollPos);
       }
     }
   }

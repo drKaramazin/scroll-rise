@@ -3,8 +3,13 @@ import { ScrollRise, StaticActor, StickyPlatformScene } from '../../lib';
 import { TestMeasuringGrid } from '../test-measuring-grid';
 import { DummyMotion } from './dummy.motion';
 import { TestTools } from '../test-tools';
+import { SimpleOrderFixture } from './simple-order.fixture';
+import { ApartFramesFixture } from './apart-frames.fixture';
+import { OneAfterAnotherFixture } from './one-after-another.fixture';
+import { IntersectingFixture } from './intersecting.fixture';
+import { ParallelFixture } from './parallel.fixture';
 
-describe('Frames order test', function() {
+fdescribe('Frames order test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
@@ -51,7 +56,7 @@ describe('Frames order test', function() {
 
     const spy = spyOn(motion, 'make').and.callThrough();
 
-    const changes = FramesOrderFixture.firstChanges(spy);
+    const changes = SimpleOrderFixture.changes(spy);
 
     const timeframe = changes.timeFrames[0](motion);
 
@@ -66,14 +71,152 @@ describe('Frames order test', function() {
     );
   });
 
-  it('should have a correct order with two frames apart', function() {
+  it('should have a correct order with two frames apart (direct)', function() {
     const motionOne = new DummyMotion('motion One');
     const motionTwo = new DummyMotion('motion Two');
 
     const spyOne = spyOn(motionOne, 'make').and.callThrough();
     const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
 
-    const changes = FramesOrderFixture.secondChanges(spyOne, spyTwo);
+    const changes = ApartFramesFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeOne, timeframeTwo]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two frames apart (reverse)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = ApartFramesFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeTwo, timeframeOne]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two frames one after another (direct)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = OneAfterAnotherFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeOne, timeframeTwo]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two frames one after another (reverse)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = OneAfterAnotherFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeTwo, timeframeOne]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two intersecting frames (direct)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = IntersectingFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeOne, timeframeTwo]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two intersecting frames (reverse)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = IntersectingFixture.changes(spyTwo, spyOne);
+
+    const timeframeOne = changes.timeFrames[1](motionOne);
+    const timeframeTwo = changes.timeFrames[0](motionTwo);
+
+    block.addFrames([timeframeTwo, timeframeOne]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two parallel frames', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = ParallelFixture.changes(spyOne, spyTwo);
 
     const timeframeOne = changes.timeFrames[0](motionOne);
     const timeframeTwo = changes.timeFrames[1](motionTwo);
