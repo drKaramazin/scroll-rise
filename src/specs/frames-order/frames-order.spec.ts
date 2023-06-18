@@ -10,6 +10,7 @@ import { IntersectingFixture } from './intersecting.fixture';
 import { ParallelFixture } from './parallel.fixture';
 import { NestedFixture } from './nested.fixture';
 import { ThreeParallelFramesFixture } from './three-parallel-frames.fixture';
+import { ThreeNestedFramesFixture } from './three-nested-frames.fixture';
 
 fdescribe('Frames order test', function() {
   let sceneElement: HTMLElement;
@@ -280,7 +281,7 @@ fdescribe('Frames order test', function() {
     );
   });
 
-  fit('should have a correct order with three parallel frames', function() {
+  it('should have a correct order with three parallel frames', function() {
     const motionOne = new DummyMotion('motion One');
     const motionTwo = new DummyMotion('motion Two');
     const motionThree = new DummyMotion('motion Three');
@@ -296,6 +297,58 @@ fdescribe('Frames order test', function() {
     const timeframeThree = changes.timeFrames[2](motionThree);
 
     block.addFrames([timeframeOne, timeframeTwo, timeframeThree]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with three nested frames (direct)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+    const motionThree = new DummyMotion('motion Three');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+    const spyThree = spyOn(motionThree, 'make').and.callThrough();
+
+    const changes = ThreeNestedFramesFixture.directChanges(spyOne, spyTwo, spyThree);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+    const timeframeThree = changes.timeFrames[2](motionThree);
+
+    block.addFrames([timeframeOne, timeframeTwo, timeframeThree]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with three nested frames (reverse)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+    const motionThree = new DummyMotion('motion Three');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+    const spyThree = spyOn(motionThree, 'make').and.callThrough();
+
+    const changes = ThreeNestedFramesFixture.reverseChanges(spyOne, spyTwo, spyThree);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+    const timeframeThree = changes.timeFrames[2](motionThree);
+
+    block.addFrames([timeframeThree, timeframeTwo, timeframeOne]);
 
     scene.add(block);
 
