@@ -21,10 +21,8 @@ export abstract class Actor {
   @Wrapped({ before: 'beforeRender', after: 'afterRender' })
   render(scrollPos: number, scene: Scene<any>): void {
     if (this.element) {
-      const frame = this.renderActorStrategy.takeRenderFrame(scrollPos);
-      if (frame) {
-        frame.motion.make(scrollPos, frame, this.element, scene);
-      }
+      const frames = this.renderActorStrategy.takeRenderFrame(scrollPos);
+      frames.forEach(frame => frame.motion.make(scrollPos, frame, this.element!, scene));
     } else {
       throw new Error('Here isn\'t an element');
     }

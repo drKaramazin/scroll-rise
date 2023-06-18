@@ -8,8 +8,8 @@ export class RenderingActorStrategy {
 
   private frameGroups: FrameGroups = {};
 
-  startFrame?: TimeFrame;
-  endFrame?: TimeFrame;
+  startFrame: { [key: string]: TimeFrame } = {};
+  endFrame: { [key: string]: TimeFrame } = {};
 
   private groupFramesByMotion(frames: TimeFrame[]): FrameGroups {
     return frames.reduce(
@@ -29,15 +29,15 @@ export class RenderingActorStrategy {
     for (const key of Object.keys(this.frameGroups)) {
       const group = this.frameGroups[key];
       if (group.length) {
-        this.startFrame = group[0];
-        this.endFrame = group[0];
+        this.startFrame[key] = group[0];
+        this.endFrame[key] = group[0];
 
         for (const frame of group) {
-          if (frame.getStartPos() < this.startFrame.getStartPos()) {
-            this.startFrame = frame;
+          if (frame.getStartPos() < this.startFrame[key].getStartPos()) {
+            this.startFrame[key] = frame;
           }
-          if (frame.getEndPos() > this.endFrame.getEndPos()) {
-            this.endFrame = frame;
+          if (frame.getEndPos() > this.endFrame[key].getEndPos()) {
+            this.endFrame[key] = frame;
           }
         }
       }
@@ -62,24 +62,31 @@ export class RenderingActorStrategy {
     }
   }
 
-  private lookIntoHoles(group: TimeFrame[], scrollPos: number): TimeFrame | undefined {
-    if (scrollPos <= this.startFrame!.getStartPos()) {
-      return this.startFrame!;
+  private lookIntoHoles(group: TimeFrame[], scrollPos: number, key: string): TimeFrame | undefined {
+    if (scrollPos <= this.startFrame[key].getStartPos()) {
+      return this.startFrame[key];
     }
-    if (scrollPos >= this.endFrame!.getEndPos()) {
-      return this.endFrame!;
+    if (scrollPos >= this.endFrame[key].getEndPos()) {
+      return this.endFrame[key];
     }
 
     return this.findNearestFrameForHole(group, scrollPos);
   }
 
-  takeRenderFrame(scrollPos: number): TimeFrame | undefined {
+  takeRenderFrame(scrollPos: number): TimeFrame[] {
+    const result: TimeFrame[] = [];
+
     for (const key of Object.keys(this.frameGroups)) {
       const group = this.frameGroups[key];
       if (group?.length) {
-        return this.findFirstHit(group, scrollPos) ?? this.lookIntoHoles(group, scrollPos);
+        const frame = this.findFirstHit(group, scrollPos) ?? this.lookIntoHoles(group, scrollPos, key);
+        if (frame) {
+          result.push(frame);
+        }
       }
     }
+
+    return result;
   }
 
 }
