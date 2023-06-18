@@ -8,6 +8,8 @@ import { ApartFramesFixture } from './apart-frames.fixture';
 import { OneAfterAnotherFixture } from './one-after-another.fixture';
 import { IntersectingFixture } from './intersecting.fixture';
 import { ParallelFixture } from './parallel.fixture';
+import { NestedFixture } from './nested.fixture';
+import { ThreeParallelFramesFixture } from './three-parallel-frames.fixture';
 
 fdescribe('Frames order test', function() {
   let sceneElement: HTMLElement;
@@ -222,6 +224,78 @@ fdescribe('Frames order test', function() {
     const timeframeTwo = changes.timeFrames[1](motionTwo);
 
     block.addFrames([timeframeOne, timeframeTwo]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two nested frames (direct)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = NestedFixture.changes(spyOne, spyTwo);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+
+    block.addFrames([timeframeOne, timeframeTwo]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  it('should have a correct order with two nested frames (reverse)', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+
+    const changes = NestedFixture.changes(spyTwo, spyOne);
+
+    const timeframeOne = changes.timeFrames[1](motionOne);
+    const timeframeTwo = changes.timeFrames[0](motionTwo);
+
+    block.addFrames([timeframeTwo, timeframeOne]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      changes.stages(),
+    );
+  });
+
+  fit('should have a correct order with three parallel frames', function() {
+    const motionOne = new DummyMotion('motion One');
+    const motionTwo = new DummyMotion('motion Two');
+    const motionThree = new DummyMotion('motion Three');
+
+    const spyOne = spyOn(motionOne, 'make').and.callThrough();
+    const spyTwo = spyOn(motionTwo, 'make').and.callThrough();
+    const spyThree = spyOn(motionThree, 'make').and.callThrough();
+
+    const changes = ThreeParallelFramesFixture.changes(spyOne, spyTwo, spyThree);
+
+    const timeframeOne = changes.timeFrames[0](motionOne);
+    const timeframeTwo = changes.timeFrames[1](motionTwo);
+    const timeframeThree = changes.timeFrames[2](motionThree);
+
+    block.addFrames([timeframeOne, timeframeTwo, timeframeThree]);
 
     scene.add(block);
 
