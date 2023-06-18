@@ -12,7 +12,7 @@ import { NestedFixture } from './nested.fixture';
 import { ThreeParallelFramesFixture } from './three-parallel-frames.fixture';
 import { ThreeNestedFramesFixture } from './three-nested-frames.fixture';
 
-fdescribe('Frames order test', function() {
+describe('Frames order test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
