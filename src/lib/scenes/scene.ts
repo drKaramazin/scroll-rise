@@ -84,4 +84,14 @@ export abstract class Scene<Options extends SceneOptions> {
     }
   }
 
+  pos(scrollPos: number): number {
+    return -(scrollPos + this.offset());
+  }
+
+  render(scrollPos: number): void {
+    for (const actor of this.actors) {
+      actor.render(this.pos(scrollPos), this);
+    }
+  }
+
 }

@@ -32,6 +32,10 @@ export interface ChangeStage {
     height: StageValue;
   };
   opacity?: StageValue;
+  toHaveBeenCalledTimes?: Array<{
+    spy: jasmine.Spy;
+    times: number;
+  }>;
 }
 
 export class TestTools {
@@ -109,6 +113,15 @@ export class TestTools {
                 expect(actualOpacity)
                   .withContext(context)
                   .toEqual(stage.opacity.value);
+              }
+            }
+
+            if (stage.toHaveBeenCalledTimes) {
+              const context = DefaultContextFn(i);
+              for (const spyItem of stage.toHaveBeenCalledTimes) {
+                expect(spyItem.spy)
+                  .withContext(context)
+                  .toHaveBeenCalledTimes(spyItem.times);
               }
             }
 

@@ -1,13 +1,9 @@
-import { StaticActor } from '../lib/actors/static.actor';
-import { ScrollRise } from '../lib/scroll-rise';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { StaticActor, ScrollRise, FixedActorsScene, TimeFrame, MoveMotion } from '../../lib';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
-import { TestTools } from './test-tools';
-import { generateExamples } from './generate-examples';
-import { FixedActorsScene } from '../lib/scenes/fixed-actors.scene';
-import { TimeFrame } from '../lib/time-frame';
-import { MoveMotion } from '../lib/motions/move.motion';
-import { customMatchers } from './custom-matchers';
+import { TestTools } from '../test-tools';
+import { generateExamples } from '../generate-examples';
+import { customMatchers } from '../custom-matchers';
 
 describe('Fixed Actors Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
