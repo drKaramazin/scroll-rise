@@ -4,13 +4,20 @@ import { TestMeasuringGrid } from '../test-measuring-grid';
 import { TestTools } from '../test-tools';
 import { OffsetFixture } from './offset.fixture';
 import { customMatchers } from '../custom-matchers';
+import { generateExamples } from '../generate-examples';
 
-fdescribe('Sticky Platforms Scene: offset test', function() {
+describe('Sticky Platforms Scene: offset test', function() {
   let sceneElement: HTMLElement;
   let scene: StickyPlatformScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
+
+  generateExamples([
+    'should have correct X, Y coords in changing X',
+    'should have correct X, Y coords in changing Y',
+    'should have correct X, Y coords in changing both X and Y',
+  ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);

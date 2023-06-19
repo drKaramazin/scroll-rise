@@ -14,9 +14,9 @@ describe('Fixed Actors Scene: move motion test', function() {
   let sr: ScrollRise;
 
   generateExamples([
-    'should have a correct X, Y coords in changing X',
-    'should have a correct X, Y coords in changing Y',
-    'should have a correct X, Y coords in changing both X and Y',
+    'should have correct X, Y coords in changing X',
+    'should have correct X, Y coords in changing Y',
+    'should have correct X, Y coords in changing both X and Y',
   ]);
 
   beforeEach(function() {
@@ -57,7 +57,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     expect(sr).toBeTruthy();
   });
 
-  it('should have a correct X, Y coords in changing X', function() {
+  it('should have correct X, Y coords in changing X', function() {
     block.addFrames([
       MoveFixture.changeX.timeFrame(),
     ]);
@@ -71,7 +71,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  it('should have correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);
@@ -85,7 +85,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);

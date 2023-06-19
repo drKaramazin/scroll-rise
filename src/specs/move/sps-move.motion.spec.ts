@@ -13,9 +13,9 @@ describe('Sticky Platforms Scene: move motion test', function() {
   let sr: ScrollRise;
 
   generateExamples([
-    'should have a correct X, Y coords in changing X',
-    'should have a correct X, Y coords in changing Y',
-    'should have a correct X, Y coords in changing both X and Y',
+    'should have correct X, Y coords in changing X',
+    'should have correct X, Y coords in changing Y',
+    'should have correct X, Y coords in changing both X and Y',
   ]);
 
   beforeEach(function() {
