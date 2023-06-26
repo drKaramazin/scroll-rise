@@ -1,7 +1,6 @@
 import { Actor } from '../actors/actor';
 import { Util } from '../util';
 import { Scene, SceneOptions } from './scene';
-import { TimeFrame } from '../time-frame';
 
 export interface StickyPlatformSceneOptions extends SceneOptions {
   stickyPlatformHeight?: (deviceWidth: number, deviceHeight: number) => number;
@@ -49,17 +48,6 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
       actor.element.style.position = 'absolute';
     }
     actor.initElement(this.elementY(), this);
-  }
-
-  interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
-    if (scrollPos < frame.getStartPos()) {
-      return startY();
-    }
-    if (scrollPos > frame.getEndPos()) {
-      return endY();
-    }
-
-    return super.interceptY(scrollPos, frame, startY, endY);
   }
 
 }

@@ -64,7 +64,7 @@ export abstract class InitiableActor extends Actor {
     }
   }
 
-  override bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined {
+  override bindElement(scrollPosOnScene: number, scene: Scene<any>): HTMLElement | undefined {
     return this.element;
   }
 

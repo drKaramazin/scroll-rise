@@ -1,7 +1,7 @@
 import { Value } from '../models/value.model';
 import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
+import { MotionParams } from '../models/motion-params.model';
 
 export interface ISizeMotion {
   startWidth: Value;
@@ -28,47 +28,47 @@ export class SizeMotion extends Motion {
     this.endHeight = data.endHeight;
   }
 
-  renderWidth(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.width = `${this.startWidth(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.width = `${this.endWidth(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-
-      const motionL = this.endWidth(Util.clientWidth(), Util.clientHeight()) - this.startWidth(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const width = this.startWidth(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
-
-      element.style.width = `${width}px`;
+  renderWidth(params: MotionParams): void {
+    if (params.scrollPosOnScene < params.frame.getStartPos()) {
+      params.element.style.width = `${this.startWidth(Util.clientWidth(), Util.clientHeight())}px`;
+      return;
     }
+    if (params.scrollPosOnScene > params.frame.getEndPos()) {
+      params.element.style.width = `${this.endWidth(Util.clientWidth(), Util.clientHeight())}px`;
+      return;
+    }
+
+    const motionL = this.endWidth(Util.clientWidth(), Util.clientHeight()) - this.startWidth(Util.clientWidth(), Util.clientHeight());
+    const d = motionL / params.frame.length();
+    const width = this.startWidth(Util.clientWidth(), Util.clientHeight()) + d * (params.scrollPosOnScene - params.frame.getStartPos());
+
+    params.element.style.width = `${width}px`;
   }
 
-  renderHeight(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.height = `${this.startHeight(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.height = `${this.endHeight(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-
-      const motionL = this.endHeight(Util.clientWidth(), Util.clientHeight()) - this.startHeight(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const height = this.startHeight(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
-
-      element.style.height = `${height}px`;
+  renderHeight(params: MotionParams): void {
+    if (params.scrollPosOnScene < params.frame.getStartPos()) {
+      params.element.style.height = `${this.startHeight(Util.clientWidth(), Util.clientHeight())}px`;
+      return;
     }
+    if (params.scrollPosOnScene > params.frame.getEndPos()) {
+      params.element.style.height = `${this.endHeight(Util.clientWidth(), Util.clientHeight())}px`;
+      return;
+    }
+
+    const motionL = this.endHeight(Util.clientWidth(), Util.clientHeight()) - this.startHeight(Util.clientWidth(), Util.clientHeight());
+    const d = motionL / params.frame.length();
+    const height = this.startHeight(Util.clientWidth(), Util.clientHeight()) + d * (params.scrollPosOnScene - params.frame.getStartPos());
+
+    params.element.style.height = `${height}px`;
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
-    this.renderWidth(scrollPosForFrame, frame, element);
-    this.renderHeight(scrollPosForFrame, frame, element);
+  override make(params: MotionParams): void {
+    if (params.element) {
+      this.renderWidth(params);
+      this.renderHeight(params);
+    } else {
+      throw new Error('There is no an element');
+    }
   }
 
 }

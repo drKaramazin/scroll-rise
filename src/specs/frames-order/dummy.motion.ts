@@ -1,4 +1,4 @@
-import { Motion, Scene, TimeFrame } from '../../lib';
+import { Motion, MotionParams } from '../../lib';
 
 export class DummyMotion extends Motion {
 
@@ -8,6 +8,6 @@ export class DummyMotion extends Motion {
     super();
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {}
+  override make(params: MotionParams): void {}
 
 }

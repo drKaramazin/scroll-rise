@@ -1,7 +1,7 @@
 import { Actor } from '../actors/actor';
 import { Util } from '../util';
 import { Scene, SceneOptions } from './scene';
-import { TimeFrame } from '../time-frame';
+import { MotionParams } from '../models/motion-params.model';
 
 export class FixedActorsScene extends Scene<SceneOptions> {
 
@@ -22,16 +22,16 @@ export class FixedActorsScene extends Scene<SceneOptions> {
     actor.initElement(this.elementY(), this);
   }
 
-  interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
-    if (scrollPos < frame.getStartPos()) {
+  interceptY(params: MotionParams, startY: () => number, endY: () => number): number | undefined {
+    if (params.scrollPosOnScene < params.frame.getStartPos()) {
       return this.elementY() < 0 ? startY() : this.elementY() + startY();
     }
-    if (scrollPos > frame.getEndPos()) {
+    if (params.scrollPosOnScene > params.frame.getEndPos()) {
       const top = this.elementHeight() + this.elementY();
       return top < this.platformHeight() ? endY() - (this.platformHeight() - top) : endY();
     }
 
-    return super.interceptY(scrollPos, frame, startY, endY);
+    return super.interceptY(params, startY, endY);
   }
 
 }

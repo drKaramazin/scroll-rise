@@ -1,9 +1,46 @@
 import { ChangeStage } from '../test-tools';
-import { Util } from '../../lib';
+import { MoveMotion, TimeFrame, Util } from '../../lib';
 import { MoveFixture } from '../move/move.fixture';
-import { MotionFixture } from '../motion.fixture';
+import { MotionFixture, TestStage } from '../motion.fixture';
 
 export class OffsetFixture extends MotionFixture {
+
+  static shortStages: () => TestStage[] = function() {
+    return [{
+      x: 0,
+      y: 0,
+    }, {
+      x: 0,
+      y: Util.castToInt(Util.innerHeight() / 2),
+    }, {
+      x: 0,
+      y: Util.innerHeight(),
+    }, {
+      x: 0,
+      y: Util.innerHeight() + Util.castToInt(Util.innerHeight() / 2),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + Util.castToInt(Util.clientHeight() / 2),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + Util.clientHeight() + Util.castToInt(Util.clientHeight() / 2),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + 2 * Util.clientHeight(),
+    }, {
+      x: 0,
+      y: 2 * Util.innerHeight() + 2 * Util.clientHeight() + Util.castToInt(Util.innerHeight() / 2),
+    }, {
+      x: 0,
+      y: 3 * Util.innerHeight() + 2 * Util.clientHeight(),
+    }];
+  };
 
   static changeX = {
     timeFrame: MoveFixture.changeXTimeFrame,
@@ -109,6 +146,84 @@ export class OffsetFixture extends MotionFixture {
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: -Util.innerHeight() - Util.clientHeight() },
+        },
+      }];
+    },
+  };
+
+  static shortChangeX = {
+    timeFrame: () => new TimeFrame(new MoveMotion({
+      startX: () => 0,
+      startY: () => 0,
+      endX: (w: number) => w - MotionFixture.block.width,
+      endY: () => 0,
+    }), (w: number, h: number) => 0, (w: number, h: number) => 2 * h),
+    stages: (): ChangeStage[] => {
+      return [{
+        scrollTo: this.shortStages()[0],
+        coords: {
+          x: { value: 0 },
+          y: { value: 2 * Util.innerHeight() },
+        },
+      }, {
+        scrollTo: this.shortStages()[1],
+        coords: {
+          x: { value: 0 },
+          y: { value: Util.innerHeight() + Util.innerHeight() / 2, margin: 1 },
+        },
+      }, {
+        scrollTo: this.shortStages()[2],
+        coords: {
+          x: { value: 0 },
+          y: { value: Util.innerHeight() },
+        },
+      }, {
+        scrollTo: this.shortStages()[3],
+        coords: {
+          x: { value: 0 },
+          y: { value: Util.innerHeight() / 2, margin: 1 },
+        },
+      }, {
+        scrollTo: this.shortStages()[4],
+        coords: {
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
+          y: { value: 0 },
+        },
+      }, {
+        scrollTo: this.shortStages()[5],
+        coords: {
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
+          y: { value: 0 },
+        },
+      }, {
+        scrollTo: this.shortStages()[6],
+        coords: {
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) * 3, margin: 1 },
+          y: { value: 0 },
+        },
+      }, {
+        scrollTo: this.shortStages()[7],
+        coords: {
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() / 2, margin: 1 },
+        },
+      }, {
+        scrollTo: this.shortStages()[8],
+        coords: {
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() },
+        },
+      }, {
+        scrollTo: this.shortStages()[9],
+        coords: {
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() - Util.clientHeight() / 2, margin: 1 },
+        },
+      }, {
+        scrollTo: this.shortStages()[10],
+        coords: {
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
+          y: { value: -Util.clientHeight() * 2 },
         },
       }];
     },

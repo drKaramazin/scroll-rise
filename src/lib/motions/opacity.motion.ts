@@ -1,7 +1,7 @@
 import { Value } from '../models/value.model';
 import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
+import { MotionParams } from '../models/motion-params.model';
 
 export interface IOpacityMotion {
   start: Value;
@@ -22,27 +22,25 @@ export class OpacityMotion extends Motion {
     this.end = data.end;
   }
 
-  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.opacity = this.start(Util.clientWidth(), Util.clientHeight()).toString();
+  override make(params: MotionParams): void {
+    if (params.element) {
+      if (params.scrollPosOnScene < params.frame.getStartPos()) {
+        params.element.style.opacity = this.start(Util.clientWidth(), Util.clientHeight()).toString();
         return;
       }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.opacity = this.end(Util.clientWidth(), Util.clientHeight()).toString();
+      if (params.scrollPosOnScene > params.frame.getEndPos()) {
+        params.element.style.opacity = this.end(Util.clientWidth(), Util.clientHeight()).toString();
         return;
       }
 
       const motionL = this.end(Util.clientWidth(), Util.clientHeight()) - this.start(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const opacity = this.start(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
+      const d = motionL / params.frame.length();
+      const opacity = this.start(Util.clientWidth(), Util.clientHeight()) + d * (params.scrollPosOnScene - params.frame.getStartPos());
 
-      element.style.opacity = opacity.toString();
+      params.element.style.opacity = opacity.toString();
+    } else {
+      throw new Error('There is no an element');
     }
-  }
-
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
-    this.renderOpacity(scrollPosForFrame, frame, element);
   }
 
 }

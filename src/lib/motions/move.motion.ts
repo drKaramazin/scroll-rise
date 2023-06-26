@@ -1,8 +1,7 @@
 import { Value } from '../models/value.model';
 import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
-import { Scene } from '../scenes/scene';
+import { MotionParams } from '../models/motion-params.model';
 
 export interface IMoveMotion {
   startX: Value;
@@ -29,46 +28,64 @@ export class MoveMotion extends Motion {
     this.endY = data.endY;
   }
 
-  renderX(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.left = `${this.startX(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.left = `${this.endX(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-
-      const motionL = this.endX(Util.clientWidth(), Util.clientHeight()) - this.startX(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos()));
-
-      element.style.left = `${x}px`;
-    }
+  protected setLeft(element: HTMLElement, left: number): void {
+    element.style.left = `${left}px`;
   }
 
-  renderY(scrollPos: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {
+  protected setTop(params: MotionParams, top: number): void {
     const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
     const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
 
-    if (element) {
-      const motionL = endY() - startY();
-      const d = motionL / frame.length();
-      let y = Util.castToInt(startY() + d * (scrollPos - frame.getStartPos()));
-
-      const sceneInterceptor = scene.interceptY(scrollPos, frame, startY, endY);
-      if (sceneInterceptor !== undefined) {
-        y = sceneInterceptor;
-      }
-
-      element.style.top = `${y}px`;
+    const sceneInterceptor = params.scene.interceptY(params, startY, endY);
+    if (sceneInterceptor !== undefined) {
+      top = sceneInterceptor;
     }
+
+    params.element.style.top = `${top}px`;
   }
 
-  make(scrollPosOnFrame: number, frame: TimeFrame, element: HTMLElement, scene: Scene<any>): void {
-    this.renderX(scrollPosOnFrame, frame, element);
-    this.renderY(scrollPosOnFrame, frame, element, scene);
+  protected makeStartStep(params: MotionParams): void {
+    const x = this.startX(Util.clientWidth(), Util.clientHeight());
+    this.setLeft(params.element, x);
+
+    const y = this.startY(Util.clientWidth(), Util.clientHeight());
+    this.setTop(params, y);
+  }
+
+  protected makeEndStep(params: MotionParams): void {
+    const x = this.endX(Util.clientWidth(), Util.clientHeight());
+    this.setLeft(params.element, x);
+
+    const y = this.endY(Util.clientWidth(), Util.clientHeight());
+    this.setTop(params, y);
+  }
+
+  protected makeUsualStep(params: MotionParams): void {
+    const xLength = this.endX(Util.clientWidth(), Util.clientHeight()) - this.startX(Util.clientWidth(), Util.clientHeight());
+
+    const x = Util.castToInt(this.startX(Util.clientWidth(), Util.clientHeight()) + xLength * params.delta);
+    this.setLeft(params.element, x);
+
+    const yLength = this.endY(Util.clientWidth(), Util.clientHeight()) - this.startY(Util.clientWidth(), Util.clientHeight());
+    const y = Util.castToInt(this.startY(Util.clientWidth(), Util.clientHeight()) + yLength * params.delta);
+    this.setTop(params, y);
+  }
+
+  make(params: MotionParams): void {
+    if (params.element) {
+      if (params.delta < 0) {
+        this.makeStartStep(params);
+        return;
+      }
+      if (params.delta > 1) {
+        this.makeEndStep(params);
+        return;
+      }
+
+      this.makeUsualStep(params);
+    } else {
+      throw new Error('There is no an element');
+    }
   }
 
 }

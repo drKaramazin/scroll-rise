@@ -2,6 +2,7 @@ export { ScrollRise } from './scroll-rise';
 export { ScrollRiseSpeed } from './scroll-rise-speed';
 
 export { Value } from './models/value.model';
+export { MotionParams } from './models/motion-params.model';
 export { Util } from './util';
 
 export { StickyPlatformScene } from './scenes/sticky-platform.scene';

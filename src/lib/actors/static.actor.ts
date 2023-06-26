@@ -24,11 +24,11 @@ export class StaticActor extends InitiableActor {
     };
   }
 
-  override bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined {
+  override bindElement(scrollPosOnScene: number, scene: Scene<any>): HTMLElement | undefined {
     if (this.element) {
       if (this.options?.initPosition) {
         const timeFrame = this.findFirstMoveMotionFrame();
-        (timeFrame.motion as MoveMotion).make(scrollPosOnFrame, timeFrame, this.element, scene);
+        (timeFrame.motion as MoveMotion).make(Util.prepareMotionParams(scrollPosOnScene, this.element, timeFrame, scene));
       }
       if (this.options?.initSize) {
         const startDimensions = this.calcStartSize();

@@ -1,8 +1,8 @@
 import { Actor } from '../actors/actor';
 import { Util } from '../util';
-import { TimeFrame } from '../time-frame';
 import { MeasuringGrid } from '../measuring-grid';
 import { MeasuringGridModel } from '../models/measuring-grid.model';
+import { MotionParams } from '../models/motion-params.model';
 
 export interface SceneOptions {
   offset?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
@@ -74,7 +74,7 @@ export abstract class Scene<Options extends SceneOptions> {
     return this._actors;
   }
 
-  public interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
+  public interceptY(params: MotionParams, startY: () => number, endY: () => number): number | undefined {
     return undefined;
   }
 

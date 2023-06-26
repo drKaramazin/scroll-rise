@@ -1,4 +1,7 @@
 import { WindowSizesModel } from './models/window-sizes.model';
+import { MotionParams } from './models/motion-params.model';
+import { TimeFrame } from './time-frame';
+import { Scene } from './scenes/scene';
 
 export class Util {
 
@@ -43,6 +46,20 @@ export class Util {
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight,
     );
+  }
+
+  static prepareMotionParams(scrollPosOnScene: number, element: HTMLElement, frame: TimeFrame, scene: Scene<any>): MotionParams {
+    const scrollPosOnFrame = scrollPosOnScene - frame.getStartPos();
+    const delta = scrollPosOnFrame / frame.length();
+
+    return {
+      scrollPosOnScene,
+      scrollPosOnFrame,
+      delta,
+      element,
+      frame,
+      scene,
+    };
   }
 
   static windowSizes(): WindowSizesModel {
