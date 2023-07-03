@@ -34,7 +34,7 @@ export class ScrollRise {
   tick(): void {
     if (!this.ticking) {
       window?.requestAnimationFrame(() => {
-        this.render(this.scene.elementY());
+        this.render();
         this.ticking = false;
       });
 
@@ -84,8 +84,8 @@ export class ScrollRise {
   afterRender: () => void;
   beforeRender: () => void;
   @Wrapped({ before: 'beforeRender', after: 'afterRender' })
-  render(scrollPos: number): void {
-    this.scene.render(scrollPos);
+  render(): void {
+    this.scene.render();
   }
 
   static version(): string {

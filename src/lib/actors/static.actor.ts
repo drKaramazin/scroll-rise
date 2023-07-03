@@ -28,7 +28,12 @@ export class StaticActor extends InitiableActor {
     if (this.element) {
       if (this.options?.initPosition) {
         const timeFrame = this.findFirstMoveMotionFrame();
-        (timeFrame.motion as MoveMotion).make(Util.prepareMotionParams(scrollPosOnScene, this.element, timeFrame, scene));
+        (timeFrame.motion as MoveMotion).make(Util.prepareMotionParams(
+          scrollPosOnScene,
+          this.element,
+          timeFrame,
+          scene,
+        ));
       }
       if (this.options?.initSize) {
         const startDimensions = this.calcStartSize();

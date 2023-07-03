@@ -23,7 +23,12 @@ export abstract class Actor {
   render(scrollPosOnScene: number, scene: Scene<any>): void {
     if (this.element) {
       const frames = this.renderActorStrategy.takeRenderFrame(scrollPosOnScene);
-      frames.forEach(frame => frame.motion.make(Util.prepareMotionParams(scrollPosOnScene, this.element!, frame, scene)));
+      frames.forEach(frame => frame.motion.make(Util.prepareMotionParams(
+        scrollPosOnScene,
+        this.element!,
+        frame,
+        scene,
+      )));
     } else {
       throw new Error('Here isn\'t an element');
     }

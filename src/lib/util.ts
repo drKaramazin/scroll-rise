@@ -50,7 +50,7 @@ export class Util {
 
   static prepareMotionParams(scrollPosOnScene: number, element: HTMLElement, frame: TimeFrame, scene: Scene<any>): MotionParams {
     const scrollPosOnFrame = scrollPosOnScene - frame.getStartPos();
-    const delta = scrollPosOnFrame / frame.length();
+    const delta = (scrollPosOnFrame - scene.offset()) / frame.length();
 
     return {
       scrollPosOnScene,

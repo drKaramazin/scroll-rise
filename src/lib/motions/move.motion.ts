@@ -36,7 +36,7 @@ export class MoveMotion extends Motion {
     const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
     const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
 
-    const sceneInterceptor = params.scene.interceptY(params, startY, endY);
+    const sceneInterceptor = params.scene.interceptY(params, top, startY, endY);
     if (sceneInterceptor !== undefined) {
       top = sceneInterceptor;
     }

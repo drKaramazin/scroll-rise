@@ -22,7 +22,7 @@ export class FixedActorsScene extends Scene<SceneOptions> {
     actor.initElement(this.elementY(), this);
   }
 
-  interceptY(params: MotionParams, startY: () => number, endY: () => number): number | undefined {
+  interceptY(params: MotionParams, y: number, startY: () => number, endY: () => number): number | undefined {
     if (params.scrollPosOnScene < params.frame.getStartPos()) {
       return this.elementY() < 0 ? startY() : this.elementY() + startY();
     }
@@ -31,7 +31,7 @@ export class FixedActorsScene extends Scene<SceneOptions> {
       return top < this.platformHeight() ? endY() - (this.platformHeight() - top) : endY();
     }
 
-    return super.interceptY(params, startY, endY);
+    return super.interceptY(params, y, startY, endY);
   }
 
 }
