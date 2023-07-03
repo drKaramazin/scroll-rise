@@ -37,7 +37,7 @@ export class BoundMotion extends Motion {
         this.applyProperties(params.element, this.after(Util.clientWidth(), Util.clientHeight()));
       }
     } else {
-      throw new Error('There is no an element');
+      throw new Error('There is no element');
     }
   }
 

@@ -16,6 +16,7 @@ export { StaticActor } from './actors/static.actor';
 export { RefActor } from './actors/ref.actor';
 
 export { Motion } from './motions/motion';
+export { FramedMotion } from './motions/framed-motion';
 export { MoveMotion } from './motions/move.motion';
 export { SizeMotion } from './motions/size.motion';
 export { OpacityMotion } from './motions/opacity.motion';

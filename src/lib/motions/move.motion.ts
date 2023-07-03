@@ -1,7 +1,7 @@
 import { Value } from '../models/value.model';
-import { Motion } from './motion';
 import { Util } from '../util';
 import { MotionParams } from '../models/motion-params.model';
+import { FramedMotion } from './framed-motion';
 
 export interface IMoveMotion {
   startX: Value;
@@ -10,7 +10,7 @@ export interface IMoveMotion {
   endY: Value;
 }
 
-export class MoveMotion extends Motion {
+export class MoveMotion extends FramedMotion {
 
   override name = 'MoveMotion';
 
@@ -69,23 +69,6 @@ export class MoveMotion extends Motion {
     const yLength = this.endY(Util.clientWidth(), Util.clientHeight()) - this.startY(Util.clientWidth(), Util.clientHeight());
     const y = Util.castToInt(this.startY(Util.clientWidth(), Util.clientHeight()) + yLength * params.delta);
     this.setTop(params, y);
-  }
-
-  make(params: MotionParams): void {
-    if (params.element) {
-      if (params.delta < 0) {
-        this.makeStartStep(params);
-        return;
-      }
-      if (params.delta > 1) {
-        this.makeEndStep(params);
-        return;
-      }
-
-      this.makeUsualStep(params);
-    } else {
-      throw new Error('There is no an element');
-    }
   }
 
 }
