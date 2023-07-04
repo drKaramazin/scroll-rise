@@ -55,14 +55,6 @@ describe('Fixed Actors Scene: opacity motion test', function() {
     document.body.removeChild(document.getElementById('test-body')!);
   });
 
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
-  });
-
   it('should have a correct opacity', function() {
     block.addFrames([
       OpacityFixture.changeOpacity.timeFrame(),
