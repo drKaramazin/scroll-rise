@@ -64,31 +64,31 @@ describe('Fixed Actors Scene: offset test (short)', function() {
     );
   });
 
-  // it('should have correct X, Y coords in changing Y', function() {
-  //   block.addFrames([
-  //     OffsetFixture.changeY.timeFrame(),
-  //   ]);
-  //
-  //   scene.add(block);
-  //
-  //   return TestTools.testGoingStages(
-  //     block,
-  //     blockElement,
-  //     OffsetFixture.changeY.stages(),
-  //   );
-  // });
-  //
-  // it('should have correct X, Y coords in changing both X and Y', function() {
-  //   block.addFrames([
-  //     OffsetFixture.changeXY.timeFrame(),
-  //   ]);
-  //
-  //   scene.add(block);
-  //
-  //   return TestTools.testGoingStages(
-  //     block,
-  //     blockElement,
-  //     OffsetFixture.changeXY.stages(),
-  //   );
-  // });
+  it('should have correct X, Y coords in changing Y', function() {
+    block.addFrames([
+      OffsetFixture.shortChangeY.timeFrame(),
+    ]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      OffsetFixture.shortChangeY.stages(),
+    );
+  });
+
+  it('should have correct X, Y coords in changing both X and Y', function() {
+    block.addFrames([
+      OffsetFixture.shortChangeXY.timeFrame(),
+    ]);
+
+    scene.add(block);
+
+    return TestTools.testGoingStages(
+      block,
+      blockElement,
+      OffsetFixture.shortChangeXY.stages(),
+    );
+  });
 });

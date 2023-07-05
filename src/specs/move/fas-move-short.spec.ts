@@ -1,14 +1,14 @@
-import { ScrollRise, StaticActor, StickyPlatformScene } from '../../lib';
-import { FramesOrderFixture } from '../frames-order/frames-order.fixture';
-import { TestMeasuringGrid } from '../test-measuring-grid';
+import { ScrollRise, StaticActor, FixedActorsScene } from '../../lib';
 import { TestTools } from '../test-tools';
-import { OffsetFixture } from './offset.fixture';
+import { MoveFixture } from './move.fixture';
 import { customMatchers } from '../custom-matchers';
 import { generateExamples } from '../generate-examples';
+import { TestMeasuringGrid } from '../test-measuring-grid';
+import { MoveShortFixture } from './move-short.fixture';
 
-describe('Sticky Platforms Scene: offset test (short)', function() {
+describe('Fixed Actors Scene: move motion test (short)', function() {
   let sceneElement: HTMLElement;
-  let scene: StickyPlatformScene;
+  let scene: FixedActorsScene;
   let blockElement: HTMLElement;
   let block: StaticActor;
   let sr: ScrollRise;
@@ -22,15 +22,14 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', FramesOrderFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MoveFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
-    scene = new StickyPlatformScene(
+    scene = new FixedActorsScene(
       sceneElement,
       (w: number, h: number) => 2 * h,
       {
-        offset: (w, h) => -h / 2,
         measuringGrid: TestMeasuringGrid,
       },
     );
@@ -40,8 +39,8 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     blockElement = document.getElementById('block')!;
 
     block = new StaticActor(blockElement, {
-      initOpacity: false,
       initSize: false,
+      initOpacity: false,
     });
   });
 
@@ -52,7 +51,7 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
 
   it('should have correct X, Y coords in changing X', function() {
     block.addFrames([
-      OffsetFixture.shortChangeX.timeFrame(),
+      MoveShortFixture.changeX.timeFrame(),
     ]);
 
     scene.add(block);
@@ -60,13 +59,13 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeX.stages(),
+      MoveShortFixture.changeX.stages(),
     );
   });
 
   it('should have correct X, Y coords in changing Y', function() {
     block.addFrames([
-      OffsetFixture.shortChangeY.timeFrame(),
+      MoveShortFixture.changeY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -74,13 +73,13 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeY.stages(),
+      MoveShortFixture.changeY.stages(),
     );
   });
 
   it('should have correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
-      OffsetFixture.shortChangeXY.timeFrame(),
+      MoveShortFixture.changeXY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -88,7 +87,7 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeXY.stages(),
+      MoveShortFixture.changeXY.stages(),
     );
   });
 });

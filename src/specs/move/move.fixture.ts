@@ -252,11 +252,13 @@ export abstract class MoveFixture extends MotionFixture {
   static changeXY = {
     timeFrame: MoveFixture.changeXYTimeFrame,
     stages: (): ChangeStage[] => {
-      return this.changeX.stages().map((stage, index) => ({
-        scrollTo: this.changeX.stages()[index].scrollTo,
+      const stagesX = this.changeX.stages();
+      const stagesY = this.changeY.stages();
+      return stagesX.map((stage, index) => ({
+        scrollTo: stagesX[index].scrollTo,
         coords: {
-          x: this.changeX.stages()[index].coords!.x,
-          y: this.changeY.stages()[index].coords!.y,
+          x: stagesX[index].coords!.x,
+          y: stagesY[index].coords!.y,
         },
       }));
     },
