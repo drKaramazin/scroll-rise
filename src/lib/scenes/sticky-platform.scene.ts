@@ -12,6 +12,10 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
 
   public platform: HTMLElement;
 
+  protected platformHeight(deviceWidth: number, deviceHeight: number): number {
+    return this.options!.stickyPlatformHeight!(deviceWidth, deviceHeight);
+  }
+
   override defaults(): StickyPlatformSceneOptions {
     return {
       ...super.defaults(),
@@ -25,7 +29,7 @@ export class StickyPlatformScene extends Scene<StickyPlatformSceneOptions> {
   }
 
   resizePlatform(): void {
-    this.platform.style.height = `${this.options!.stickyPlatformHeight!(Util.clientWidth(), Util.clientHeight())}px`;
+    this.platform.style.height = `${this.platformHeightValue()}px`;
   }
 
   protected override init(): void {

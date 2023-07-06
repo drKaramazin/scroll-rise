@@ -6,7 +6,10 @@ import { MotionParams } from '../models/motion-params.model';
 export class FixedActorsScene extends Scene<SceneOptions> {
 
   public override name = 'FixedActorsScene';
-  protected platformHeight = Util.clientHeight;
+
+  protected platformHeight(deviceWidth: number, deviceHeight: number): number {
+    return deviceHeight;
+  }
 
   override resizeHeight(): void {
     this.element.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
@@ -22,16 +25,17 @@ export class FixedActorsScene extends Scene<SceneOptions> {
     actor.initElement(this.elementY(), this);
   }
 
-  interceptY(params: MotionParams, y: number, startY: () => number, endY: () => number): number | undefined {
-    if (params.scrollPosOnScene < params.frame.getStartPos()) {
+  interceptY(y: number, params: MotionParams, startY: () => number, endY: () => number): number {
+    if (params.scrollPosOnScene < 0) {
       return this.elementY() < 0 ? startY() : this.elementY() + startY();
     }
-    if (params.scrollPosOnScene > params.frame.getEndPos()) {
+
+    if (params.scrollPosOnScene > this.elementHeight() - this.platformHeightValue()) {
       const top = this.elementHeight() + this.elementY();
-      return top < this.platformHeight() ? endY() - (this.platformHeight() - top) : endY();
+      return top < this.platformHeightValue() ? endY() - (this.platformHeightValue() - top) : endY();
     }
 
-    return super.interceptY(params, y, startY, endY);
+    return super.interceptY(y, params, startY, endY);
   }
 
 }

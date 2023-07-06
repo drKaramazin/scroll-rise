@@ -17,6 +17,7 @@ export abstract class Scene<Options extends SceneOptions> {
 
   protected abstract init(): void;
   public abstract resizeHeight(): void;
+  protected abstract platformHeight(deviceWidth: number, deviceHeight: number): number;
 
   protected grid: MeasuringGrid;
 
@@ -63,6 +64,10 @@ export abstract class Scene<Options extends SceneOptions> {
     return this.element.getBoundingClientRect().y;
   }
 
+  platformHeightValue(): number {
+    return this.platformHeight(Util.clientWidth(), Util.clientHeight());
+  }
+
   scrollPos(): number {
     return -this.elementY();
   }
@@ -79,8 +84,8 @@ export abstract class Scene<Options extends SceneOptions> {
     return this._actors;
   }
 
-  public interceptY(params: MotionParams, y: number, startY: () => number, endY: () => number): number | undefined {
-    return undefined;
+  public interceptY(y: number, params: MotionParams, startY: () => number, endY: () => number): number {
+    return y;
   }
 
   public redrawMeasuringGrid(): void {
