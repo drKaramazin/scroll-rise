@@ -84,7 +84,7 @@ export abstract class Scene<Options extends SceneOptions> {
     return this._actors;
   }
 
-  public interceptY(y: number, params: MotionParams, startY: () => number, endY: () => number): number {
+  public interceptY(y: number, params: MotionParams): number {
     return y;
   }
 

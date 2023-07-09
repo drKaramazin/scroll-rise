@@ -33,11 +33,7 @@ export class MoveMotion extends FramedMotion {
   }
 
   protected setTop(params: MotionParams, y: number): void {
-    const startY = (): number => this.startY(Util.clientWidth(), Util.clientHeight());
-    const endY = (): number => this.endY(Util.clientWidth(), Util.clientHeight());
-
-    const top = params.scene.interceptY(y, params, startY, endY);
-
+    const top = params.scene.interceptY(y, params);
     params.element.style.top = `${top}px`;
   }
 

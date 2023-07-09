@@ -25,17 +25,16 @@ export class FixedActorsScene extends Scene<SceneOptions> {
     actor.initElement(this.elementY(), this);
   }
 
-  interceptY(y: number, params: MotionParams, startY: () => number, endY: () => number): number {
+  interceptY(y: number, params: MotionParams): number {
     if (params.scrollPosOnScene < 0) {
-      return this.elementY() < 0 ? startY() : this.elementY() + startY();
+      return y - params.scrollPosOnScene;
     }
 
     if (params.scrollPosOnScene > this.elementHeight() - this.platformHeightValue()) {
-      const top = this.elementHeight() + this.elementY();
-      return top < this.platformHeightValue() ? endY() - (this.platformHeightValue() - top) : endY();
+      return y - this.platformHeightValue() + this.elementHeight() + this.elementY();
     }
 
-    return super.interceptY(y, params, startY, endY);
+    return super.interceptY(y, params);
   }
 
 }
