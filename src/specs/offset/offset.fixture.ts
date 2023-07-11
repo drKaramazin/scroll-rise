@@ -1,35 +1,9 @@
-import { MotionFixture } from '../motion.fixture';
-import { TimeFrame, MoveMotion, Util } from '../../lib';
 import { ChangeStage } from '../test-tools';
+import { Util } from '../../lib';
+import { MoveFixture } from '../move/move.fixture';
+import { MotionFixture } from '../motion.fixture';
 
-export abstract class MoveFixture extends MotionFixture {
-
-  static changeXTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      startY: () => 0,
-      endX: (w: number) => w - MotionFixture.block.width,
-      endY: () => 0,
-    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
-  };
-
-  static changeYTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      startY: () => 0,
-      endX: () => 0,
-      endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
-  }
-
-  static changeXYTimeFrame(): TimeFrame {
-    return new TimeFrame(new MoveMotion({
-      startX: () => 0,
-      startY: () => 0,
-      endX: (w: number) => w - MotionFixture.block.width,
-      endY: (w: number, h: number) => h - MotionFixture.block.height,
-    }), (w: number, h: number) => h, (w: number, h: number) => 3 * h);
-  }
+export class OffsetFixture extends MotionFixture {
 
   static changeX = {
     timeFrame: MoveFixture.changeXTimeFrame,
@@ -73,25 +47,25 @@ export abstract class MoveFixture extends MotionFixture {
       }, {
         scrollTo: this.stages()[6],
         coords: {
-          x: { value: 0 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[7],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[8],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) * 3, margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[9],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) * 3, margin: 1 },
+          x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: 0 },
         },
       }, {
@@ -183,25 +157,25 @@ export abstract class MoveFixture extends MotionFixture {
         scrollTo: this.stages()[6],
         coords: {
           x: { value: 0 },
-          y: { value: 0 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[7],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4), margin: 1 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[8],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2), margin: 1 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[9],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3, margin: 1 },
+          y: { value: Util.clientHeight() - MoveFixture.block.height },
         },
       }, {
         scrollTo: this.stages()[10],
@@ -252,13 +226,11 @@ export abstract class MoveFixture extends MotionFixture {
   static changeXY = {
     timeFrame: MoveFixture.changeXYTimeFrame,
     stages: (): ChangeStage[] => {
-      const stagesX = this.changeX.stages();
-      const stagesY = this.changeY.stages();
-      return stagesX.map((stage, index) => ({
-        scrollTo: stagesX[index].scrollTo,
+      return this.changeX.stages().map((stage, index) => ({
+        scrollTo: this.changeX.stages()[index].scrollTo,
         coords: {
-          x: stagesX[index].coords!.x,
-          y: stagesY[index].coords!.y,
+          x: this.changeX.stages()[index].coords!.x,
+          y: this.changeY.stages()[index].coords!.y,
         },
       }));
     },

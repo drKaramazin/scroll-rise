@@ -48,12 +48,6 @@ describe('Frames order test', function() {
     document.body.removeChild(document.getElementById('test-body')!);
   });
 
-  it('should be inited', function() {
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
-  });
-
   it('should have a correct order with only one frame', function() {
     const motion = new DummyMotion('Single motion');
 

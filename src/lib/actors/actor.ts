@@ -2,6 +2,7 @@ import { TimeFrame } from '../time-frame';
 import { Scene } from '../scenes/scene';
 import { Wrapped } from '../decorators/wrapped';
 import { RenderingActorStrategy } from '../strategies/rendering-actor.strategy';
+import { Util } from '../util';
 
 export abstract class Actor {
 
@@ -19,10 +20,15 @@ export abstract class Actor {
   beforeRender: () => void;
   afterRender: () => void;
   @Wrapped({ before: 'beforeRender', after: 'afterRender' })
-  render(scrollPos: number, scene: Scene<any>): void {
+  render(scrollPosOnScene: number, scene: Scene<any>): void {
     if (this.element) {
-      const frames = this.renderActorStrategy.takeRenderFrame(scrollPos);
-      frames.forEach(frame => frame.motion.make(scrollPos, frame, this.element!, scene));
+      const frames = this.renderActorStrategy.takeRenderFrame(scrollPosOnScene);
+      frames.forEach(frame => frame.motion.make(Util.prepareMotionParams(
+        scrollPosOnScene,
+        this.element!,
+        frame,
+        scene,
+      )));
     } else {
       throw new Error('Here isn\'t an element');
     }
@@ -37,8 +43,8 @@ export abstract class Actor {
     this.renderActorStrategy.prerender(this.frames);
   }
 
-  initElement(scrollPosOnFrame: number, scene: Scene<any>): void {
-    this.element = this.bindElement(scrollPosOnFrame, scene);
+  initElement(scrollPosOnScene: number, scene: Scene<any>): void {
+    this.element = this.bindElement(scrollPosOnScene, scene);
     this.afterBindElement();
   }
 

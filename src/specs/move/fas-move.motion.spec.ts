@@ -1,5 +1,4 @@
 import { StaticActor, ScrollRise, FixedActorsScene } from '../../lib';
-import { MotionFixture } from '../motion.fixture';
 import { TestTools } from '../test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from '../custom-matchers';
@@ -14,20 +13,20 @@ describe('Fixed Actors Scene: move motion test', function() {
   let sr: ScrollRise;
 
   generateExamples([
-    'should have a correct X, Y coords in changing X',
-    'should have a correct X, Y coords in changing Y',
-    'should have a correct X, Y coords in changing both X and Y',
+    'should have correct X, Y coords in changing X',
+    'should have correct X, Y coords in changing Y',
+    'should have correct X, Y coords in changing both X and Y',
   ]);
 
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', MotionFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', MoveFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
     scene = new FixedActorsScene(
-      sceneElement!,
+      sceneElement,
       (w: number, h: number) => 5 * h,
       {
         measuringGrid: TestMeasuringGrid,
@@ -38,7 +37,7 @@ describe('Fixed Actors Scene: move motion test', function() {
 
     blockElement = document.getElementById('block')!;
 
-    block = new StaticActor(blockElement!, {
+    block = new StaticActor(blockElement, {
       initSize: false,
       initOpacity: false,
     });
@@ -49,15 +48,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     document.body.removeChild(document.getElementById('test-body')!);
   });
 
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
-  });
-
-  it('should have a correct X, Y coords in changing X', function() {
+  it('should have correct X, Y coords in changing X', function() {
     block.addFrames([
       MoveFixture.changeX.timeFrame(),
     ]);
@@ -71,7 +62,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  it('should have correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);
@@ -85,7 +76,7 @@ describe('Fixed Actors Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);

@@ -1,5 +1,4 @@
-import { TimeFrame } from '../time-frame';
-import { Scene } from '../scenes/scene';
+import { MotionParams } from '../models/motion-params.model';
 
 export abstract class Motion {
 
@@ -9,11 +8,6 @@ export abstract class Motion {
     return this.name;
   }
 
-  abstract make(
-    scrollPosForFrame: number,
-    frame: TimeFrame,
-    element: HTMLElement,
-    scene: Scene<any>,
-  ): void;
+  abstract make(params: MotionParams): void;
 
 }

@@ -1,12 +1,15 @@
 import { Actor } from '../actors/actor';
 import { Util } from '../util';
 import { Scene, SceneOptions } from './scene';
-import { TimeFrame } from '../time-frame';
+import { MotionParams } from '../models/motion-params.model';
 
 export class FixedActorsScene extends Scene<SceneOptions> {
 
   public override name = 'FixedActorsScene';
-  protected platformHeight = Util.clientHeight;
+
+  protected platformHeight(deviceWidth: number, deviceHeight: number): number {
+    return deviceHeight;
+  }
 
   override resizeHeight(): void {
     this.element.style.height = `${this.height(Util.clientWidth(), Util.clientHeight())}px`;
@@ -22,16 +25,16 @@ export class FixedActorsScene extends Scene<SceneOptions> {
     actor.initElement(this.elementY(), this);
   }
 
-  interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
-    if (scrollPos < frame.getStartPos()) {
-      return this.elementY() < 0 ? startY() : this.elementY() + startY();
-    }
-    if (scrollPos > frame.getEndPos()) {
-      const top = this.elementHeight() + this.elementY();
-      return top < this.platformHeight() ? endY() - (this.platformHeight() - top) : endY();
+  interceptY(y: number, params: MotionParams): number {
+    if (params.scrollPosOnScene < 0) {
+      return y - params.scrollPosOnScene;
     }
 
-    return super.interceptY(scrollPos, frame, startY, endY);
+    if (params.scrollPosOnScene > this.elementHeight() - this.platformHeightValue()) {
+      return y - this.platformHeightValue() + this.elementHeight() + this.elementY();
+    }
+
+    return super.interceptY(y, params);
   }
 
 }

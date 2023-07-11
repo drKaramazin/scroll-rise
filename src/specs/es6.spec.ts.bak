@@ -28,9 +28,4 @@ describe("Init test", function() {
         document.body.removeChild(document.getElementById('scene'));
     });
 
-    it("should be inited", function() {
-        expect(sceneElement).toBeTruthy();
-        expect(scene).toBeTruthy();
-        expect(sr).toBeTruthy();
-    });
 });

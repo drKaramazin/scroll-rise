@@ -1,7 +1,7 @@
 import { Value } from '../models/value.model';
-import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
+import { MotionParams } from '../models/motion-params.model';
+import { FramedMotion } from './framed-motion';
 
 export interface ISizeMotion {
   startWidth: Value;
@@ -10,7 +10,7 @@ export interface ISizeMotion {
   endHeight: Value;
 }
 
-export class SizeMotion extends Motion {
+export class SizeMotion extends FramedMotion {
 
   override name = 'SizeMotion';
 
@@ -28,47 +28,38 @@ export class SizeMotion extends Motion {
     this.endHeight = data.endHeight;
   }
 
-  renderWidth(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.width = `${this.startWidth(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.width = `${this.endWidth(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-
-      const motionL = this.endWidth(Util.clientWidth(), Util.clientHeight()) - this.startWidth(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const width = this.startWidth(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
-
-      element.style.width = `${width}px`;
-    }
+  protected setWidth(params: MotionParams, width: number): void {
+    params.element.style.width = `${width}px`;
   }
 
-  renderHeight(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.height = `${this.startHeight(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.height = `${this.endHeight(Util.clientWidth(), Util.clientHeight())}px`;
-        return;
-      }
-
-      const motionL = this.endHeight(Util.clientWidth(), Util.clientHeight()) - this.startHeight(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const height = this.startHeight(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
-
-      element.style.height = `${height}px`;
-    }
+  protected setHeight(params: MotionParams, height: number): void {
+    params.element.style.height = `${height}px`;
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
-    this.renderWidth(scrollPosForFrame, frame, element);
-    this.renderHeight(scrollPosForFrame, frame, element);
+  protected makeStartStep(params: MotionParams): void {
+    const width = this.startWidth(Util.clientWidth(), Util.clientHeight());
+    this.setWidth(params, width);
+
+    const height = this.startHeight(Util.clientWidth(), Util.clientHeight());
+    this.setHeight(params, height);
+  }
+
+  protected makeEndStep(params: MotionParams): void {
+    const width = this.endWidth(Util.clientWidth(), Util.clientHeight());
+    this.setWidth(params, width);
+
+    const height = this.endHeight(Util.clientWidth(), Util.clientHeight());
+    this.setHeight(params, height);
+  }
+
+  protected makeUsualStep(params: MotionParams): void {
+    const widthLength = this.endWidth(Util.clientWidth(), Util.clientHeight()) - this.startWidth(Util.clientWidth(), Util.clientHeight());
+    const width = Util.castToInt(this.startWidth(Util.clientWidth(), Util.clientHeight()) + widthLength * params.delta);
+    this.setWidth(params, width);
+
+    const heightLength = this.endHeight(Util.clientWidth(), Util.clientHeight()) - this.startHeight(Util.clientWidth(), Util.clientHeight());
+    const height = Util.castToInt(this.startHeight(Util.clientWidth(), Util.clientHeight()) + heightLength * params.delta);
+    this.setHeight(params, height);
   }
 
 }
