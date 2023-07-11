@@ -78,7 +78,6 @@ describe('Sticky Platforms Scene: move motion test (short)', function() {
   });
 
   it('should have correct X, Y coords in changing both X and Y', function() {
-    Util.logWindowSizes(); // TODO debug
     block.addFrames([
       MoveShortFixture.changeXY.timeFrame(),
     ]);

@@ -1,8 +1,8 @@
-import { MotionFixture } from '../motion.fixture';
 import { MoveMotion, TimeFrame, Util } from '../../lib';
 import { ChangeStage } from '../test-tools';
+import { MotionShortFixture } from '../motion-short.fixture';
 
-export abstract class MoveShortFixture extends MotionFixture {
+export abstract class MoveShortFixture extends MotionShortFixture {
 
   static changeXTimeFrame(): TimeFrame {
     return new TimeFrame(new MoveMotion({
