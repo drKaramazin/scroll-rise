@@ -1,4 +1,4 @@
-import { ScrollRise, StickyPlatformScene, StaticActor, Util } from '../../lib';
+import { ScrollRise, StickyPlatformScene, StaticActor } from '../../lib';
 import { TestTools } from '../test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from '../custom-matchers';
