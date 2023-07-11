@@ -1,4 +1,4 @@
-import { ScrollRise, StickyPlatformScene, StaticActor } from '../../lib';
+import { ScrollRise, StickyPlatformScene, StaticActor, Util } from '../../lib';
 import { TestTools } from '../test-tools';
 import { MoveFixture } from './move.fixture';
 import { customMatchers } from '../custom-matchers';
@@ -78,6 +78,7 @@ describe('Sticky Platforms Scene: move motion test (short)', function() {
   });
 
   it('should have correct X, Y coords in changing both X and Y', function() {
+    Util.logWindowSizes(); // TODO debug
     block.addFrames([
       MoveShortFixture.changeXY.timeFrame(),
     ]);
