@@ -72,13 +72,13 @@ export class OffsetShortFixture extends MotionShortFixture {
         scrollTo: this.stages()[9],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.clientHeight() - Util.clientHeight() / 2, margin: 1 },
+          y: { value: -Util.clientHeight() - Util.innerHeight() / 2, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[10],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.clientHeight() * 2 },
+          y: { value: -Util.clientHeight() - Util.innerHeight() },
         },
       }];
     },
