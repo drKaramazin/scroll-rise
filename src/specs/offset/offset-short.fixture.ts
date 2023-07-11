@@ -1,12 +1,18 @@
 import { ChangeStage } from '../test-tools';
-import { Util } from '../../lib';
+import { MoveMotion, TimeFrame, Util } from '../../lib';
 import { MoveFixture } from '../move/move.fixture';
 import { MotionFixture } from '../motion.fixture';
+import { MotionShortFixture } from '../motion-short.fixture';
 
-export class OffsetFixture extends MotionFixture {
+export class OffsetShortFixture extends MotionShortFixture {
 
   static changeX = {
-    timeFrame: MoveFixture.changeXTimeFrame,
+    timeFrame: () => new TimeFrame(new MoveMotion({
+      startX: () => 0,
+      startY: () => 0,
+      endX: (w: number) => w - MotionFixture.block.width,
+      endY: () => 0,
+    }), () => 0, (w: number, h: number) => 2 * h),
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: this.stages()[0],
@@ -35,87 +41,56 @@ export class OffsetFixture extends MotionFixture {
       }, {
         scrollTo: this.stages()[4],
         coords: {
-          x: { value: 0 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[5],
         coords: {
-          x: { value: 0 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[6],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4), margin: 1 },
+          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) * 3, margin: 1 },
           y: { value: 0 },
         },
       }, {
         scrollTo: this.stages()[7],
         coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 2), margin: 1 },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[8],
-        coords: {
-          x: { value: Math.round((Util.clientWidth() - MoveFixture.block.width) / 4) * 3, margin: 1 },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[9],
-        coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[10],
-        coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[11],
-        coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[12],
-        coords: {
-          x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: 0 },
-        },
-      }, {
-        scrollTo: this.stages()[13],
-        coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: -Util.clientHeight() / 2, margin: 1 },
         },
       }, {
-        scrollTo: this.stages()[14],
+        scrollTo: this.stages()[8],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
           y: { value: -Util.clientHeight() },
         },
       }, {
-        scrollTo: this.stages()[15],
+        scrollTo: this.stages()[9],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() / 2 - Util.clientHeight(), margin: 1 },
+          y: { value: -Util.clientHeight() - Util.clientHeight() / 2, margin: 1 },
         },
       }, {
-        scrollTo: this.stages()[16],
+        scrollTo: this.stages()[10],
         coords: {
           x: { value: Util.clientWidth() - MoveFixture.block.width },
-          y: { value: -Util.innerHeight() - Util.clientHeight() },
+          y: { value: -Util.clientHeight() * 2 },
         },
       }];
     },
   };
 
   static changeY = {
-    timeFrame: MoveFixture.changeYTimeFrame,
+    timeFrame: () => new TimeFrame(new MoveMotion({
+      startX: () => 0,
+      startY: () => 0,
+      endX: () => 0,
+      endY: (w: number, h: number) => h - MotionFixture.block.height,
+    }), () => 0, (w: number, h: number) => 2 * h),
     stages: (): ChangeStage[] => {
       return [{
         scrollTo: this.stages()[0],
@@ -145,76 +120,40 @@ export class OffsetFixture extends MotionFixture {
         scrollTo: this.stages()[4],
         coords: {
           x: { value: 0 },
-          y: { value: 0 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[5],
         coords: {
           x: { value: 0 },
-          y: { value: 0 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2), margin: 1 },
         },
       }, {
         scrollTo: this.stages()[6],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4), margin: 1 },
+          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[7],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 2), margin: 1 },
+          y: { value: Util.clientHeight() / 2 - MoveFixture.block.height, margin: 1 },
         },
       }, {
         scrollTo: this.stages()[8],
         coords: {
           x: { value: 0 },
-          y: { value: Math.round((Util.clientHeight() - MoveFixture.block.height) / 4) * 3, margin: 1 },
+          y: { value: -MoveFixture.block.height },
         },
       }, {
         scrollTo: this.stages()[9],
         coords: {
           x: { value: 0 },
-          y: { value: Util.clientHeight() - MoveFixture.block.height },
-        },
-      }, {
-        scrollTo: this.stages()[10],
-        coords: {
-          x: { value: 0 },
-          y: { value: Util.clientHeight() - MoveFixture.block.height },
-        },
-      }, {
-        scrollTo: this.stages()[11],
-        coords: {
-          x: { value: 0 },
-          y: { value: Util.clientHeight() - MoveFixture.block.height },
-        },
-      }, {
-        scrollTo: this.stages()[12],
-        coords: {
-          x: { value: 0 },
-          y: { value: Util.clientHeight() - MoveFixture.block.height },
-        },
-      }, {
-        scrollTo: this.stages()[13],
-        coords: {
-          x: { value: 0 },
-          y: { value: Util.clientHeight() / 2 - MoveFixture.block.height, margin: 1 },
-        },
-      }, {
-        scrollTo: this.stages()[14],
-        coords: {
-          x: { value: 0 },
-          y: { value: -MoveFixture.block.height },
-        },
-      }, {
-        scrollTo: this.stages()[15],
-        coords: {
-          x: { value: 0 },
           y: { value: -(Util.innerHeight() / 2) - MoveFixture.block.height, margin: 1 },
         },
       }, {
-        scrollTo: this.stages()[16],
+        scrollTo: this.stages()[10],
         coords: {
           x: { value: 0 },
           y: { value: -Util.innerHeight() - MoveFixture.block.height },
@@ -224,7 +163,12 @@ export class OffsetFixture extends MotionFixture {
   };
 
   static changeXY = {
-    timeFrame: MoveFixture.changeXYTimeFrame,
+    timeFrame: () => new TimeFrame(new MoveMotion({
+      startX: () => 0,
+      startY: () => 0,
+      endX: (w: number) => w - MotionFixture.block.width,
+      endY: (w: number, h: number) => h - MotionFixture.block.height,
+    }), () => 0, (w: number, h: number) => 2 * h),
     stages: (): ChangeStage[] => {
       return this.changeX.stages().map((stage, index) => ({
         scrollTo: this.changeX.stages()[index].scrollTo,

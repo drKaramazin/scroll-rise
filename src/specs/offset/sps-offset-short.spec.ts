@@ -2,9 +2,9 @@ import { ScrollRise, StaticActor, StickyPlatformScene } from '../../lib';
 import { FramesOrderFixture } from '../frames-order/frames-order.fixture';
 import { TestMeasuringGrid } from '../test-measuring-grid';
 import { TestTools } from '../test-tools';
-import { OffsetFixture } from './offset.fixture';
 import { customMatchers } from '../custom-matchers';
 import { generateExamples } from '../generate-examples';
+import { OffsetShortFixture } from './offset-short.fixture';
 
 describe('Sticky Platforms Scene: offset test (short)', function() {
   let sceneElement: HTMLElement;
@@ -52,7 +52,7 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
 
   it('should have correct X, Y coords in changing X', function() {
     block.addFrames([
-      OffsetFixture.shortChangeX.timeFrame(),
+      OffsetShortFixture.changeX.timeFrame(),
     ]);
 
     scene.add(block);
@@ -60,13 +60,13 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeX.stages(),
+      OffsetShortFixture.changeX.stages(),
     );
   });
 
   it('should have correct X, Y coords in changing Y', function() {
     block.addFrames([
-      OffsetFixture.shortChangeY.timeFrame(),
+      OffsetShortFixture.changeY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -74,13 +74,13 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeY.stages(),
+      OffsetShortFixture.changeY.stages(),
     );
   });
 
   it('should have correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
-      OffsetFixture.shortChangeXY.timeFrame(),
+      OffsetShortFixture.changeXY.timeFrame(),
     ]);
 
     scene.add(block);
@@ -88,7 +88,7 @@ describe('Sticky Platforms Scene: offset test (short)', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OffsetFixture.shortChangeXY.stages(),
+      OffsetShortFixture.changeXY.stages(),
     );
   });
 });
