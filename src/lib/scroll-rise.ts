@@ -4,6 +4,10 @@ import { Wrapped } from './decorators/wrapped';
 
 declare const VERSION: string;
 
+export interface ScrollRiseOptions {
+  optimizeResizing: boolean;
+}
+
 export class ScrollRise {
 
   private initialized = false;
@@ -11,23 +15,47 @@ export class ScrollRise {
   private scrollListener?: (() => void);
   private resizeListener?: (() => void);
 
-  private displayWidth: number;
-  private displayHeight: number;
+  private clientWidth: number;
+  private clientHeight: number;
 
   constructor(
     public scene: Scene<SceneOptions>,
+    protected options?: ScrollRiseOptions,
   ) {
+    this.setDefaults();
     this.saveDisplaySize();
     this.init();
     this.tick();
   }
 
+  protected setDefaults(): void {
+    this.options = {
+      ...this.defaults(),
+      ...this.options,
+    } as ScrollRiseOptions;
+  }
+
+  protected defaults(): ScrollRiseOptions {
+    return {
+      optimizeResizing: false,
+    };
+  }
+
   saveDisplaySize(): void {
-    this.displayWidth = Util.clientWidth();
-    this.displayHeight = Util.clientHeight();
+    this.clientWidth = Util.clientWidth();
+    this.clientHeight = Util.clientHeight();
   }
 
   isNeedResize(): boolean {
+    if (this.options?.optimizeResizing) {
+      if (Util.clientWidth() !== this.clientWidth || Util.clientHeight() !== this.clientHeight) {
+        this.saveDisplaySize();
+        return true;
+      }
+
+      return false;
+    }
+
     return true;
   }
 
