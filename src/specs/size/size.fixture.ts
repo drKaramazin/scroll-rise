@@ -1,8 +1,6 @@
-import { MotionFixture } from './motion.fixture';
-import { ChangeStage } from './test-tools';
-import { TimeFrame } from '../lib/time-frame';
-import { SizeMotion } from '../lib/motions/size.motion';
-import { Util } from '../lib/util';
+import { MotionFixture } from '../motion.fixture';
+import { ChangeStage } from '../test-tools';
+import { TimeFrame, SizeMotion, Util } from '../../lib';
 
 export class SizeFixture extends MotionFixture {
 

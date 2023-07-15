@@ -1,8 +1,6 @@
-import { MotionFixture } from './motion.fixture';
-import { TimeFrame } from '../lib/time-frame';
-import { MoveMotion } from '../lib/motions/move.motion';
-import { ChangeStage } from './test-tools';
-import { Util } from '../lib/util';
+import { MotionFixture } from '../motion.fixture';
+import { TimeFrame, MoveMotion, Util } from '../../lib';
+import { ChangeStage } from '../test-tools';
 
 export abstract class MoveFixture extends MotionFixture {
 
@@ -254,11 +252,13 @@ export abstract class MoveFixture extends MotionFixture {
   static changeXY = {
     timeFrame: MoveFixture.changeXYTimeFrame,
     stages: (): ChangeStage[] => {
-      return this.changeX.stages().map((stage, index) => ({
-        scrollTo: this.changeX.stages()[index].scrollTo,
+      const stagesX = this.changeX.stages();
+      const stagesY = this.changeY.stages();
+      return stagesX.map((stage, index) => ({
+        scrollTo: stagesX[index].scrollTo,
         coords: {
-          x: this.changeX.stages()[index].coords!.x,
-          y: this.changeY.stages()[index].coords!.y,
+          x: stagesX[index].coords!.x,
+          y: stagesY[index].coords!.y,
         },
       }));
     },

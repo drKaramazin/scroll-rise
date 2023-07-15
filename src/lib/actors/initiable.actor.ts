@@ -11,7 +11,7 @@ export abstract class InitiableActor extends Actor {
   findFirstFrame(motionName: string): TimeFrame | undefined {
     return this.frames.reduce(
       (acc: TimeFrame | undefined, frame: TimeFrame) => {
-        if (frame.motion.name === motionName) {
+        if (frame.motion.motionName() === motionName) {
           if (acc) {
             if (frame.getStartPos() < acc?.getStartPos()) {
               return frame;
@@ -64,7 +64,7 @@ export abstract class InitiableActor extends Actor {
     }
   }
 
-  override bindElement(scrollPosOnFrame: number, scene: Scene<any>): HTMLElement | undefined {
+  override bindElement(scrollPosOnScene: number, scene: Scene<any>): HTMLElement | undefined {
     return this.element;
   }
 

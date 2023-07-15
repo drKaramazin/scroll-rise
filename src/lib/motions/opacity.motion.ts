@@ -1,14 +1,14 @@
 import { Value } from '../models/value.model';
-import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
+import { MotionParams } from '../models/motion-params.model';
+import { FramedMotion } from './framed-motion';
 
 export interface IOpacityMotion {
   start: Value;
   end: Value;
 }
 
-export class OpacityMotion extends Motion {
+export class OpacityMotion extends FramedMotion {
 
   override name = 'OpacityMotion';
 
@@ -22,27 +22,24 @@ export class OpacityMotion extends Motion {
     this.end = data.end;
   }
 
-  renderOpacity(scrollPos: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPos < frame.getStartPos()) {
-        element.style.opacity = this.start(Util.clientWidth(), Util.clientHeight()).toString();
-        return;
-      }
-      if (scrollPos > frame.getEndPos()) {
-        element.style.opacity = this.end(Util.clientWidth(), Util.clientHeight()).toString();
-        return;
-      }
-
-      const motionL = this.end(Util.clientWidth(), Util.clientHeight()) - this.start(Util.clientWidth(), Util.clientHeight());
-      const d = motionL / frame.length();
-      const opacity = this.start(Util.clientWidth(), Util.clientHeight()) + d * (scrollPos - frame.getStartPos());
-
-      element.style.opacity = opacity.toString();
-    }
+  protected setOpacity(params: MotionParams, opacity: number): void {
+    params.element.style.opacity = opacity.toString();
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
-    this.renderOpacity(scrollPosForFrame, frame, element);
+  protected makeStartStep(params: MotionParams): void {
+    const opacity = this.start(Util.clientWidth(), Util.clientHeight());
+    this.setOpacity(params, opacity);
+  }
+
+  protected makeEndStep(params: MotionParams): void {
+    const opacity = this.end(Util.clientWidth(), Util.clientHeight());
+    this.setOpacity(params, opacity);
+  }
+
+  protected makeUsualStep(params: MotionParams): void {
+    const motionLength = this.end(Util.clientWidth(), Util.clientHeight()) - this.start(Util.clientWidth(), Util.clientHeight());
+    const opacity = this.start(Util.clientWidth(), Util.clientHeight()) + motionLength * params.delta;
+    this.setOpacity(params, opacity);
   }
 
 }

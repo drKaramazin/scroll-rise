@@ -43,5 +43,6 @@ module.exports = {
     'no-var': 'error',
     '@typescript-eslint/promise-function-async': 'off',
     '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'as', objectLiteralTypeAssertions: 'allow' }],
+    '@typescript-eslint/restrict-template-expressions': 'off',
   },
 };

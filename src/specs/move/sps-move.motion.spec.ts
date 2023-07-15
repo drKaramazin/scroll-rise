@@ -1,11 +1,9 @@
-import { ScrollRise } from '../lib/scroll-rise';
-import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
-import { StaticActor } from '../lib/actors/static.actor';
-import { TestTools } from './test-tools';
+import { ScrollRise, StickyPlatformScene, StaticActor } from '../../lib';
+import { TestTools } from '../test-tools';
 import { MoveFixture } from './move.fixture';
-import { customMatchers } from './custom-matchers';
-import { generateExamples } from './generate-examples';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { customMatchers } from '../custom-matchers';
+import { generateExamples } from '../generate-examples';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 
 describe('Sticky Platforms Scene: move motion test', function() {
   let sceneElement: HTMLElement;
@@ -15,9 +13,9 @@ describe('Sticky Platforms Scene: move motion test', function() {
   let sr: ScrollRise;
 
   generateExamples([
-    'should have a correct X, Y coords in changing X',
-    'should have a correct X, Y coords in changing Y',
-    'should have a correct X, Y coords in changing both X and Y',
+    'should have correct X, Y coords in changing X',
+    'should have correct X, Y coords in changing Y',
+    'should have correct X, Y coords in changing both X and Y',
   ]);
 
   beforeEach(function() {
@@ -50,15 +48,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
     document.body.removeChild(document.getElementById('test-body')!);
   });
 
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
-  });
-
-  it('should have a correct X, Y coords in changing X', function() {
+  it('should have correct X, Y coords in changing X', function() {
     block.addFrames([
       MoveFixture.changeX.timeFrame(),
     ]);
@@ -72,7 +62,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing Y', function() {
+  it('should have correct X, Y coords in changing Y', function() {
     block.addFrames([
       MoveFixture.changeY.timeFrame(),
     ]);
@@ -86,7 +76,7 @@ describe('Sticky Platforms Scene: move motion test', function() {
     );
   });
 
-  it('should have a correct X, Y coords in changing both X and Y', function() {
+  it('should have correct X, Y coords in changing both X and Y', function() {
     block.addFrames([
       MoveFixture.changeXY.timeFrame(),
     ]);

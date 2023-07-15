@@ -1,6 +1,6 @@
 import { Motion } from './motion';
-import { TimeFrame } from '../time-frame';
 import { Util } from '../util';
+import { MotionParams } from '../models/motion-params.model';
 
 export declare type BoundValue = (deviceWidth: number, deviceHeight: number) => Partial<CSSStyleDeclaration>;
 
@@ -29,13 +29,15 @@ export class BoundMotion extends Motion {
     }
   }
 
-  override make(scrollPosForFrame: number, frame: TimeFrame, element: HTMLElement): void {
-    if (element) {
-      if (scrollPosForFrame < frame.getStartPos()) {
-        this.applyProperties(element, this.before(Util.clientWidth(), Util.clientHeight()));
+  override make(params: MotionParams): void {
+    if (params.element) {
+      if (params.scrollPosOnScene < params.frame.getStartPos()) {
+        this.applyProperties(params.element, this.before(Util.clientWidth(), Util.clientHeight()));
       } else {
-        this.applyProperties(element, this.after(Util.clientWidth(), Util.clientHeight()));
+        this.applyProperties(params.element, this.after(Util.clientWidth(), Util.clientHeight()));
       }
+    } else {
+      throw new Error('There is no element');
     }
   }
 

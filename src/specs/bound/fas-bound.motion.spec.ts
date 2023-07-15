@@ -1,15 +1,11 @@
-import { StaticActor } from '../lib/actors/static.actor';
-import { ScrollRise } from '../lib/scroll-rise';
-import { TestMeasuringGrid } from './test-measuring-grid';
-import { OpacityFixture } from './opacity.fixture';
-import { TestTools } from './test-tools';
-import { generateExamples } from './generate-examples';
-import { FixedActorsScene } from '../lib/scenes/fixed-actors.scene';
-import { TimeFrame } from '../lib/time-frame';
-import { MoveMotion } from '../lib/motions/move.motion';
-import { customMatchers } from './custom-matchers';
+import { StaticActor, ScrollRise, FixedActorsScene, TimeFrame, MoveMotion } from '../../lib';
+import { TestMeasuringGrid } from '../test-measuring-grid';
+import { TestTools } from '../test-tools';
+import { generateExamples } from '../generate-examples';
+import { customMatchers } from '../custom-matchers';
+import { BoundFixture } from './bound.fixture';
 
-describe('Fixed Actors Scene: opacity motion test', function() {
+describe('Fixed Actors Scene: bound motion test', function() {
   let sceneElement: HTMLElement;
   let scene: FixedActorsScene;
   let blockElement: HTMLElement;
@@ -23,7 +19,7 @@ describe('Fixed Actors Scene: opacity motion test', function() {
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
 
-    document.body.insertAdjacentHTML('afterbegin', OpacityFixture.htmlTemplate());
+    document.body.insertAdjacentHTML('afterbegin', BoundFixture.htmlTemplate());
 
     sceneElement = document.getElementById('scene')!;
 
@@ -41,6 +37,7 @@ describe('Fixed Actors Scene: opacity motion test', function() {
 
     block = new StaticActor(blockElement, {
       initSize: false,
+      initOpacity: false,
     });
 
     // To show an actor in docs
@@ -59,17 +56,9 @@ describe('Fixed Actors Scene: opacity motion test', function() {
     document.body.removeChild(document.getElementById('test-body')!);
   });
 
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
-  });
-
   it('should have a correct opacity', function() {
     block.addFrames([
-      OpacityFixture.changeOpacity.timeFrame(),
+      BoundFixture.changes.timeFrame(),
     ]);
 
     scene.add(block);
@@ -77,7 +66,7 @@ describe('Fixed Actors Scene: opacity motion test', function() {
     return TestTools.testGoingStages(
       block,
       blockElement,
-      OpacityFixture.changeOpacity.stages(),
+      BoundFixture.changes.stages(),
     );
   });
 });

@@ -1,8 +1,9 @@
 import { Actor } from '../actors/actor';
 import { Util } from '../util';
-import { TimeFrame } from '../time-frame';
 import { MeasuringGrid } from '../measuring-grid';
 import { MeasuringGridModel } from '../models/measuring-grid.model';
+import { MotionParams } from '../models/motion-params.model';
+import { Wrapped } from '../decorators/wrapped';
 
 export interface SceneOptions {
   offset?: (deviceWidth: number, deviceHeight: number, sceneHeight: number) => number;
@@ -16,6 +17,7 @@ export abstract class Scene<Options extends SceneOptions> {
 
   protected abstract init(): void;
   public abstract resizeHeight(): void;
+  protected abstract platformHeight(deviceWidth: number, deviceHeight: number): number;
 
   protected grid: MeasuringGrid;
 
@@ -62,6 +64,14 @@ export abstract class Scene<Options extends SceneOptions> {
     return this.element.getBoundingClientRect().y;
   }
 
+  platformHeightValue(): number {
+    return this.platformHeight(Util.clientWidth(), Util.clientHeight());
+  }
+
+  scrollPos(): number {
+    return -this.elementY();
+  }
+
   elementHeight(): number {
     return this.height(Util.clientWidth(), Util.clientHeight());
   }
@@ -74,13 +84,22 @@ export abstract class Scene<Options extends SceneOptions> {
     return this._actors;
   }
 
-  public interceptY(scrollPos: number, frame: TimeFrame, startY: () => number, endY: () => number): number | undefined {
-    return undefined;
+  public interceptY(y: number, params: MotionParams): number {
+    return y;
   }
 
   public redrawMeasuringGrid(): void {
     if (this.grid) {
       this.grid.redrawMeasuringGrid();
+    }
+  }
+
+  afterRender: () => void;
+  beforeRender: () => void;
+  @Wrapped({ before: 'beforeRender', after: 'afterRender' })
+  render(): void {
+    for (const actor of this.actors) {
+      actor.render(this.scrollPos(), this);
     }
   }
 

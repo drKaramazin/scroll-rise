@@ -1,11 +1,9 @@
-import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
-import { StaticActor } from '../lib/actors/static.actor';
-import { ScrollRise } from '../lib/scroll-rise';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { StickyPlatformScene, StaticActor, ScrollRise } from '../../lib';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 import { OpacityFixture } from './opacity.fixture';
-import { TestTools } from './test-tools';
-import { generateExamples } from './generate-examples';
-import { customMatchers } from './custom-matchers';
+import { TestTools } from '../test-tools';
+import { generateExamples } from '../generate-examples';
+import { customMatchers } from '../custom-matchers';
 
 describe('Sticky Platforms Scene: opacity motion test', function() {
   let sceneElement: HTMLElement;
@@ -46,14 +44,6 @@ describe('Sticky Platforms Scene: opacity motion test', function() {
   afterEach(function() {
     sr.stop();
     document.body.removeChild(document.getElementById('test-body')!);
-  });
-
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
   });
 
   it('should have a correct opacity', function() {

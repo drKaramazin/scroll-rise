@@ -1,11 +1,7 @@
-import { Util } from '../lib';
+import { Util } from '../../lib';
+import { TestStage } from '../motion.fixture';
 
-export interface TestStage {
-  x: number;
-  y: number;
-}
-
-export abstract class MotionFixture {
+export class FramesOrderFixture {
 
   static block = {
     width: 17,
@@ -18,7 +14,7 @@ export abstract class MotionFixture {
         <div class="display"></div>
         <div class="display"></div>
         <div id="scene">
-          <div id="block" style="width: ${MotionFixture.block.width}px; height: ${MotionFixture.block.height}px;"></div>
+            <div id="block" style="width: ${FramesOrderFixture.block.width}px; height: ${FramesOrderFixture.block.height}px;"></div>
         </div>
         <div class="display"></div>
         <div class="display"></div>

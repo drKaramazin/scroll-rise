@@ -1,11 +1,9 @@
-import { StickyPlatformScene } from '../lib/scenes/sticky-platform.scene';
-import { ScrollRise } from '../lib/scroll-rise';
-import { StaticActor } from '../lib/actors/static.actor';
+import { StickyPlatformScene, ScrollRise, StaticActor } from '../../lib';
 import { SizeFixture } from './size.fixture';
-import { TestTools } from './test-tools';
-import { customMatchers } from './custom-matchers';
-import { generateExamples } from './generate-examples';
-import { TestMeasuringGrid } from './test-measuring-grid';
+import { TestTools } from '../test-tools';
+import { customMatchers } from '../custom-matchers';
+import { generateExamples } from '../generate-examples';
+import { TestMeasuringGrid } from '../test-measuring-grid';
 
 describe('Sticky Platforms Scene: size motion test', function() {
   let sceneElement: HTMLElement;
@@ -48,14 +46,6 @@ describe('Sticky Platforms Scene: size motion test', function() {
   afterEach(function() {
     sr.stop();
     document.body.removeChild(document.getElementById('test-body')!);
-  });
-
-  it('should be inited', function() {
-    expect(blockElement).toBeTruthy();
-    expect(block).toBeTruthy();
-    expect(sceneElement).toBeTruthy();
-    expect(scene).toBeTruthy();
-    expect(sr).toBeTruthy();
   });
 
   it('should have a correct size in changing width', function() {
