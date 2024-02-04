@@ -1,8 +1,8 @@
 {
   "name": "scroll-rise",
-  "version": "1.7.0",
+  "version": "1.7.0-deprecation",
   "private": false,
-  "description": "The typescript library for scroll animation",
+  "description": "[DEPRECATED] The typescript library for scroll animation",
   "main": "lib/index.umd.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",

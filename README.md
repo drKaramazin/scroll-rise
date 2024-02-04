@@ -1,4 +1,7 @@
-# Scroll Rise
+# DEPRECATED
+This package has been move to https://www.npmjs.com/package/ballet
+
+## Scroll Rise
 The typescript library for scroll animation.
 
 [![NPM](https://nodei.co/npm/scroll-rise.png)](https://nodei.co/npm/scroll-rise/)
